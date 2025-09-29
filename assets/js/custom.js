@@ -383,12 +383,12 @@ var plexify = function () {
     }
   };
 
-  const handleSupport = () => {
-    const script = document.createElement("script");
-    script.id = "DZScript";
-    script.src = "https://dzassets.s3.amazonaws.com/w3-global-2.0.js?token=W-b6a2811d6ab9b0aaf35f3d17ef168bd4";
-    document.body.appendChild(script);
-  };
+  // const handleSupport = () => {
+  //   const script = document.createElement("script");
+  //   script.id = "DZScript";
+  //   script.src = "https://dzassets.s3.amazonaws.com/w3-global-2.0.js?token=W-b6a2811d6ab9b0aaf35f3d17ef168bd4";
+  //   document.body.appendChild(script);
+  // };
 
   const handleLightgallery = () => {
     const ids = [
