@@ -9210,3 +9210,18 @@ body.menu-btn-open {
   initial-value: "";
   inherits: false;
 }
+.sec-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #de202a17;
+    border: 1px solid #de202a38;
+    border-radius: 50px;
+    padding: 5px 17px;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #de202a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
