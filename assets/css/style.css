@@ -149,7 +149,7 @@
     --color-bg2: #343B27;
     --color-bg3: #273215;
     --color-bg4: #353C29;
-    --color-bglight: #ECECDE;
+    --color-bglight: #ffdbdd75;
     --color-lightgrey: #A6A6A6;
     --color-grey: #D4D4D4;
     --color-red: #F25749;
@@ -8031,7 +8031,7 @@ input[type=number] {
   }
 }
 .site-header .navbar .sub-menu {
-  background-color: var(--color-bodyfg);
+  background-color: #ffffff !important;
   color: var(--color-secondary);
   --tw-duration: 500ms;
   transition-duration: 500ms;
@@ -9225,3 +9225,167 @@ body.menu-btn-open {
     text-transform: uppercase;
     margin-bottom: 16px;
 }
+/* Section & Container */
+    .custom-create-section {
+        padding: 60px 20px;
+        background-color: #f8f9fa;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    .custom-create-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* --- New Title Styles --- */
+    .custom-create-header-wrapper {
+        margin-bottom: 50px;
+        max-width: 700px;
+    }
+    /* ------------------------ */
+
+    .custom-create-grid-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    @media (min-width: 992px) {
+        .custom-create-grid-layout {
+            grid-template-columns: 2fr 1fr;
+        }
+    }
+
+    .custom-create-left-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+        .custom-create-left-wrapper {
+            grid-template-columns: 1fr 1fr;
+        }
+        .custom-create-wide-item {
+            grid-column: span 2;
+        }
+    }
+
+    .custom-create-card-box {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        border: 1px solid #eaeaea;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .custom-create-icon-circle {
+        width: 45px;
+        height: 45px;
+        border: 1px solid #cccccc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #de202a;
+    }
+
+    .custom-create-card-heading {
+        color: #1B2D00;
+        font-size: 22px;
+        margin: 0 0 12px 0;
+        font-weight: 700;
+    }
+
+    .custom-create-text {
+        color: #555555;
+        line-height: 1.6;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .custom-create-dark-card {
+        background-color: #de202a;
+        padding: 40px;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 400px;
+        color: #ffffff;
+    }
+
+    .custom-create-dark-card .custom-create-icon-circle {
+        border-color: rgba(255,255,255,0.3);
+        color: #ffffff;
+    }
+
+    .custom-create-action-btn {
+        background-color: #ffdbdd75;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        margin-top: 30px;
+        border: none;
+        cursor: pointer;
+    }
+    /* Styling for the logo swiper container and items */
+    .custom-create-client-swiper {
+        padding: 40px 20px;
+    }
+
+    .custom-create-swiper-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px; 
+    }
+
+    /* Container for individual slide to handle background/border */
+    .custom-create-logo-slide {
+        background: #ffffff; /* Logo Background */
+        border: 1px solid #eaeaea; /* Light Gray Border */
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 180px; 
+        height: 100px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Target the image inside the slide */
+    .custom-create-logo-img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        filter: brightness(1);
+        transition: filter 0.4s ease;
+    }
+
+    /* HOVER EFFECT: Remove the black filter to show real colors */
+    .custom-create-logo-slide:hover {
+        border-color: #d1d1d1;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .custom-create-logo-slide:hover .custom-create-logo-img {
+        filter: brightness(1);
+    }
+
+    /* Keep existing class behavior if it exists in your global CSS */
+    .swiper-slide {
+        flex-shrink: 0;
+    }

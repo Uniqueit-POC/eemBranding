@@ -263,57 +263,6 @@ var plexify = function () {
     });
   };
 
-const handleThemeBtn = function () {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const dataTheme = urlParams.get('data-theme');
-  const btnLight = document.querySelector(".dark-theme"); // Button to trigger light mode
-  const btnDark = document.querySelector(".light-theme");  // Button to trigger dark mode
-  const html = document.querySelector("html");
-
-  function setCookie(name, value, days) {
-    const expires = new Date(Date.now() + days * 86400000).toUTCString();
-    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
-  }
-
-  function getCookie(name) {
-    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    return match ? match[2] : null;
-  }
-
-  function applyTheme(theme) {
-    // Simply toggle classes based on the theme string
-    if (theme === "dark") {
-      html.classList.add("dark");
-      html.classList.remove("light");
-    } else {
-      html.classList.remove("dark");
-      html.classList.add("light");
-    }
-    setCookie("theme", theme, 30);
-  }
-
-  // logic to determine initial theme
-  if (dataTheme === "light" || dataTheme === "dark") {
-    applyTheme(dataTheme);
-  } else {
-    const savedTheme = getCookie("theme");
-    if (savedTheme === "dark" || savedTheme === "light") {
-      applyTheme(savedTheme);
-    } else {
-      // CHANGE IS HERE: Default to light instead of dark
-      applyTheme("light"); 
-    }
-  }
-
-  if (btnLight) {
-    btnLight.addEventListener("click", () => applyTheme("light"));
-  }
-  if (btnDark) {
-    btnDark.addEventListener("click", () => applyTheme("dark"));
-  }
-};
-
   const handleCounterJS = function () {
     const counters = document.querySelectorAll(".value");
     const speed = 200;
