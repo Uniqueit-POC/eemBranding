@@ -6393,7 +6393,7 @@
   --black: #000;
 }
 .pxl-loader {
-  background: var(--color-bodybg);
+  background: #E64750;
   height: 100vh;
   position: fixed;
   width: 100%;
@@ -8152,7 +8152,7 @@ input[type=number] {
 
 .sub-menu li a:hover {
   background: #f5f5f5;
-  color: #007bff;
+  color: #e31e24;
 }
 
 /* Nested Creative submenu */
@@ -9389,3 +9389,43 @@ body.menu-btn-open {
     .swiper-slide {
         flex-shrink: 0;
     }
+    /* Ensure the parent <li> is the reference point */
+.nav .sub-menu li {
+    position: relative;
+}
+
+/* Position the SECOND level sub-menu to the right */
+.nav .sub-menu .sub-menu {
+    position: absolute;
+    top: 0;
+    left: 100%; /* This pushes it to the right */
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-top: 0; /* Align with the top of the parent <li> */
+}
+
+/* Show the second level on hover of the parent <li> */
+.nav .sub-menu li:hover > .sub-menu {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+/* Optional: If the menu is too close to the right edge of the screen, 
+   you can push it to the left side instead */
+.nav .sub-menu li.menu-left > .sub-menu {
+    left: auto;
+    right: 100%;
+}
+.menu-link {
+    display: flex !important;
+    justify-content: space-between !important; /* left-right space */
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+}
+
+.menu-link i {
+    margin-left: 10px; /* thodu spacing */
+}
