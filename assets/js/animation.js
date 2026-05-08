@@ -57,7 +57,7 @@ const plexifyGsap = function () {
 
       const stepDiv = document.createElement("div");
       stepDiv.className =
-        "step flex items-center justify-center absolute dark:bg-bg4 bg-[#F3F6E9] text-[#979797] size-50 rounded-full text-xl font-bold duration-500";
+        "step flex items-center justify-center absolute dark:bg-bg4 bg-[#ffdfdb] text-[#979797] size-50 rounded-full text-xl font-bold duration-500";
       stepDiv.style.left = `${x}px`;
       stepDiv.style.top = `${y}px`;
       stepDiv.textContent = String(i + 1).padStart(2, "0");

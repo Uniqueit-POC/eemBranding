@@ -138,8 +138,8 @@
     --color-title: var(--title);
     --color-heading: #191B1D;
     --color-dark: #1C1A1B;
-    --color-textlight: #ECECDE;
-    --color-bordercolor: #ECECDE;
+    --color-textlight: #ffe5e2b3;
+    --color-bordercolor: #ffe5e2b3;
     --color-inputborder: #E3E3E3;
     --color-social: #191B1D;
     --color-label: #fff;
@@ -1675,8 +1675,8 @@
   .bg-\[\#EEEEEE\] {
     background-color: #EEEEEE;
   }
-  .bg-\[\#F3F6E9\] {
-    background-color: #F3F6E9;
+  .bg-\[\#ffdfdb\] {
+    background-color: #ffdfdb;
   }
   .bg-\[\#FFBE17\] {
     background-color: #FFBE17;
