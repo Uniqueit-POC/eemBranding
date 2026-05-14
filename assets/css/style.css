@@ -7563,6 +7563,9 @@ input[type=number] {
 .custom-accordion.style-2 .accordion-item .accordion-header.open .arrow.active .fa-plus {
   display: none;
 }
+.tab-title.tab-underline:not(.active) button::after {
+  width: 0;
+}
 .tab-title.tab-underline.active a::after , .tab-title.tab-underline.active button::after {
   width: 100%;
 }
@@ -9429,3 +9432,58 @@ body.menu-btn-open {
 .menu-link i {
     margin-left: 10px; /* thodu spacing */
 }
+  /* 1. Infinite Animation Logic */
+        @keyframes marqueeLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-marquee-left {
+            display: flex;
+            width: max-content;
+            animation: marqueeLeft 30s linear infinite;
+        }
+
+        /* Pause on hover */
+        .animate-marquee-left:hover {
+            animation-play-state: paused;
+        }
+
+        /* 2. Scroll & Drag Specific Styles */
+        .marquee-wrapper {
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE/Edge */
+            cursor: grab;
+        }
+
+        .marquee-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .marquee-wrapper:active {
+            cursor: grabbing;
+        }
+
+        /* 3. Your Custom Logo Styling */
+        .custom-create-logo-img {
+            background-color: #ffffff; 
+            border: 1.5px solid #eeeeee;
+            border-radius: 12px; 
+            width: 226px !important; 
+            height: 120px !important;
+            padding: 20px;
+            object-fit: contain; 
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .custom-create-logo-img:hover {
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Ensure wrapper is transparent as requested */
+        .transparent-bg {
+            background-color: transparent !important;
+        }

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Section - Pure CSS</title>
+  <style>
+    /* ========== RESET ========== */
+    .hs-reset,
+    .hs-reset *,
+    .hs-reset *::before,
+    .hs-reset *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ========== BASE ========== */
+    .hs-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f8f8;
+    }
+
+    /* ========== MAIN LAYOUT ========== */
+    .hs-main {
+      flex: 1;
+      display: flex;
+      padding: 32px;
+      gap: 32px;
+    }
+
+    /* ========== SIDEBAR NAVIGATION ========== */
+    .hs-sidebar {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 48px;
+    }
+
+    /* ========== NAV ITEM ========== */
+    .hs-nav-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .hs-nav-item:hover {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    /* ========== NAV ICON ========== */
+    .hs-nav-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hs-nav-icon-shape {
+      width: 18px;
+      height: 18px;
+      background-color: #ffffff;
+    }
+
+    .hs-nav-icon-shape--star {
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .hs-nav-icon-shape--diamond {
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    .hs-nav-icon-shape--triangle {
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* ========== NAV TEXT ========== */
+    .hs-nav-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hs-nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hs-nav-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ========== SLIDER AREA ========== */
+    .hs-slider {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* ========== SLIDE ========== */
+    .hs-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* ========== SLIDE ICON ========== */
+    .hs-slide-icon {
+      width: 72px;
+      height: 72px;
+      background-color: #dc2626;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+    }
+
+    .hs-slide-icon-shape {
+      width: 28px;
+      height: 28px;
+      background-color: #ffffff;
+    }
+
+    .hs-slide-icon-shape--star {
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .hs-slide-icon-shape--diamond {
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    .hs-slide-icon-shape--triangle {
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* ========== SLIDE TEXT ========== */
+    .hs-slide-subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .hs-slide-title {
+      font-size: 40px;
+      font-weight: 800;
+      color: #1a1a1a;
+      text-align: center;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hs-slide-title-highlight {
+      color: #dc2626;
+    }
+
+    /* ========== INITIAL LOGO SLIDE ========== */
+    .hs-slide--logo {
+      background-color: #1a1a1a;
+    }
+
+    .hs-logo-box {
+      width: 100px;
+      height: 100px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hs-logo-letter {
+      font-size: 48px;
+      font-weight: 800;
+      color: #dc2626;
+    }
+
+    /* ========== PROGRESS BAR ========== */
+    .hs-progress {
+      padding: 16px 32px 32px;
+    }
+
+    .hs-progress-track {
+      height: 4px;
+      background-color: #e5e7eb;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .hs-progress-bar {
+      height: 100%;
+      background-color: #dc2626;
+      width: 0%;
+    }
+
+    /* ========================================
+       CSS-ONLY ANIMATION SYSTEM
+       
+       Timeline (14s total cycle):
+       - 0s-2s: Logo slide (14.3%)
+       - 2s-6s: Slide 1 - Identities (28.6%)
+       - 6s-10s: Slide 2 - Strategy (28.6%)
+       - 10s-14s: Slide 3 - Success (28.6%)
+    ======================================== */
+
+    /* SLIDE ANIMATIONS */
+    .hs-slide--logo {
+      animation: hs-anim-logo 14s infinite;
+    }
+
+    .hs-slide--identities {
+      animation: hs-anim-slide1 14s infinite;
+    }
+
+    .hs-slide--strategy {
+      animation: hs-anim-slide2 14s infinite;
+    }
+
+    .hs-slide--success {
+      animation: hs-anim-slide3 14s infinite;
+    }
+
+    /* Logo: 0% - 14.3% (0s - 2s) */
+    @keyframes hs-anim-logo {
+      0%, 10% {
+        opacity: 1;
+        visibility: visible;
+      }
+      14.3%, 100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Slide 1: 14.3% - 42.9% (2s - 6s) */
+    @keyframes hs-anim-slide1 {
+      0%, 14.3% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      17%, 40% {
+        opacity: 1;
+        visibility: visible;
+      }
+      42.9%, 100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Slide 2: 42.9% - 71.4% (6s - 10s) */
+    @keyframes hs-anim-slide2 {
+      0%, 42.9% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      46%, 68% {
+        opacity: 1;
+        visibility: visible;
+      }
+      71.4%, 100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Slide 3: 71.4% - 100% (10s - 14s) */
+    @keyframes hs-anim-slide3 {
+      0%, 71.4% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      74%, 97% {
+        opacity: 1;
+        visibility: visible;
+      }
+      100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* NAV ICON ANIMATIONS */
+    .hs-nav-item--first .hs-nav-icon {
+      animation: hs-anim-icon1 14s infinite;
+    }
+
+    .hs-nav-item--second .hs-nav-icon {
+      animation: hs-anim-icon2 14s infinite;
+    }
+
+    .hs-nav-item--third .hs-nav-icon {
+      animation: hs-anim-icon3 14s infinite;
+    }
+
+    @keyframes hs-anim-icon1 {
+      0%, 14.3% {
+        background-color: #1a1a1a;
+        box-shadow: none;
+      }
+      17%, 40% {
+        background-color: #dc2626;
+        box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+      }
+      42.9%, 100% {
+        background-color: #1a1a1a;
+        box-shadow: none;
+      }
+    }
+
+    @keyframes hs-anim-icon2 {
+      0%, 42.9% {
+        background-color: #1a1a1a;
+        box-shadow: none;
+      }
+      46%, 68% {
+        background-color: #dc2626;
+        box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+      }
+      71.4%, 100% {
+        background-color: #1a1a1a;
+        box-shadow: none;
+      }
+    }
+
+    @keyframes hs-anim-icon3 {
+      0%, 71.4% {
+        background-color: #1a1a1a;
+        box-shadow: none;
+      }
+      74%, 97% {
+        background-color: #dc2626;
+        box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+      }
+      100% {
+        background-color: #1a1a1a;
+        box-shadow: none;
+      }
+    }
+
+    /* NAV LABEL ANIMATIONS */
+    .hs-nav-item--first .hs-nav-label {
+      animation: hs-anim-label1 14s infinite;
+    }
+
+    .hs-nav-item--second .hs-nav-label {
+      animation: hs-anim-label2 14s infinite;
+    }
+
+    .hs-nav-item--third .hs-nav-label {
+      animation: hs-anim-label3 14s infinite;
+    }
+
+    @keyframes hs-anim-label1 {
+      0%, 14.3% {
+        color: #9ca3af;
+      }
+      17%, 40% {
+        color: #1a1a1a;
+      }
+      42.9%, 100% {
+        color: #9ca3af;
+      }
+    }
+
+    @keyframes hs-anim-label2 {
+      0%, 42.9% {
+        color: #9ca3af;
+      }
+      46%, 68% {
+        color: #1a1a1a;
+      }
+      71.4%, 100% {
+        color: #9ca3af;
+      }
+    }
+
+    @keyframes hs-anim-label3 {
+      0%, 71.4% {
+        color: #9ca3af;
+      }
+      74%, 97% {
+        color: #1a1a1a;
+      }
+      100% {
+        color: #9ca3af;
+      }
+    }
+
+    /* NAV TITLE ANIMATIONS */
+    .hs-nav-item--first .hs-nav-title {
+      animation: hs-anim-title1 14s infinite;
+    }
+
+    .hs-nav-item--second .hs-nav-title {
+      animation: hs-anim-title2 14s infinite;
+    }
+
+    .hs-nav-item--third .hs-nav-title {
+      animation: hs-anim-title3 14s infinite;
+    }
+
+    @keyframes hs-anim-title1 {
+      0%, 14.3% {
+        color: #6b7280;
+      }
+      17%, 40% {
+        color: #1a1a1a;
+      }
+      42.9%, 100% {
+        color: #6b7280;
+      }
+    }
+
+    @keyframes hs-anim-title2 {
+      0%, 42.9% {
+        color: #6b7280;
+      }
+      46%, 68% {
+        color: #1a1a1a;
+      }
+      71.4%, 100% {
+        color: #6b7280;
+      }
+    }
+
+    @keyframes hs-anim-title3 {
+      0%, 71.4% {
+        color: #6b7280;
+      }
+      74%, 97% {
+        color: #1a1a1a;
+      }
+      100% {
+        color: #6b7280;
+      }
+    }
+
+    /* PROGRESS BAR ANIMATION */
+    .hs-progress-bar {
+      animation: hs-anim-progress 4s linear infinite;
+    }
+
+    @keyframes hs-anim-progress {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .hs-main {
+        flex-direction: column;
+        padding: 24px;
+        gap: 24px;
+      }
+
+      .hs-sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 0;
+        order: 2;
+      }
+
+      .hs-nav-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .hs-nav-text {
+        display: none;
+      }
+
+      .hs-slider {
+        order: 1;
+        min-height: 400px;
+      }
+
+      .hs-slide-title {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hs-main {
+        padding: 16px;
+      }
+
+      .hs-slide-title {
+        font-size: 22px;
+      }
+
+      .hs-slide-icon {
+        width: 56px;
+        height: 56px;
+      }
+
+      .hs-slide-icon-shape {
+        width: 22px;
+        height: 22px;
+      }
+
+      .hs-nav-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .hs-progress {
+        padding: 12px 16px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hs-reset">
+    <section class="hs-hero">
+      <!-- Main Content -->
+      <div class="hs-main">
+        <!-- Sidebar Navigation -->
+        <nav class="hs-sidebar">
+          <div class="hs-nav-item hs-nav-item--first">
+            <div class="hs-nav-icon">
+              <div class="hs-nav-icon-shape hs-nav-icon-shape--star"></div>
+            </div>
+            <div class="hs-nav-text">
+              <span class="hs-nav-label">Artisaning Iconic</span>
+              <span class="hs-nav-title">Identities</span>
+            </div>
+          </div>
+
+          <div class="hs-nav-item hs-nav-item--second">
+            <div class="hs-nav-icon">
+              <div class="hs-nav-icon-shape hs-nav-icon-shape--diamond"></div>
+            </div>
+            <div class="hs-nav-text">
+              <span class="hs-nav-label">Visionary Brand</span>
+              <span class="hs-nav-title">Strategy</span>
+            </div>
+          </div>
+
+          <div class="hs-nav-item hs-nav-item--third">
+            <div class="hs-nav-icon">
+              <div class="hs-nav-icon-shape hs-nav-icon-shape--triangle"></div>
+            </div>
+            <div class="hs-nav-text">
+              <span class="hs-nav-label">Articulate Growth</span>
+              <span class="hs-nav-title">Success</span>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Slider -->
+        <div class="hs-slider">
+          <!-- Initial Logo Slide -->
+          <div class="hs-slide hs-slide--logo">
+            <div class="hs-logo-box">
+              <span class="hs-logo-letter">A</span>
+            </div>
+          </div>
+
+          <!-- Slide 1: Identities -->
+          <div class="hs-slide hs-slide--identities">
+            <div class="hs-slide-icon">
+              <div class="hs-slide-icon-shape hs-slide-icon-shape--star"></div>
+            </div>
+            <p class="hs-slide-subtitle">Aligned to Your Brand</p>
+            <h2 class="hs-slide-title">Artisaning <span class="hs-slide-title-highlight">Iconic</span><br>Identities</h2>
+          </div>
+
+          <!-- Slide 2: Strategy -->
+          <div class="hs-slide hs-slide--strategy">
+            <div class="hs-slide-icon">
+              <div class="hs-slide-icon-shape hs-slide-icon-shape--diamond"></div>
+            </div>
+            <p class="hs-slide-subtitle">Aimed at Your Future</p>
+            <h2 class="hs-slide-title">Visionary <span class="hs-slide-title-highlight">Brand</span><br>Strategy</h2>
+          </div>
+
+          <!-- Slide 3: Success -->
+          <div class="hs-slide hs-slide--success">
+            <div class="hs-slide-icon">
+              <div class="hs-slide-icon-shape hs-slide-icon-shape--triangle"></div>
+            </div>
+            <p class="hs-slide-subtitle">Articulate About Your Success</p>
+            <h2 class="hs-slide-title">Articulate <span class="hs-slide-title-highlight">Growth</span><br>Success</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="hs-progress">
+        <div class="hs-progress-track">
+          <div class="hs-progress-bar"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

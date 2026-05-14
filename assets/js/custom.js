@@ -634,6 +634,53 @@ var plexify = function () {
     }
   };
 
+         const wrapper = document.getElementById('scrollWrapper');
+        const inner = document.getElementById('marqueeInner');
+
+        // --- 1. Mouse Wheel Scroll (Left/Right) ---
+        wrapper.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            // Move scrollLeft based on wheel delta
+            wrapper.scrollLeft += e.deltaY;
+            
+            // Pause animation temporarily while scrolling
+            inner.style.animationPlayState = 'paused';
+            clearTimeout(wrapper.scrollTimeout);
+            wrapper.scrollTimeout = setTimeout(() => {
+                inner.style.animationPlayState = 'running';
+            }, 500);
+        });
+
+        // --- 2. Click and Drag to Scroll ---
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        wrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - wrapper.offsetLeft;
+            scrollLeft = wrapper.scrollLeft;
+            inner.style.animationPlayState = 'paused';
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            isDown = false;
+            inner.style.animationPlayState = 'running';
+        });
+
+        wrapper.addEventListener('mouseup', () => {
+            isDown = false;
+            inner.style.animationPlayState = 'running';
+        });
+
+        wrapper.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - wrapper.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed
+            wrapper.scrollLeft = scrollLeft - walk;
+        });
+        
   const handleFormRecaptcha = function () {
     const form = document.querySelector(".dz-form.footer-form");
     if (!form) return;
@@ -713,6 +760,7 @@ var plexify = function () {
       handleCustomSelects();
       handleHoverActive();
       handleStarRating();
+      handleClientLogoSwiper();
       handleFormRecaptcha();
       handleAnimation();
     },
