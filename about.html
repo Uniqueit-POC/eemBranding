@@ -18,12 +18,6 @@
     --card-bg: #ffffff;
   }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--light);
-    color: var(--dark);
-  }
-
   /* ─── SECTION ─── */
   .vm-section {
     padding: clamp(60px, 10vw, 120px) 0;
@@ -31,18 +25,18 @@
     overflow: hidden;
   }
 
-  .container {
-    max-width: 1200px;
+  .vm-container {
+    max-width: 1050px;
     margin: 0 auto;
-    padding: 0 clamp(16px, 5vw, 48px);
+    padding: 0 clamp(20px, 5vw, 48px);
   }
 
   /* ─── HEADER ─── */
-  .section-header {
+  .vm-section-header {
     text-align: center;
-    margin-bottom: clamp(48px, 8vw, 80px);
+    margin-bottom: clamp(48px, 8vw, 20px);
   }
-  .eyebrow {
+  .vm-eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -53,13 +47,13 @@
     letter-spacing: .2em;
     text-transform: uppercase;
   }
-  .eyebrow-line {
+  .vm-eyebrow-line {
     display: inline-block;
     width: 32px;
     height: 1px;
     background: var(--primary);
   }
-  .section-title {
+  .vm-section-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 900;
@@ -68,14 +62,14 @@
   }
 
   /* ─── CARDS WRAPPER ─── */
-  .cards-wrapper {
+  .vm-cards-wrapper {
     display: flex;
     flex-direction: column;
     gap: 32px;
   }
 
   /* ─── CARD ROW ─── */
-  .card-row {
+  .vm-card-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
@@ -86,12 +80,12 @@
     background: var(--card-bg);
     transition: box-shadow .35s ease;
   }
-  .card-row:hover {
+  .vm-card-row:hover {
     box-shadow: 0 20px 60px rgba(227,30,36,.13);
   }
 
   /* ─── INFO CARD (LEFT) ─── */
-  .info-card {
+  .vm-info-card {
     position: relative;
     padding: clamp(32px, 5vw, 56px) clamp(28px, 4vw, 52px);
     display: flex;
@@ -101,7 +95,7 @@
     overflow: hidden;
     transition: background .4s ease;
   }
-  .info-card::before {
+  .vm-info-card::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -110,15 +104,15 @@
     transition: opacity .4s ease;
     z-index: 0;
   }
-  .card-row:hover .info-card::before { opacity: 1; }
+  .vm-card-row:hover .vm-info-card::before { opacity: 1; }
 
-  .info-card-inner {
+  .vm-info-card-inner {
     position: relative;
     z-index: 1;
   }
 
   /* Icon badge */
-  .icon-badge {
+  .vm-icon-badge {
     width: 56px;
     height: 56px;
     border-radius: 16px;
@@ -130,16 +124,16 @@
     flex-shrink: 0;
     transition: background .4s ease, transform .3s ease;
   }
-  .card-row:hover .icon-badge {
+  .vm-card-row:hover .vm-icon-badge {
     background: rgba(255,255,255,.2);
     transform: scale(1.08);
   }
-  .icon-badge svg path, .icon-badge svg circle {
+  .vm-icon-badge svg path, .vm-icon-badge svg circle {
     stroke: #fff;
   }
 
   /* Card title */
-  .card-title {
+  .vm-card-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     font-weight: 700;
@@ -148,10 +142,10 @@
     line-height: 1;
     transition: color .4s ease;
   }
-  .card-row:hover .card-title { color: #fff; }
+  .vm-card-row:hover .vm-card-title { color: #fff; }
 
   /* Divider */
-  .card-divider {
+  .vm-card-divider {
     width: 40px;
     height: 3px;
     background: var(--primary);
@@ -159,29 +153,29 @@
     margin-bottom: 20px;
     transition: background .4s ease, width .4s ease;
   }
-  .card-row:hover .card-divider {
+  .vm-card-row:hover .vm-card-divider {
     background: rgba(255,255,255,.5);
     width: 60px;
   }
 
   /* Body text */
-  .card-body {
+  .vm-card-body {
     font-size: clamp(.95rem, 1.5vw, 1.1rem);
     line-height: 1.75;
     color: var(--text);
     font-weight: 300;
     transition: color .4s ease;
   }
-  .card-row:hover .card-body { color: rgba(255,255,255,.88); }
-  .card-body strong {
+  .vm-card-row:hover .vm-card-body { color: rgba(255,255,255,.88); }
+  .vm-card-body strong {
     font-weight: 500;
     color: var(--dark);
     transition: color .4s ease;
   }
-  .card-row:hover .card-body strong { color: #fff; }
+  .vm-card-row:hover .vm-card-body strong { color: #fff; }
 
   /* CTA tag */
-  .card-tag {
+  .vm-card-tag {
     margin-top: 28px;
     display: inline-flex;
     align-items: center;
@@ -195,20 +189,20 @@
     transform: translateY(8px);
     transition: opacity .35s ease .1s, transform .35s ease .1s, color .4s ease;
   }
-  .card-row:hover .card-tag {
+  .vm-card-row:hover .vm-card-tag {
     opacity: 1;
     transform: translateY(0);
     color: #fff;
   }
-  .card-tag-arrow {
+  .vm-card-tag-arrow {
     width: 20px;
     height: 1px;
     background: currentColor;
     position: relative;
     transition: width .3s ease;
   }
-  .card-row:hover .card-tag-arrow { width: 32px; }
-  .card-tag-arrow::after {
+  .vm-card-row:hover .vm-card-tag-arrow { width: 32px; }
+  .vm-card-tag-arrow::after {
     content: '';
     position: absolute;
     right: 0; top: -3px;
@@ -218,22 +212,22 @@
   }
 
   /* ─── IMAGE PANEL (RIGHT) ─── */
-  .image-panel {
+  .vm-image-panel {
     position: relative;
     overflow: hidden;
     min-height: 320px;
   }
-  .image-panel img {
+  .vm-image-panel img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     transition: transform .6s cubic-bezier(.25,.46,.45,.94);
   }
-  .card-row:hover .image-panel img { transform: scale(1.06); }
+  .vm-card-row:hover .vm-image-panel img { transform: scale(1.06); }
 
   /* Red accent bar at bottom of image */
-  .image-panel::after {
+  .vm-image-panel::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -243,10 +237,10 @@
     transform-origin: left;
     transition: transform .5s cubic-bezier(.25,.46,.45,.94);
   }
-  .card-row:hover .image-panel::after { transform: scaleX(1); }
+  .vm-card-row:hover .vm-image-panel::after { transform: scaleX(1); }
 
   /* Image overlay gradient */
-  .image-panel::before {
+  .vm-image-panel::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -255,105 +249,105 @@
     transition: opacity .4s ease;
     z-index: 1;
   }
-  .card-row:hover .image-panel::before { opacity: 1; }
+  .vm-card-row:hover .vm-image-panel::before { opacity: 1; }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
-    .card-row {
+    .vm-card-row {
       grid-template-columns: 1fr;
       min-height: unset;
     }
     /* On mobile: image goes on top, card below */
-    .image-panel { order: 1; min-height: 240px; }
-    .info-card   { order: 2; }
-    .card-row:hover .image-panel img { transform: scale(1.03); }
+    .vm-image-panel { order: 1; min-height: 240px; }
+    .vm-info-card   { order: 2; }
+    .vm-card-row:hover .vm-image-panel img { transform: scale(1.03); }
   }
 
   @media (max-width: 480px) {
-    .image-panel { min-height: 200px; }
-    .card-title { font-size: 1.6rem; }
+    .vm-image-panel { min-height: 200px; }
+    .vm-card-title { font-size: 1.6rem; }
   }
 </style>
 </head>
 <body>
 
 <section class="vm-section">
-  <div class="container">
+  <div class="vm-container">
 
     <!-- Header -->
-    <div class="section-header">
-      <div class="eyebrow">
-        <span class="eyebrow-line"></span>
+    <div class="vm-section-header">
+      <div class="vm-eyebrow">
+        <span class="vm-eyebrow-line"></span>
         Who We Are
-        <span class="eyebrow-line"></span>
+        <span class="vm-eyebrow-line"></span>
       </div>
-      <h2 class="section-title">Our Vision &amp; Mission</h2>
+      <h2 class="vm-section-title">Our Vision &amp; Mission</h2>
     </div>
 
     <!-- Cards -->
-    <div class="cards-wrapper">
+    <div class="vm-cards-wrapper">
 
       <!-- VISION CARD -->
-      <div class="card-row">
+      <div class="vm-card-row">
+        <!-- Right: Image -->
+        <div class="vm-image-panel">
+          <img src="assets/images/about-us/Vision-Eem.webp"
+               alt="Our Vision"
+               onerror="this.style.background='linear-gradient(135deg,#e31e24 0%,#b81519 100%)';this.style.minHeight='100%';">
+        </div>
         <!-- Left: Info Card -->
-        <div class="info-card">
-          <div class="info-card-inner">
-            <div class="icon-badge">
+        <div class="vm-info-card">
+          <div class="vm-info-card-inner">
+            <div class="vm-icon-badge">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <circle cx="12" cy="12" r="3" stroke-width="2"/>
               </svg>
             </div>
-            <h3 class="card-title">Vision</h3>
-            <div class="card-divider"></div>
-            <p class="card-body">
+            <h3 class="vm-card-title">Vision</h3>
+            <div class="vm-card-divider"></div>
+            <p class="vm-card-body">
               We envision a future where every brand we touch doesn't just exist in a market but <strong>defines it</strong> — setting the standard for excellence and becoming a cultural landmark for generations to come.
             </p>
-            <span class="card-tag">
+            <span class="vm-card-tag">
               Learn More
-              <span class="card-tag-arrow"></span>
+              <span class="vm-card-tag-arrow"></span>
             </span>
           </div>
-        </div>
-        <!-- Right: Image -->
-        <div class="image-panel">
-          <img src="assets/images/about-us/Vision-Eem.webp"
-               alt="Our Vision"
-               onerror="this.style.background='linear-gradient(135deg,#e31e24 0%,#b81519 100%)';this.style.minHeight='100%';">
         </div>
       </div>
 
       <!-- MISSION CARD -->
-      <div class="card-row">
+      <div class="vm-card-row">
         <!-- Left: Info Card -->
-        <div class="info-card">
-          <div class="info-card-inner">
-            <div class="icon-badge">
+        <div class="vm-info-card">
+          <div class="vm-info-card-inner">
+            <div class="vm-icon-badge">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" stroke-width="2"/>
                 <path d="M12 8v4l3 3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            <h3 class="card-title">Mission</h3>
-            <div class="card-divider"></div>
-            <p class="card-body">
+            <h3 class="vm-card-title">Mission</h3>
+            <div class="vm-card-divider"></div>
+            <p class="vm-card-body">
               Our mission is to bridge the gap between ambition and identity by blending <strong>provocative strategy</strong> with soul-stirring design. We don't just build brands; we ignite movements that command attention and drive incomparable growth.
             </p>
-            <span class="card-tag">
+            <span class="vm-card-tag">
               Learn More
-              <span class="card-tag-arrow"></span>
+              <span class="vm-card-tag-arrow"></span>
             </span>
           </div>
         </div>
         <!-- Right: Image -->
-        <div class="image-panel">
+        <div class="vm-image-panel">
           <img src="assets/images/about-us/Mission-Eem.webp"
                alt="Our Mission"
                onerror="this.style.background='linear-gradient(135deg,#222 0%,#444 100%)';this.style.minHeight='100%';">
         </div>
       </div>
 
-    </div><!-- /cards-wrapper -->
+    </div><!-- /vm-cards-wrapper -->
   </div>
 </section>
 
