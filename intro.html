@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us Intro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #e31e24;
+    --dark: #111111;
+    --body: #555555;
+    --light: #f8f6f3;
+    --border: #e5e0d8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: var(--dark);
+  }
+
+  /* ── SECTION ── */
+  .about-section {
+    padding: clamp(64px, 10vw, 120px) 0;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle background decoration */
+  .about-section::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(227,30,36,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-section::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(227,30,36,.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-container {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 48px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── EYEBROW ── */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+  .eyebrow-line { width: 28px; height: 1px; background: var(--primary); display: inline-block; }
+
+  /* ── MAIN HEADLINE ── */
+  .main-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.18;
+    margin-bottom: 28px;
+    letter-spacing: -.01em;
+  }
+  .main-headline em {
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  /* ── TAGLINE ── */
+  .tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+    letter-spacing: .01em;
+  }
+
+  /* ── SUB-TAGLINE ── */
+  .sub-tagline {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 400;
+    color: var(--body);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+  }
+
+  /* ── CONTENT GRID: 3 pillars ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 44px;
+  }
+  .pillar {
+    padding: clamp(20px, 3vw, 32px) clamp(16px, 2.5vw, 28px);
+    text-align: center;
+    position: relative;
+    transition: background .3s ease;
+  }
+  .pillar:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20%; right: 0;
+    width: 1px; height: 60%;
+    background: var(--border);
+  }
+  .pillar:hover { background: var(--light); }
+  .pillar-icon {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .pillar-word {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(.95rem, 1.5vw, 1.15rem);
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .pillar-desc {
+    font-size: clamp(.78rem, 1.1vw, .88rem);
+    color: var(--body);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* ── BODY TEXT ── */
+  .body-text {
+    font-size: clamp(.95rem, 1.5vw, 1.08rem);
+    line-height: 1.85;
+    color: var(--body);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .body-text strong {
+    color: var(--dark);
+    font-weight: 500;
+  }
+  .body-text a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity .2s;
+  }
+  .body-text a:hover { opacity: .75; }
+
+  /* Pull quote style for last line */
+  .highlight-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--light);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    margin-top: 8px;
+  }
+  .highlight-line p {
+    font-size: clamp(.95rem, 1.5vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--body);
+    font-weight: 300;
+  }
+  .highlight-line p strong { color: var(--dark); font-weight: 600; }
+  .highlight-line p a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .pillars { grid-template-columns: 1fr; }
+    .pillar:not(:last-child)::after {
+      top: auto; right: 20%; bottom: 0;
+      width: 60%; height: 1px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="about-section">
+  <div class="about-container">
+
+    <!-- Eyebrow -->
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      About Us
+      <span class="eyebrow-line"></span>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="main-headline">
+      Building the Iconic Story of Every Brand —
+      <em>The EEM Way</em>
+    </h1>
+
+    <!-- Tagline -->
+    <p class="tagline">Be Heard, Seen, and Remembered.</p>
+
+    <!-- Sub tagline -->
+    <p class="sub-tagline">
+      We are the branding agency in Ahmedabad that brings your brand to life.<br>
+      We don't just build brands — <strong>we bring life into them.</strong>
+    </p>
+
+    <!-- Decorative divider -->
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-dot"></span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- Body paragraphs -->
+    <p class="body-text">
+      We've distilled our philosophy into three human actions: listen to your core, see what you are capable of, and speak your truth. When you work with us as your branding agency in Ahmedabad, we ensure that when your brand speaks, not only do the right people listen — <strong>they believe in you.</strong>
+    </p>
+
+    <!-- Highlighted closing line -->
+    <div class="highlight-line">
+      <p>
+        Whether we're designing an elegant laminate catalogue or expanding your reach with
+        <a href="https://eembranding.com/services/creative-design-agency-in-ahmedabad">custom advertising and creative design</a>,
+        our goal is always the same — to take you from just being seen to being <strong>remembered.</strong>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

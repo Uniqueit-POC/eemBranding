@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EEM – Ears Eyes Mouth</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: auto; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f4f1ed;
+    color: #111;
+    overflow-x: hidden;
+  }
+
+  :root {
+    --red:     #e31e24;
+    --red-lt:  rgba(227,30,36,.08);
+    --red-md:  rgba(227,30,36,.15);
+    --dark:    #111111;
+    --body:    #666666;
+    --bg:      #f4f1ed;
+    --card:    #ffffff;
+    --border:  #e8e2d9;
+    --left-bg: #faf8f5;
+  }
+
+  /* ── fake content ── */
+  .fake { height:50vh; display:flex; align-items:center; justify-content:center; background:#f4f1ed; }
+  .fake p { color:#bbb; font-size:12px; letter-spacing:3px; text-transform:uppercase; }
+
+  /* ════════════════════════════════
+     SPACER + STICKY
+  ════════════════════════════════ */
+  #eem-spacer { height:400vh; position:relative; }
+
+  #eem-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  /* Progress bar */
+  #eem-bar {
+    position: absolute;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #e31e24, #ff6b6b);
+    width: 0%;
+    z-index: 100;
+  }
+
+  /* ════════════════════════════════
+     CARD
+  ════════════════════════════════ */
+  .eem-card {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background: var(--card);
+    will-change: transform, opacity;
+    box-shadow: 0 4px 60px rgba(0,0,0,.06);
+  }
+
+  /* ── LEFT PANEL ── */
+  .card-left {
+    background: var(--left-bg);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    position: relative;
+    overflow: hidden;
+    gap: 28px;
+  }
+
+  /* subtle red circle glow */
+  .card-left::after {
+    content: '';
+    position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--red-md) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── ORGAN ILLUSTRATION ── */
+  .organ-wrap {
+    position: relative;
+    z-index: 1;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 32px rgba(227,30,36,.12), 0 2px 8px rgba(0,0,0,.06);
+  }
+  .organ-wrap svg { display: block; }
+
+  /* ── E·E·M letters ── */
+  .eem-letters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .eem-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #ddd;
+    transition: color .3s ease;
+  }
+  .eem-letter.active {
+    color: var(--red);
+  }
+  .eem-connector {
+    width: 1px; height: 18px;
+    background: var(--border);
+    margin: 2px 0;
+  }
+
+  /* card number */
+  .card-num {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #bbb;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative; z-index: 1;
+  }
+
+  /* ── RIGHT PANEL ── */
+  .card-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(32px, 5vw, 64px) clamp(36px, 5vw, 72px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* faint decorative large letter watermark */
+  .card-right::before {
+    content: attr(data-letter);
+    position: absolute;
+    right: -20px; bottom: -40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 28vw;
+    font-weight: 900;
+    color: rgba(227,30,36,.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ── SMALL TITLE block: organ name ── */
+  .organ-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .organ-icon-sm {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--red-lt);
+    border: 1px solid rgba(227,30,36,.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .organ-icon-sm svg { display: block; }
+
+  .organ-label-text { display: flex; flex-direction: column; gap: 1px; }
+  .organ-stands-for {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #aaa;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .organ-fullname {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* ── BIG HEADLINE ── */
+  .card-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 8px;
+  }
+  .card-headline .red { color: var(--red); font-style: italic; }
+
+  /* tagline */
+  .card-tagline {
+    font-size: clamp(.9rem, 1.4vw, 1.05rem);
+    color: var(--body);
+    font-style: italic;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  /* divider */
+  .card-divider {
+    width: 44px; height: 2px;
+    background: var(--red);
+    border-radius: 1px;
+    margin-bottom: 22px;
+  }
+
+  /* body */
+  .card-body {
+    font-size: clamp(.88rem, 1.3vw, 1rem);
+    color: var(--body);
+    line-height: 1.9;
+    max-width: 580px;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .card-body em { color: var(--dark); font-style: italic; }
+
+  /* bullets */
+  .card-bullets { display: flex; gap: 20px; flex-wrap: wrap; }
+  .bullet-item { border-left: 2px solid var(--red); padding-left: 12px; }
+  .bullet-label {
+    font-size: 9px; letter-spacing: 2px;
+    color: #bbb; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 3px;
+  }
+  .bullet-val {
+    color: var(--dark); font-size: 12px;
+    font-weight: 400; line-height: 1.45;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .eem-card {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+    .card-left {
+      flex-direction: row;
+      justify-content: center;
+      padding: 18px 24px;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+    .organ-wrap { width: 64px; height: 64px; }
+    .eem-letters { flex-direction: row; gap: 0; }
+    .eem-letter  { font-size: 2rem; }
+    .eem-connector { width: 12px; height: 1px; margin: 0 2px; align-self: center; }
+    .card-num { display: none; }
+    .card-right { padding: 24px 20px; }
+    .card-bullets { flex-direction: column; gap: 14px; }
+    .card-right::before { font-size: 45vw; }
+  }
+</style>
+</head>
+<body>
+
+<div class="fake"><p>Scroll down to explore</p></div>
+
+<div id="eem-spacer">
+  <div id="eem-sticky">
+
+    <div id="eem-bar"></div>
+
+    <!-- ══════ CARD 1: EARS ══════ -->
+    <div class="eem-card" id="ec0">
+
+      <div class="card-left">
+        <!-- Ear illustration -->
+        <div class="organ-wrap">
+          <!-- Ear SVG -->
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <ellipse cx="32" cy="32" rx="18" ry="22" stroke="#e31e24" stroke-width="2.2" fill="none"/>
+            <path d="M26 22c0-3.3 2.7-6 6-6s6 2.7 6 6c0 5-4 7-6 10" stroke="#e31e24" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M32 38c0 2.5-1.5 4-3 5.5" stroke="#e31e24" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <circle cx="32" cy="34" r="2.5" fill="#e31e24" opacity=".25"/>
+            <!-- sound waves -->
+            <path d="M13 26c-1.5 3-1.5 9 0 12" stroke="#e31e24" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".4"/>
+            <path d="M8 23c-2.5 5-2.5 13 0 18" stroke="#e31e24" stroke-width="1.4" stroke-linecap="round" fill="none" opacity=".2"/>
+          </svg>
+        </div>
+
+        <!-- E E M letters -->
+        <div class="eem-letters">
+          <div class="eem-letter active">E</div>
+          <div class="eem-connector"></div>
+          <div class="eem-letter">E</div>
+          <div class="eem-connector"></div>
+          <div class="eem-letter">M</div>
+        </div>
+
+        <div class="card-num">01 / 03</div>
+      </div>
+
+      <div class="card-right" data-letter="E">
+        <!-- Small title -->
+        <div class="organ-label">
+          <div class="organ-icon-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2a7 7 0 0 1 7 7c0 3.5-2.5 6.5-5 8v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-2.27A7 7 0 0 1 12 2zm0 2a5 5 0 0 0-3.46 8.54l.46.43V19h4v-1.5l.35-.28C15.5 15.5 17 13 17 9a5 5 0 0 0-5-5z" fill="#e31e24"/>
+            </svg>
+          </div>
+          <div class="organ-label-text">
+            <span class="organ-stands-for">The first E stands for</span>
+            <span class="organ-fullname">Ears</span>
+          </div>
+        </div>
+
+        <!-- Big title -->
+        <h2 class="card-headline">We <span class="red">Listen.</span></h2>
+        <p class="card-tagline">Strategy begins with a conversation.</p>
+        <div class="card-divider"></div>
+
+        <p class="card-body">
+          Before we ever draw a line, we listen to your story. Not the obvious short, but the <em>"why"</em> of your business. As your branding agency in Ahmedabad, we get stuck into not only what you're up against but also the needs of your audience. We take everything in before we give anything out.
+        </p>
+
+        <div class="card-bullets">
+          <div class="bullet-item">
+            <div class="bullet-label">Real Compass</div>
+            <div class="bullet-val">A brand direction you can actually understand</div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-label">Real Messaging</div>
+            <div class="bullet-val">A tone that sounds like you, not a marketing bot</div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-label">No Guesswork</div>
+            <div class="bullet-val">Real-World-Ready Plans</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ CARD 2: EYES ══════ -->
+    <div class="eem-card" id="ec1">
+
+      <div class="card-left">
+        <!-- Eye illustration -->
+        <div class="organ-wrap">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <!-- outer eye shape -->
+            <path d="M8 32c0 0 10-16 24-16s24 16 24 16-10 16-24 16S8 32 8 32z" stroke="#e31e24" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+            <!-- iris -->
+            <circle cx="32" cy="32" r="8" stroke="#e31e24" stroke-width="2" fill="none"/>
+            <!-- pupil -->
+            <circle cx="32" cy="32" r="3.5" fill="#e31e24" opacity=".3"/>
+            <!-- highlight -->
+            <circle cx="35" cy="29" r="1.5" fill="#e31e24" opacity=".6"/>
+            <!-- lashes top -->
+            <path d="M24 18l1.5 3M32 16v3.5M40 18l-1.5 3" stroke="#e31e24" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+          </svg>
+        </div>
+
+        <div class="eem-letters">
+          <div class="eem-letter">E</div>
+          <div class="eem-connector"></div>
+          <div class="eem-letter active">E</div>
+          <div class="eem-connector"></div>
+          <div class="eem-letter">M</div>
+        </div>
+
+        <div class="card-num">02 / 03</div>
+      </div>
+
+      <div class="card-right" data-letter="E">
+        <!-- Small title -->
+        <div class="organ-label">
+          <div class="organ-icon-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z" fill="#e31e24" opacity=".2"/>
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z" stroke="#e31e24" stroke-width="1.5" fill="none"/>
+              <circle cx="12" cy="12" r="3" fill="#e31e24"/>
+            </svg>
+          </div>
+          <div class="organ-label-text">
+            <span class="organ-stands-for">The second E stands for</span>
+            <span class="organ-fullname">Eyes</span>
+          </div>
+        </div>
+
+        <!-- Big title -->
+        <h2 class="card-headline">We <span class="red">Visualise.</span></h2>
+        <p class="card-tagline">Design that actually makes noise, not just design.</p>
+        <div class="card-divider"></div>
+
+        <p class="card-body">
+          "Good" visuals should do more than just "look good" — they should solve problems. We bring your brand to life so it catches the eye of the right people. Whether it's an upscale laminate catalogue or digital graphics, we've got you covered.
+        </p>
+
+        <div class="card-bullets">
+          <div class="bullet-item">
+            <div class="bullet-label">Design Experiment</div>
+            <div class="bullet-val">A Visual Aesthetic of Premium and Purpose</div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-label">Uniformity</div>
+            <div class="bullet-val">Everything looks the same from social to website</div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-label">Instant Recognition</div>
+            <div class="bullet-val">A brand identity that resonates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ CARD 3: MOUTH ══════ -->
+    <div class="eem-card" id="ec2">
+
+      <div class="card-left">
+        <!-- Mouth illustration -->
+        <div class="organ-wrap">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <!-- lips outline -->
+            <path d="M14 28c4-3 8-4 18-4s14 1 18 4" stroke="#e31e24" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- lower lip smile -->
+            <path d="M14 28c2 8 6 14 18 14s16-6 18-14" stroke="#e31e24" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <!-- upper lip cupid bow -->
+            <path d="M14 28c2-4 6-6 10-5" stroke="#e31e24" stroke-width="2" stroke-linecap="round" fill="none" opacity=".5"/>
+            <path d="M50 28c-2-4-6-6-10-5" stroke="#e31e24" stroke-width="2" stroke-linecap="round" fill="none" opacity=".5"/>
+            <path d="M24 23c2-3 4-4 8-4s6 1 8 4" stroke="#e31e24" stroke-width="2" stroke-linecap="round" fill="none" opacity=".5"/>
+            <!-- teeth hint -->
+            <path d="M22 29h20" stroke="#e31e24" stroke-width="1" opacity=".15"/>
+            <!-- tongue hint -->
+            <path d="M26 36c1.5 3 4 4 6 4s4.5-1 6-4" stroke="#e31e24" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".3"/>
+            <!-- speech dots -->
+            <circle cx="52" cy="22" r="2" fill="#e31e24" opacity=".5"/>
+            <circle cx="57" cy="17" r="1.4" fill="#e31e24" opacity=".35"/>
+            <circle cx="54" cy="13" r="1" fill="#e31e24" opacity=".2"/>
+          </svg>
+        </div>
+
+        <div class="eem-letters">
+          <div class="eem-letter">E</div>
+          <div class="eem-connector"></div>
+          <div class="eem-letter">E</div>
+          <div class="eem-connector"></div>
+          <div class="eem-letter active">M</div>
+        </div>
+
+        <div class="card-num">03 / 03</div>
+      </div>
+
+      <div class="card-right" data-letter="M">
+        <!-- Small title -->
+        <div class="organ-label">
+          <div class="organ-icon-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="#e31e24" opacity=".2" stroke="#e31e24" stroke-width="1.5"/>
+              <path d="M7 14.5C8.5 17 10.5 18 12 18s3.5-1 5-3.5" stroke="#e31e24" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="organ-label-text">
+            <span class="organ-stands-for">The M stands for</span>
+            <span class="organ-fullname">Mouth</span>
+          </div>
+        </div>
+
+        <!-- Big title -->
+        <h2 class="card-headline">We <span class="red">Speak.</span></h2>
+        <p class="card-tagline">Your message, delivered with clarity.</p>
+        <div class="card-divider"></div>
+
+        <p class="card-body">
+          We connect your brand with marketers when it's time to go public. Our digital marketing services deliver your message where it should go — through expert copywriting, social media, or an intense launch campaign. Marketing that resembles conversation, not a break.
+        </p>
+
+        <div class="card-bullets">
+          <div class="bullet-item">
+            <div class="bullet-label">Commanding Voice</div>
+            <div class="bullet-val">Confident, authentic, and bold communication</div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-label">Meaningful Connection</div>
+            <div class="bullet-val">Campaigns that really resonate with humans</div>
+          </div>
+          <div class="bullet-item">
+            <div class="bullet-label">Natural Publicity</div>
+            <div class="bullet-val">Marketing that resembles conversation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /eem-sticky -->
+</div><!-- /eem-spacer -->
+
+<div class="fake"><p>End of section</p></div>
+
+<script>
+(function () {
+  function init() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      return setTimeout(init, 100);
+    }
+    gsap.registerPlugin(ScrollTrigger);
+
+    var spacer = document.getElementById('eem-spacer');
+    var sticky = document.getElementById('eem-sticky');
+    var bar    = document.getElementById('eem-bar');
+    var c0     = document.getElementById('ec0');
+    var c1     = document.getElementById('ec1');
+    var c2     = document.getElementById('ec2');
+    if (!spacer || !c0) return;
+
+    var scroller = document.getElementById('smooth-wrapper') || window;
+
+    [c0, c1, c2].forEach(function(c) {
+      c.style.transition = 'none';
+      c.style.willChange = 'transform, opacity';
+    });
+
+    gsap.set(c0, { y: '0%',   scale: 1,    opacity: 1, zIndex: 3 });
+    gsap.set(c1, { y: '100%',              opacity: 0, zIndex: 4 });
+    gsap.set(c2, { y: '100%',              opacity: 0, zIndex: 5 });
+
+    var tl = gsap.timeline({ defaults: { ease: 'none' } });
+
+    // Card 2 slides up, Card 1 pushes back
+    tl.to(c1, { y: '0%', opacity: 1, duration: 1 }, 0)
+      .to(c0,  { y: '-4%', scale: 0.97, opacity: 0.15, duration: 1 }, 0);
+
+    // Card 3 slides up, Card 2 pushes back
+    tl.to(c2, { y: '0%', opacity: 1, duration: 1 }, 1)
+      .to(c1,  { y: '-4%', scale: 0.97, opacity: 0.15, duration: 1 }, 1);
+
+    tl.fromTo(bar, { width: '0%' }, { width: '100%', duration: 2, ease: 'none' }, 0);
+
+    ScrollTrigger.create({
+      trigger:    spacer,
+      start:      'top top',
+      end:        'bottom bottom',
+      pin:        sticky,
+      pinSpacing: false,
+      scrub:      1.2,
+      scroller:   scroller,
+      animation:  tl,
+      anticipatePin: 1,
+      onUpdate: function (self) {
+        if (bar) bar.style.width = (self.progress * 100) + '%';
+      }
+    });
+
+    setTimeout(function () { ScrollTrigger.refresh(); }, 300);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(init, 200); });
+  } else {
+    setTimeout(init, 200);
+  }
+})();
+</script>
+</body>
+</html>
