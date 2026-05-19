@@ -968,12 +968,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (newSrc) {
       var isGif = newSrc.toLowerCase().endsWith(".gif");
       if (isGif) {
-        if (videoEl) videoEl.style.display = "none";
-        if (gifEl)   { gifEl.style.display = "block"; gifEl.src = newSrc; }
+        if (videoEl) videoEl.hidden = true;
+        if (gifEl)   { gifEl.hidden = false; gifEl.src = newSrc; }
       } else {
-        if (gifEl)   gifEl.style.display = "none";
+        if (gifEl)   gifEl.hidden = true;
         if (videoEl) {
-          videoEl.style.display = "block";
+          videoEl.hidden = false;
           var source = videoEl.querySelector("source");
           if (source && source.src.split("/").pop() !== newSrc.split("/").pop()) {
             source.src = newSrc;
