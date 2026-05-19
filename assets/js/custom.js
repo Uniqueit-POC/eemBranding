@@ -1059,3 +1059,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('nav').style.padding =
       window.scrollY > 60 ? '14px 60px' : '22px 60px';
   });
+
+  // start blog details page 
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('reading-progress').style.width = progress + '%';
+  });
+// end blog details page
