@@ -42,10 +42,10 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-        <link href="css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
         <link rel="stylesheet" href="./assets/css/dev-style.css"/>
-
+  
     </head>
 
     <body class="selection:bg-primary selection:text-white">
@@ -59,14 +59,29 @@
 
             <!-- Header -->
             <header class="absolute top-0 left-0 w-full z-9999 site-header">
-                <!-- main header -->
-                <div class="main-bar-wraper">
-                    <div class="container-fluid">
-                        <div class="flex items-center 2xl:gap-40 gap-20 sm:py-20 py-10">
-                            <div class="logo xl:me-20 grow">
-                                <div class="dark:inline-block hidden">
+            <!-- main header -->
+            <div class="main-bar-wraper">
+                <div class="container-fluid">
+                    <div class="flex items-center 2xl:gap-40 gap-20 sm:py-20 py-10">
+                        <div class="logo xl:me-20 grow">
+                            <div class="dark:inline-block hidden">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/main/logo-small-white.png" width="120px" alt="Logo">
+                                </a>
+                            </div>
+                            <div class="dark:hidden block">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/main/logo-small.png" width="120px" alt="Logo">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="header-nav navbar-collapse full-sidenav custom-scroll">
+                            <div class="logo xl:hidden xl:mb-0 mb-50">
+                                <div class="dark:block hidden">
                                     <a href="index.html">
-                                        <img src="assets/images/logo/main/logo-small-white.png" width="120px" alt="Logo">
+                                        <img src="assets/images/logo/main/logo-small-white.png" width="120px"
+                                            alt="Logo">
                                     </a>
                                 </div>
                                 <div class="dark:hidden block">
@@ -76,88 +91,72 @@
                                 </div>
                             </div>
 
-                            <div class="header-nav navbar-collapse full-sidenav custom-scroll">
-                                <div class="logo xl:hidden xl:mb-0 mb-50">
-                                    <div class="dark:block hidden">
-                                        <a href="index.html">
-                                            <img src="assets/images/logo/main/logo-small-white.png" width="120px"
-                                                alt="Logo">
-                                        </a>
-                                    </div>
-                                    <div class="dark:hidden block">
-                                        <a href="index.html">
-                                            <img src="assets/images/logo/main/logo-small.png" width="120px" alt="Logo">
-                                        </a>
-                                    </div>
-                                </div>
+                            <ul class="nav navbar xl:flex xl:w-auto w-full">
+                                <li><a href="index.html"><span>Home</span></a></li>
+                                <li><a href="about-us.html"><span>About Us</span></a></li>
 
-                                <ul class="nav navbar xl:flex xl:w-auto w-full">
-                                    <li><a href="index.html"><span>Home</span></a></li>
-                                    <li><a href="about-us.html"><span>About Us</span></a></li>
+                                <!-- Services Dropdown -->
+                                <li class="sub-menu-down">
+                                    <a href="services.html"><span>Services</span></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="catalog-design.html">Catalog Design</a></li>
+                                        <li class="menu-item">
+                                            <a href="javascript:void(0);" class="menu-link">
+                                                <span>Creative Design</span>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
 
-                                    <!-- Services Dropdown -->
-                                    <li class="sub-menu-down">
-                                        <a href="services.html"><span>Services</span></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="catalog-design.html">Catalog Design</a></li>
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);" class="menu-link">
-                                                    <span>Creative Design</span>
-                                                    <i class="fa fa-angle-right"></i>
-                                                </a>
+                                            <ul class="sub-menu">
+                                                <li><a href="logo-design.html">Logo Design</a></li>
+                                                <li><a href="packaging-design.html">Packaging Design</a></li>
+                                                <li><a href="graphic-design.html">Graphic Design</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="javascript:void(0);" class="menu-link">
+                                                <span>Digital Marketing</span>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
 
-                                                <ul class="sub-menu">
-                                                    <li><a href="logo-design.html">Logo Design</a></li>
-                                                    <li><a href="packaging-design.html">Packaging Design</a></li>
-                                                    <li><a href="graphic-design.html">Graphic Design</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="javascript:void(0);" class="menu-link">
-                                                    <span>Digital Marketing</span>
-                                                    <i class="fa fa-angle-right"></i>
-                                                </a>
+                                            <ul class="sub-menu">
+                                                <li><a href="seo.html">SEO</a></li>
+                                                <li><a href="performance-marketing.html">Performance Marketing</a></li>
+                                                <li><a href="social-media.html">Social Media</a></li>
+                                            </ul>
+                                        </li>
 
-                                                <ul class="sub-menu">
-                                                    <li><a href="seo.html">SEO</a></li>
-                                                    <li><a href="performance-marketing.html">Performance Marketing</a></li>
-                                                    <li><a href="social-media.html">Social Media</a></li>
-                                                </ul>
-                                            </li>
+                                        <li><a href="3d-rendering.html">3D Rendering</a></li>
+                                        <li><a href="website-design.html">Website Design</a></li>
+                                        <li><a href="exhibition-stall-design.html">Exhibition Stall Design</a></li>
+                                        <li><a href="influencer-marketing.html">Influencer Marketing</a></li>
+                                        <li><a href="motion-graphics.html">Motion Graphic Design</a></li>
+                                        <li><a href="ecommerce-marketing.html">Ecommerce Marketing</a></li>
+                                    </ul>
+                                </li>
 
-                                            <li><a href="3d-rendering.html">3D Rendering</a></li>
-                                            <li><a href="website-design.html">Website Design</a></li>
-                                            <li><a href="exhibition-stall-design.html">Exhibition Stall Design</a></li>
-                                            <li><a href="influencer-marketing.html">Influencer Marketing</a></li>
-                                            <li><a href="motion-graphics.html">Motion Graphic Design</a></li>
-                                            <li><a href="ecommerce-marketing.html">Ecommerce Marketing</a></li>
-                                        </ul>
-                                    </li>
+                                <li><a href="portfolio.html"><span>Portfolio</span></a></li>
+                                <li><a href="blog.html"><span>Blog</span></a></li>
+                            </ul>
+                        </div>
 
-                                    <li><a href="portfolio.html"><span>Portfolio</span></a></li>
-                                    <li><a href="blog.html"><span>Blog</span></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="flex xl:gap-20 gap-10">
-                                <a href="contact-us.html"
-                                   class="btn btn-primary btn-md dark:!border-white dark:text-white max-xl:hidden 
-                                   hover:bg-transparent hover:!border-black hover:!text-black transition-all duration-300">
-                                    <span class="pxl-button-text">Contact Us</span>
-                                </a>
-                                <div class="menu-btn relative xl:hidden flex items-center justify-center size-48">
-                                    <span class="inline-block align-middle space-y-6 toogle-btn">
-                                        <span class="dark:bg-white bg-black block h-1 duration-500"></span>
-                                        <span class="dark:bg-white bg-black block h-1 duration-500"></span>
-                                        <span class="dark:bg-white bg-black block h-1 duration-500"></span>
-                                    </span>
-                                </div>
+                        <div class="flex xl:gap-20 gap-10">
+                            <a href="contact-us.html"
+                                class="btn btn-outline-white btn-md dark:!border-white dark:text-white max-xl:hidden hover:bg-primary hover:!border-primary">
+                                <span class="pxl-button-text">Contact Us</span>
+                            </a>
+                            <div class="menu-btn relative xl:hidden flex items-center justify-center size-48">
+                                <span class="inline-block align-middle space-y-6 toogle-btn">
+                                    <span class="dark:bg-white bg-black block h-1 duration-500"></span>
+                                    <span class="dark:bg-white bg-black block h-1 duration-500"></span>
+                                    <span class="dark:bg-white bg-black block h-1 duration-500"></span>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- main header END -->
-            </header>
+            </div>
+            <!-- main header END -->
+        </header>
             <!-- Header END -->
             <div id="smooth-wrapper">
                 <div id="smooth-content">
@@ -809,7 +808,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        </section>  
 
                         <section class="lg:py-60 sm:py-60 py-60 bg-white dark:bg-bodybg overflow-hidden relative">
                             <div class="container relative z-1">
@@ -2493,144 +2492,6 @@
                 </div>
             </div>
         </div>
-
-        
-    <script>
-    (function () {
-
-        /* ── Config ── */
-        var INTRO_DURATION   = 2000;   // ms – how long the intro image shows
-        var SLIDE_DURATION   = 3000;   // ms – how long each slide shows before auto-advance
-        var TRANSITION_MS    = 400;    // ms – title fade duration (must match CSS)
-
-        /* ── Elements ── */
-        var introEl    = document.getElementById('hero-intro');
-        var contentBox = document.getElementById('hero-content');
-        var titlesEl   = document.getElementById('hero-titles');
-        var subEl      = document.getElementById('dynamic-sub');
-        var mainEl     = document.getElementById('dynamic-main');
-        var videoEl    = document.getElementById('main-hero-video');
-        var gifEl      = document.getElementById('main-hero-gif');
-        var buttons    = Array.from(document.querySelectorAll('.nav-btn'));
-
-        /* ── State ── */
-        var currentIndex  = 0;
-        var autoTimer     = null;
-        var isAuto        = true;   // flips to false when user manually clicks
-
-        /* Pass CSS variable for the progress-bar animation duration */
-        document.documentElement.style.setProperty('--slide-duration', (SLIDE_DURATION / 1000) + 's');
-
-        /* ─────────────────────────────────────────
-        Activate a slide (by index)
-        ───────────────────────────────────────── */
-        function activateSlide(index, manual) {
-            var btn = buttons[index];
-            if (!btn) return;
-
-            /* 1. Update title with slide-out → slide-in animation */
-            titlesEl.classList.add('slide-out');
-            setTimeout(function () {
-                subEl.textContent  = btn.getAttribute('data-sub');
-                mainEl.textContent = btn.getAttribute('data-main');
-                titlesEl.classList.remove('slide-out');
-                titlesEl.classList.add('slide-in');
-                /* tiny frame delay so browser registers the class change */
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        titlesEl.classList.add('active');
-                    });
-                });
-                setTimeout(function () {
-                    titlesEl.classList.remove('slide-in', 'active');
-                }, TRANSITION_MS + 50);
-            }, TRANSITION_MS);
-
-            /* 2. Swap video or GIF */
-            var newSrc = btn.getAttribute('data-video');
-            var isGif = newSrc.toLowerCase().endsWith('.gif');
-            
-            if (isGif) {
-                // Show GIF, hide video
-                videoEl.style.display = 'none';
-                gifEl.style.display = 'block';
-                gifEl.src = newSrc;
-            } else {
-                // Show video, hide GIF
-                gifEl.style.display = 'none';
-                videoEl.style.display = 'block';
-                var source = videoEl.querySelector('source');
-                var currentFile = source.src.split('/').pop();
-                var newFile     = newSrc.split('/').pop();
-                if (currentFile !== newFile) {
-                    source.src = newSrc;
-                    videoEl.load();
-                    videoEl.play();
-                }
-            }
-
-            /* 3. Update active button states */
-            buttons.forEach(function (b) {
-                b.classList.remove('active', 'manual-active');
-            });
-            btn.classList.add(manual ? 'manual-active' : 'active');
-
-            currentIndex = index;
-        }
-
-        /* ─────────────────────────────────────────
-        Auto-advance loop
-        ───────────────────────────────────────── */
-        function scheduleNext() {
-            clearTimeout(autoTimer);
-            autoTimer = setTimeout(function () {
-                if (!isAuto) return;
-                var next = (currentIndex + 1) % buttons.length;
-                activateSlide(next, false);
-                scheduleNext();
-            }, SLIDE_DURATION);
-        }
-
-        /* ─────────────────────────────────────────
-        Manual click handler
-        ───────────────────────────────────────── */
-        buttons.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var idx = parseInt(btn.getAttribute('data-index'), 10);
-                isAuto = false;             // stop auto-cycling
-                clearTimeout(autoTimer);    // cancel pending auto-advance
-                activateSlide(idx, true);
-            });
-        });
-
-        /* ─────────────────────────────────────────
-        Sequence on page load
-        Phase 0: show intro image (2 s)
-        Phase 1: fade out intro, reveal content, start slider at slide 0
-        ───────────────────────────────────────── */
-        setTimeout(function () {
-
-            /* Fade out the intro overlay */
-            introEl.classList.add('fade-out');
-
-            /* Reveal hero content */
-            contentBox.classList.add('visible');
-
-            /* Activate first slide (auto mode) */
-            activateSlide(0, false);
-
-            /* After fade transition remove intro from DOM flow */
-            setTimeout(function () {
-                introEl.classList.add('hidden');
-            }, 850);
-
-            /* Start the auto-advance loop (first advance after SLIDE_DURATION) */
-            scheduleNext();
-
-        }, INTRO_DURATION);
-
-    })();
-    </script>
 
         <script src="assets/vendor/gsap/gsap.min.js"></script>
         <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>

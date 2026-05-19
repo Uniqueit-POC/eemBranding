@@ -129,7 +129,7 @@ var plexify = function () {
 		  }
 		});
 	  });
-	  
+
 	  container.querySelectorAll(".accordion-header.open").forEach((header) => {
 		const content = header.parentElement.querySelector(".accordion-content");
 		const arrow = header.querySelector(".arrow");
@@ -222,7 +222,7 @@ var plexify = function () {
         }
       }
     });
-  
+
   };
 
   const handleTabs = () => {
@@ -642,7 +642,7 @@ var plexify = function () {
             e.preventDefault();
             // Move scrollLeft based on wheel delta
             wrapper.scrollLeft += e.deltaY;
-            
+
             // Pause animation temporarily while scrolling
             inner.style.animationPlayState = 'paused';
             clearTimeout(wrapper.scrollTimeout);
@@ -680,23 +680,23 @@ var plexify = function () {
             const walk = (x - startX) * 2; // Scroll speed
             wrapper.scrollLeft = scrollLeft - walk;
         });
-        
+
   const handleFormRecaptcha = function () {
     const form = document.querySelector(".dz-form.footer-form");
     if (!form) return;
- 
+
     const requiredInputs = form.querySelectorAll(
       'input[required]:not([type="hidden"]), textarea[required]'
     );
     const recaptchaContainer = form.querySelector(".input-recaptcha");
- 
+
     if (!recaptchaContainer) return;
- 
+
     recaptchaContainer.style.display = "none";
- 
+
     function checkAllFieldsFilled() {
       let allFilled = true;
- 
+
       requiredInputs.forEach((input) => {
         if (
           input.offsetParent !== null &&
@@ -705,22 +705,22 @@ var plexify = function () {
           allFilled = false;
         }
       });
- 
+
       recaptchaContainer.style.display = allFilled ? "block" : "none";
       return allFilled;
     }
- 
+
     requiredInputs.forEach((input) => {
       input.addEventListener("input", checkAllFieldsFilled);
       input.addEventListener("change", checkAllFieldsFilled);
     });
- 
+
     form.addEventListener("submit", (e) => {
       if (!checkAllFieldsFilled()) {
         e.preventDefault(); // Stop the form from submitting
       }
     });
- 
+
     checkAllFieldsFilled();
   };
 
@@ -795,3 +795,267 @@ window.addEventListener("resize", function () {
 document.addEventListener("DOMContentLoaded", function () {
   plexify().init();
 });
+
+    // <!-- /* ============== start faq seciton custome ==============  */ -->
+        document.addEventListener("DOMContentLoaded", () => {
+            // Find all parent accordions on the page
+            const accordions = document.querySelectorAll(".qa-accordion");
+
+            accordions.forEach((accordion) => {
+                const items = accordion.querySelectorAll(".qa-acc__item");
+
+                items.forEach((item) => {
+                    const trigger = item.querySelector(".qa-acc__trigger");
+                    const panel = item.querySelector(".qa-acc__panel");
+
+                    // Automatically set heights for items marked active by default on load
+                    if (item.classList.contains("qa-acc__item--active")) {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+
+                    trigger.addEventListener("click", () => {
+                        const isActive = item.classList.contains("qa-acc__item--active");
+
+                        // Close other items only inside this specific block container
+                        items.forEach((sibling) => {
+                            if (sibling !== item && sibling.classList.contains("qa-acc__item--active")) {
+                                sibling.classList.remove("qa-acc__item--active");
+                                sibling.querySelector(".qa-acc__trigger").setAttribute("aria-expanded", "false");
+                                sibling.querySelector(".qa-acc__panel").style.maxHeight = null;
+                            }
+                        });
+
+                        // Toggle current card active layout state
+                        if (isActive) {
+                            item.classList.remove("qa-acc__item--active");
+                            trigger.setAttribute("aria-expanded", "false");
+                            panel.style.maxHeight = null;
+                        } else {
+                            item.classList.add("qa-acc__item--active");
+                            trigger.setAttribute("aria-expanded", "true");
+                            panel.style.maxHeight = panel.scrollHeight + "px";
+                        }
+                    });
+                });
+            });
+        });
+    // <!-- /* ============== end seciton custome ==============  */ -->
+
+    // <!-- /* ============== start We Speak. ==============  */ -->
+        (function () {
+            function init() {
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                    return setTimeout(init, 100);
+                }
+                gsap.registerPlugin(ScrollTrigger);
+
+                var spacer = document.getElementById('eem-spacer');
+                var sticky = document.getElementById('eem-sticky');
+                var bar = document.getElementById('eem-bar');
+                var c0 = document.getElementById('ec0');
+                var c1 = document.getElementById('ec1');
+                var c2 = document.getElementById('ec2');
+                if (!spacer || !c0) return;
+
+                var scroller = document.getElementById('smooth-wrapper') || window;
+
+                [c0, c1, c2].forEach(function (c) {
+                    c.style.transition = 'none';
+                    c.style.willChange = 'transform, opacity';
+                });
+
+                gsap.set(c0, { y: '0%', scale: 1, opacity: 1, zIndex: 3 });
+                gsap.set(c1, { y: '100%', opacity: 0, zIndex: 4 });
+                gsap.set(c2, { y: '100%', opacity: 0, zIndex: 5 });
+
+                var tl = gsap.timeline({ defaults: { ease: 'none' } });
+
+                // Card 2 slides up, Card 1 pushes back
+                tl.to(c1, { y: '0%', opacity: 1, duration: 1 }, 0)
+                    .to(c0, { y: '-4%', scale: 0.97, opacity: 0.15, duration: 1 }, 0);
+
+                // Card 3 slides up, Card 2 pushes back
+                tl.to(c2, { y: '0%', opacity: 1, duration: 1 }, 1)
+                    .to(c1, { y: '-4%', scale: 0.97, opacity: 0.15, duration: 1 }, 1);
+
+                tl.fromTo(bar, { width: '0%' }, { width: '100%', duration: 2, ease: 'none' }, 0);
+
+                ScrollTrigger.create({
+                    trigger: spacer,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    pin: sticky,
+                    pinSpacing: false,
+                    scrub: 1.2,
+                    scroller: scroller,
+                    animation: tl,
+                    anticipatePin: 1,
+                    onUpdate: function (self) {
+                        if (bar) bar.style.width = (self.progress * 100) + '%';
+                    }
+                });
+
+                setTimeout(function () { ScrollTrigger.refresh(); }, 300);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () { setTimeout(init, 200); });
+            } else {
+                setTimeout(init, 200);
+            }
+        })();
+    // <!-- /* ============== end We Speak. ==============  */ -->
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  });
+// home page hero slider logic
+    (function () {
+
+        /* ── Config ── */
+        var INTRO_DURATION   = 2000;   // ms – how long the intro image shows
+        var SLIDE_DURATION   = 3000;   // ms – how long each slide shows before auto-advance
+        var TRANSITION_MS    = 400;    // ms – title fade duration (must match CSS)
+
+        /* ── Elements ── */
+        var introEl    = document.getElementById('hero-intro');
+        var contentBox = document.getElementById('hero-content');
+        var titlesEl   = document.getElementById('hero-titles');
+        var subEl      = document.getElementById('dynamic-sub');
+        var mainEl     = document.getElementById('dynamic-main');
+        var videoEl    = document.getElementById('main-hero-video');
+        var gifEl      = document.getElementById('main-hero-gif');
+        var buttons    = Array.from(document.querySelectorAll('.nav-btn'));
+
+        /* ── State ── */
+        var currentIndex  = 0;
+        var autoTimer     = null;
+        var isAuto        = true;   // flips to false when user manually clicks
+
+        /* Pass CSS variable for the progress-bar animation duration */
+        document.documentElement.style.setProperty('--slide-duration', (SLIDE_DURATION / 1000) + 's');
+
+        /* ─────────────────────────────────────────
+        Activate a slide (by index)
+        ───────────────────────────────────────── */
+        function activateSlide(index, manual) {
+            var btn = buttons[index];
+            if (!btn) return;
+
+            /* 1. Update title with slide-out → slide-in animation */
+            titlesEl.classList.add('slide-out');
+            setTimeout(function () {
+                subEl.textContent  = btn.getAttribute('data-sub');
+                mainEl.textContent = btn.getAttribute('data-main');
+                titlesEl.classList.remove('slide-out');
+                titlesEl.classList.add('slide-in');
+                /* tiny frame delay so browser registers the class change */
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        titlesEl.classList.add('active');
+                    });
+                });
+                setTimeout(function () {
+                    titlesEl.classList.remove('slide-in', 'active');
+                }, TRANSITION_MS + 50);
+            }, TRANSITION_MS);
+
+            /* 2. Swap video or GIF */
+            var newSrc = btn.getAttribute('data-video');
+            var isGif = newSrc.toLowerCase().endsWith('.gif');
+
+            if (isGif) {
+                // Show GIF, hide video
+                videoEl.style.display = 'none';
+                gifEl.style.display = 'block';
+                gifEl.src = newSrc;
+            } else {
+                // Show video, hide GIF
+                gifEl.style.display = 'none';
+                videoEl.style.display = 'block';
+                var source = videoEl.querySelector('source');
+                var currentFile = source.src.split('/').pop();
+                var newFile     = newSrc.split('/').pop();
+                if (currentFile !== newFile) {
+                    source.src = newSrc;
+                    videoEl.load();
+                    videoEl.play();
+                }
+            }
+
+            /* 3. Update active button states */
+            buttons.forEach(function (b) {
+                b.classList.remove('active', 'manual-active');
+            });
+            btn.classList.add(manual ? 'manual-active' : 'active');
+
+            currentIndex = index;
+        }
+
+        /* ─────────────────────────────────────────
+        Auto-advance loop
+        ───────────────────────────────────────── */
+        function scheduleNext() {
+            clearTimeout(autoTimer);
+            autoTimer = setTimeout(function () {
+                if (!isAuto) return;
+                var next = (currentIndex + 1) % buttons.length;
+                activateSlide(next, false);
+                scheduleNext();
+            }, SLIDE_DURATION);
+        }
+
+        /* ─────────────────────────────────────────
+        Manual click handler
+        ───────────────────────────────────────── */
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var idx = parseInt(btn.getAttribute('data-index'), 10);
+                isAuto = false;             // stop auto-cycling
+                clearTimeout(autoTimer);    // cancel pending auto-advance
+                activateSlide(idx, true);
+            });
+        });
+
+        /* ─────────────────────────────────────────
+        Sequence on page load
+        Phase 0: show intro image (2 s)
+        Phase 1: fade out intro, reveal content, start slider at slide 0
+        ───────────────────────────────────────── */
+        setTimeout(function () {
+
+            /* Fade out the intro overlay */
+            introEl.classList.add('fade-out');
+
+            /* Reveal hero content */
+            contentBox.classList.add('visible');
+
+            /* Activate first slide (auto mode) */
+            activateSlide(0, false);
+
+            /* After fade transition remove intro from DOM flow */
+            setTimeout(function () {
+                introEl.classList.add('hidden');
+            }, 850);
+
+            /* Start the auto-advance loop (first advance after SLIDE_DURATION) */
+            scheduleNext();
+
+        }, INTRO_DURATION);
+
+    })();
+// end home page
+
+//  star portfolio page
+  // Filter tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Subtle scroll effect on nav
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.padding =
+      window.scrollY > 60 ? '14px 60px' : '22px 60px';
+  });
