@@ -9605,3 +9605,54 @@ h1, h2, h3, h4, h5, h6 {
     }
 
 }
+
+
+/* ── Portfolio Tab Nav → Mobile Horizontal Scroll ── */
+@media (max-width: 767px) {
+
+  /* Tab nav: horizontal scroll, no wrap */
+  .custom-tab > ul {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 0 !important;
+  }
+
+  .custom-tab > ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Prevent tab buttons from shrinking */
+  .custom-tab > ul .tab-title {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+
+/* ── Tab nav drag-scroll fix — needs overflow on all screen sizes ── */
+.custom-tab > ul {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+.custom-tab > ul::-webkit-scrollbar { display: none; }
+.custom-tab > ul:active { cursor: grabbing; }
+.custom-tab > ul .tab-title { flex-shrink: 0; white-space: nowrap; }
+
+/* ── Tab content grid drag-scroll fix ── */
+.tab-content .grid.grid-cols-12 {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+.tab-content .grid.grid-cols-12::-webkit-scrollbar { display: none; }
+.tab-content .grid.grid-cols-12:active { cursor: grabbing; }

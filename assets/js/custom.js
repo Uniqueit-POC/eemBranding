@@ -36,6 +36,10 @@ var plexify = function () {
         (subMenu.classList.contains("sub-menu") ||
           subMenu.classList.contains("mega-menu"))
       ) {
+        if (window.innerWidth >= 1200) {
+          return;
+        }
+
         e.preventDefault();
 
         const isOpen = link.classList.contains("dz-open");
@@ -634,52 +638,54 @@ var plexify = function () {
     }
   };
 
-         const wrapper = document.getElementById('scrollWrapper');
-        const inner = document.getElementById('marqueeInner');
+  // ── Client Logo Marquee Slider ──
+  const handleClientLogoSwiper = () => {
+    const wrapper = document.getElementById('scrollWrapper');
+    const inner   = document.getElementById('marqueeInner');
+    if (!wrapper || !inner) return;
 
-        // --- 1. Mouse Wheel Scroll (Left/Right) ---
-        wrapper.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            // Move scrollLeft based on wheel delta
-            wrapper.scrollLeft += e.deltaY;
+    const SPEED_PX_SEC = 80;
+    let currentX   = 0;
+    let lastTime   = null;
+    let paused     = false;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragBaseX  = 0;
+    let halfWidth  = 0;
 
-            // Pause animation temporarily while scrolling
-            inner.style.animationPlayState = 'paused';
-            clearTimeout(wrapper.scrollTimeout);
-            wrapper.scrollTimeout = setTimeout(() => {
-                inner.style.animationPlayState = 'running';
-            }, 500);
-        });
+    function measureHalf() {
+      const firstSet = inner.querySelector('.flex.flex-shrink-0');
+      halfWidth = firstSet ? firstSet.offsetWidth : inner.scrollWidth / 2;
+    }
 
-        // --- 2. Click and Drag to Scroll ---
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+    function tick(ts) {
+      if (!lastTime) lastTime = ts;
+      const dt = ts - lastTime;
+      lastTime = ts;
+      if (!paused && !isDragging) {
+        currentX -= SPEED_PX_SEC * (dt / 1000);
+      }
+      if (!halfWidth) measureHalf();
+      if (halfWidth > 0) {
+        if (currentX <= -halfWidth) currentX += halfWidth;
+        if (currentX > 0)           currentX -= halfWidth;
+      }
+      inner.style.transform = `translateX(${currentX}px)`;
+      inner.style.animation  = 'none';
+      requestAnimationFrame(tick);
+    }
 
-        wrapper.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - wrapper.offsetLeft;
-            scrollLeft = wrapper.scrollLeft;
-            inner.style.animationPlayState = 'paused';
-        });
+    inner.style.animation = 'none';
+    requestAnimationFrame(tick);
 
-        wrapper.addEventListener('mouseleave', () => {
-            isDown = false;
-            inner.style.animationPlayState = 'running';
-        });
-
-        wrapper.addEventListener('mouseup', () => {
-            isDown = false;
-            inner.style.animationPlayState = 'running';
-        });
-
-        wrapper.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - wrapper.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll speed
-            wrapper.scrollLeft = scrollLeft - walk;
-        });
+    wrapper.addEventListener('mouseenter', () => { paused = true;  lastTime = null; });
+    wrapper.addEventListener('mouseleave', () => { paused = false; isDragging = false; lastTime = null; wrapper.style.cursor = 'grab'; });
+    wrapper.addEventListener('mousedown',  (e) => { isDragging = true; dragStartX = e.clientX; dragBaseX = currentX; wrapper.style.cursor = 'grabbing'; e.preventDefault(); });
+    window.addEventListener('mouseup',     ()  => { if (!isDragging) return; isDragging = false; lastTime = null; wrapper.style.cursor = 'grab'; });
+    window.addEventListener('mousemove',   (e) => { if (!isDragging) return; currentX = dragBaseX + (e.clientX - dragStartX); });
+    wrapper.addEventListener('wheel',      (e) => { e.preventDefault(); currentX -= e.deltaY * 0.6; }, { passive: false });
+    wrapper.style.cursor = 'grab';
+  };
 
   const handleFormRecaptcha = function () {
     const form = document.querySelector(".dz-form.footer-form");
@@ -742,7 +748,6 @@ var plexify = function () {
       handleColorFilter();
       handleTabs();
       handleServiceCard();
-      handleThemeBtn();
       handleCounterJS();
       handleVedioPopupJS();
       handleLightgallery();
@@ -756,7 +761,6 @@ var plexify = function () {
       }, 500);
       handleButtonAnimations();
       handleSetCurrentYear();
-      handleSupport();
       handleCustomSelects();
       handleHoverActive();
       handleStarRating();
@@ -796,276 +800,311 @@ document.addEventListener("DOMContentLoaded", function () {
   plexify().init();
 });
 
-    // <!-- /* ============== start faq seciton custome ==============  */ -->
-        document.addEventListener("DOMContentLoaded", () => {
-            // Find all parent accordions on the page
-            const accordions = document.querySelectorAll(".qa-accordion");
+// ============================================================
+// FAQ Custom Accordion (.qa-accordion)
+// Safe: only runs if .qa-accordion exists on the page
+// ============================================================
+document.addEventListener("DOMContentLoaded", function () {
+  var accordions = document.querySelectorAll(".qa-accordion");
+  if (!accordions.length) return;
 
-            accordions.forEach((accordion) => {
-                const items = accordion.querySelectorAll(".qa-acc__item");
+  accordions.forEach(function (accordion) {
+    var items = accordion.querySelectorAll(".qa-acc__item");
 
-                items.forEach((item) => {
-                    const trigger = item.querySelector(".qa-acc__trigger");
-                    const panel = item.querySelector(".qa-acc__panel");
+    items.forEach(function (item) {
+      var trigger = item.querySelector(".qa-acc__trigger");
+      var panel   = item.querySelector(".qa-acc__panel");
+      if (!trigger || !panel) return;
 
-                    // Automatically set heights for items marked active by default on load
-                    if (item.classList.contains("qa-acc__item--active")) {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    }
+      // Open default-active items on load
+      if (item.classList.contains("qa-acc__item--active")) {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
 
-                    trigger.addEventListener("click", () => {
-                        const isActive = item.classList.contains("qa-acc__item--active");
+      trigger.addEventListener("click", function () {
+        var isActive = item.classList.contains("qa-acc__item--active");
 
-                        // Close other items only inside this specific block container
-                        items.forEach((sibling) => {
-                            if (sibling !== item && sibling.classList.contains("qa-acc__item--active")) {
-                                sibling.classList.remove("qa-acc__item--active");
-                                sibling.querySelector(".qa-acc__trigger").setAttribute("aria-expanded", "false");
-                                sibling.querySelector(".qa-acc__panel").style.maxHeight = null;
-                            }
-                        });
-
-                        // Toggle current card active layout state
-                        if (isActive) {
-                            item.classList.remove("qa-acc__item--active");
-                            trigger.setAttribute("aria-expanded", "false");
-                            panel.style.maxHeight = null;
-                        } else {
-                            item.classList.add("qa-acc__item--active");
-                            trigger.setAttribute("aria-expanded", "true");
-                            panel.style.maxHeight = panel.scrollHeight + "px";
-                        }
-                    });
-                });
-            });
+        // Close all siblings
+        items.forEach(function (sibling) {
+          if (sibling !== item && sibling.classList.contains("qa-acc__item--active")) {
+            sibling.classList.remove("qa-acc__item--active");
+            var sibTrigger = sibling.querySelector(".qa-acc__trigger");
+            var sibPanel   = sibling.querySelector(".qa-acc__panel");
+            if (sibTrigger) sibTrigger.setAttribute("aria-expanded", "false");
+            if (sibPanel)   sibPanel.style.maxHeight = null;
+          }
         });
-    // <!-- /* ============== end seciton custome ==============  */ -->
 
-    // <!-- /* ============== start We Speak. ==============  */ -->
-        (function () {
-            function init() {
-                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-                    return setTimeout(init, 100);
-                }
-                gsap.registerPlugin(ScrollTrigger);
-
-                var spacer = document.getElementById('eem-spacer');
-                var sticky = document.getElementById('eem-sticky');
-                var bar = document.getElementById('eem-bar');
-                var c0 = document.getElementById('ec0');
-                var c1 = document.getElementById('ec1');
-                var c2 = document.getElementById('ec2');
-                if (!spacer || !c0) return;
-
-                var scroller = document.getElementById('smooth-wrapper') || window;
-
-                [c0, c1, c2].forEach(function (c) {
-                    c.style.transition = 'none';
-                    c.style.willChange = 'transform, opacity';
-                });
-
-                gsap.set(c0, { y: '0%', scale: 1, opacity: 1, zIndex: 3 });
-                gsap.set(c1, { y: '100%', opacity: 0, zIndex: 4 });
-                gsap.set(c2, { y: '100%', opacity: 0, zIndex: 5 });
-
-                var tl = gsap.timeline({ defaults: { ease: 'none' } });
-
-                // Card 2 slides up, Card 1 pushes back
-                tl.to(c1, { y: '0%', opacity: 1, duration: 1 }, 0)
-                    .to(c0, { y: '-4%', scale: 0.97, opacity: 0.15, duration: 1 }, 0);
-
-                // Card 3 slides up, Card 2 pushes back
-                tl.to(c2, { y: '0%', opacity: 1, duration: 1 }, 1)
-                    .to(c1, { y: '-4%', scale: 0.97, opacity: 0.15, duration: 1 }, 1);
-
-                tl.fromTo(bar, { width: '0%' }, { width: '100%', duration: 2, ease: 'none' }, 0);
-
-                ScrollTrigger.create({
-                    trigger: spacer,
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    pin: sticky,
-                    pinSpacing: false,
-                    scrub: 1.2,
-                    scroller: scroller,
-                    animation: tl,
-                    anticipatePin: 1,
-                    onUpdate: function (self) {
-                        if (bar) bar.style.width = (self.progress * 100) + '%';
-                    }
-                });
-
-                setTimeout(function () { ScrollTrigger.refresh(); }, 300);
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function () { setTimeout(init, 200); });
-            } else {
-                setTimeout(init, 200);
-            }
-        })();
-    // <!-- /* ============== end We Speak. ==============  */ -->
-
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Toggle current
+        if (isActive) {
+          item.classList.remove("qa-acc__item--active");
+          trigger.setAttribute("aria-expanded", "false");
+          panel.style.maxHeight = null;
+        } else {
+          item.classList.add("qa-acc__item--active");
+          trigger.setAttribute("aria-expanded", "true");
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    });
   });
-// home page hero slider logic
-    (function () {
+});
 
-        /* ── Config ── */
-        var INTRO_DURATION   = 2000;   // ms – how long the intro image shows
-        var SLIDE_DURATION   = 3000;   // ms – how long each slide shows before auto-advance
-        var TRANSITION_MS    = 400;    // ms – title fade duration (must match CSS)
+// ============================================================
+// EARS / EYES / MOUTH — GSAP ScrollTrigger Stack
+// Safe: only runs if #eem-spacer exists (about-us page)
+// ============================================================
+(function () {
+  function initEEM() {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+      return setTimeout(initEEM, 100);
+    }
+    gsap.registerPlugin(ScrollTrigger);
 
-        /* ── Elements ── */
-        var introEl    = document.getElementById('hero-intro');
-        var contentBox = document.getElementById('hero-content');
-        var titlesEl   = document.getElementById('hero-titles');
-        var subEl      = document.getElementById('dynamic-sub');
-        var mainEl     = document.getElementById('dynamic-main');
-        var videoEl    = document.getElementById('main-hero-video');
-        var gifEl      = document.getElementById('main-hero-gif');
-        var buttons    = Array.from(document.querySelectorAll('.nav-btn'));
+    var spacer = document.getElementById("eem-spacer");
+    var sticky = document.getElementById("eem-sticky");
+    var bar    = document.getElementById("eem-bar");
+    var c0     = document.getElementById("ec0");
+    var c1     = document.getElementById("ec1");
+    var c2     = document.getElementById("ec2");
+    if (!spacer || !c0) return; // Not on this page — exit silently
 
-        /* ── State ── */
-        var currentIndex  = 0;
-        var autoTimer     = null;
-        var isAuto        = true;   // flips to false when user manually clicks
+    var scroller = document.getElementById("smooth-wrapper") || window;
 
-        /* Pass CSS variable for the progress-bar animation duration */
-        document.documentElement.style.setProperty('--slide-duration', (SLIDE_DURATION / 1000) + 's');
+    [c0, c1, c2].forEach(function (c) {
+      c.style.transition  = "none";
+      c.style.willChange  = "transform, opacity";
+    });
 
-        /* ─────────────────────────────────────────
-        Activate a slide (by index)
-        ───────────────────────────────────────── */
-        function activateSlide(index, manual) {
-            var btn = buttons[index];
-            if (!btn) return;
+    gsap.set(c0, { y: "0%",   scale: 1,    opacity: 1, zIndex: 3 });
+    gsap.set(c1, { y: "100%",              opacity: 0, zIndex: 4 });
+    gsap.set(c2, { y: "100%",              opacity: 0, zIndex: 5 });
 
-            /* 1. Update title with slide-out → slide-in animation */
-            titlesEl.classList.add('slide-out');
-            setTimeout(function () {
-                subEl.textContent  = btn.getAttribute('data-sub');
-                mainEl.textContent = btn.getAttribute('data-main');
-                titlesEl.classList.remove('slide-out');
-                titlesEl.classList.add('slide-in');
-                /* tiny frame delay so browser registers the class change */
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        titlesEl.classList.add('active');
-                    });
-                });
-                setTimeout(function () {
-                    titlesEl.classList.remove('slide-in', 'active');
-                }, TRANSITION_MS + 50);
-            }, TRANSITION_MS);
+    var tl = gsap.timeline({ defaults: { ease: "none" } });
 
-            /* 2. Swap video or GIF */
-            var newSrc = btn.getAttribute('data-video');
-            var isGif = newSrc.toLowerCase().endsWith('.gif');
+    // Card 2 (EYES) slides up, Card 1 (EARS) pushes back
+    tl.to(c1, { y: "0%",  opacity: 1,    duration: 1 }, 0)
+      .to(c0, { y: "-4%", scale: 0.97, opacity: 0.15, duration: 1 }, 0);
 
-            if (isGif) {
-                // Show GIF, hide video
-                videoEl.style.display = 'none';
-                gifEl.style.display = 'block';
-                gifEl.src = newSrc;
-            } else {
-                // Show video, hide GIF
-                gifEl.style.display = 'none';
-                videoEl.style.display = 'block';
-                var source = videoEl.querySelector('source');
-                var currentFile = source.src.split('/').pop();
-                var newFile     = newSrc.split('/').pop();
-                if (currentFile !== newFile) {
-                    source.src = newSrc;
-                    videoEl.load();
-                    videoEl.play();
-                }
-            }
+    // Card 3 (MOUTH) slides up, Card 2 (EYES) pushes back
+    tl.to(c2, { y: "0%",  opacity: 1,    duration: 1 }, 1)
+      .to(c1, { y: "-4%", scale: 0.97, opacity: 0.15, duration: 1 }, 1);
 
-            /* 3. Update active button states */
-            buttons.forEach(function (b) {
-                b.classList.remove('active', 'manual-active');
-            });
-            btn.classList.add(manual ? 'manual-active' : 'active');
+    // Progress bar
+    tl.fromTo(bar, { width: "0%" }, { width: "100%", duration: 2, ease: "none" }, 0);
 
-            currentIndex = index;
-        }
+    ScrollTrigger.create({
+      trigger:     spacer,
+      start:       "top top",
+      end:         "bottom bottom",
+      pin:         sticky,
+      pinSpacing:  false,
+      scrub:       1.2,
+      scroller:    scroller,
+      animation:   tl,
+      anticipatePin: 1,
+      onUpdate: function (self) {
+        if (bar) bar.style.width = (self.progress * 100) + "%";
+      }
+    });
 
-        /* ─────────────────────────────────────────
-        Auto-advance loop
-        ───────────────────────────────────────── */
-        function scheduleNext() {
-            clearTimeout(autoTimer);
-            autoTimer = setTimeout(function () {
-                if (!isAuto) return;
-                var next = (currentIndex + 1) % buttons.length;
-                activateSlide(next, false);
-                scheduleNext();
-            }, SLIDE_DURATION);
-        }
+    setTimeout(function () { ScrollTrigger.refresh(); }, 300);
+  }
 
-        /* ─────────────────────────────────────────
-        Manual click handler
-        ───────────────────────────────────────── */
-        buttons.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var idx = parseInt(btn.getAttribute('data-index'), 10);
-                isAuto = false;             // stop auto-cycling
-                clearTimeout(autoTimer);    // cancel pending auto-advance
-                activateSlide(idx, true);
-            });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () { setTimeout(initEEM, 200); });
+  } else {
+    setTimeout(initEEM, 200);
+  }
+})();
+
+// ============================================================
+// Home Page — Hero Banner Slider
+// Safe: only runs if #hero-content exists (index page)
+// ============================================================
+(function () {
+  var contentBox = document.getElementById("hero-content");
+  if (!contentBox) return; // Not on home page — exit silently
+
+  var INTRO_DURATION = 2000;
+  var SLIDE_DURATION = 3000;
+  var TRANSITION_MS  = 400;
+
+  var introEl  = document.getElementById("hero-intro");
+  var titlesEl = document.getElementById("hero-titles");
+  var subEl    = document.getElementById("dynamic-sub");
+  var mainEl   = document.getElementById("dynamic-main");
+  var videoEl  = document.getElementById("main-hero-video");
+  var gifEl    = document.getElementById("main-hero-gif");
+  var buttons  = Array.from(document.querySelectorAll(".nav-btn"));
+
+  var currentIndex = 0;
+  var autoTimer    = null;
+  var isAuto       = true;
+
+  document.documentElement.style.setProperty("--slide-duration", (SLIDE_DURATION / 1000) + "s");
+
+  function activateSlide(index, manual) {
+    var btn = buttons[index];
+    if (!btn) return;
+
+    // Animate title out → in
+    if (titlesEl) {
+      titlesEl.classList.add("slide-out");
+      setTimeout(function () {
+        if (subEl)  subEl.textContent  = btn.getAttribute("data-sub");
+        if (mainEl) mainEl.textContent = btn.getAttribute("data-main");
+        titlesEl.classList.remove("slide-out");
+        titlesEl.classList.add("slide-in");
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { titlesEl.classList.add("active"); });
         });
+        setTimeout(function () { titlesEl.classList.remove("slide-in", "active"); }, TRANSITION_MS + 50);
+      }, TRANSITION_MS);
+    }
 
-        /* ─────────────────────────────────────────
-        Sequence on page load
-        Phase 0: show intro image (2 s)
-        Phase 1: fade out intro, reveal content, start slider at slide 0
-        ───────────────────────────────────────── */
-        setTimeout(function () {
+    // Swap media (GIF or video)
+    var newSrc = btn.getAttribute("data-video");
+    if (newSrc) {
+      var isGif = newSrc.toLowerCase().endsWith(".gif");
+      if (isGif) {
+        if (videoEl) videoEl.style.display = "none";
+        if (gifEl)   { gifEl.style.display = "block"; gifEl.src = newSrc; }
+      } else {
+        if (gifEl)   gifEl.style.display = "none";
+        if (videoEl) {
+          videoEl.style.display = "block";
+          var source = videoEl.querySelector("source");
+          if (source && source.src.split("/").pop() !== newSrc.split("/").pop()) {
+            source.src = newSrc;
+            videoEl.load();
+            videoEl.play().catch(function () {});
+          }
+        }
+      }
+    }
 
-            /* Fade out the intro overlay */
-            introEl.classList.add('fade-out');
+    // Update button states
+    buttons.forEach(function (b) { b.classList.remove("active", "manual-active"); });
+    btn.classList.add(manual ? "manual-active" : "active");
+    currentIndex = index;
+  }
 
-            /* Reveal hero content */
-            contentBox.classList.add('visible');
+  function scheduleNext() {
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(function () {
+      if (!isAuto) return;
+      activateSlide((currentIndex + 1) % buttons.length, false);
+      scheduleNext();
+    }, SLIDE_DURATION);
+  }
 
-            /* Activate first slide (auto mode) */
-            activateSlide(0, false);
-
-            /* After fade transition remove intro from DOM flow */
-            setTimeout(function () {
-                introEl.classList.add('hidden');
-            }, 850);
-
-            /* Start the auto-advance loop (first advance after SLIDE_DURATION) */
-            scheduleNext();
-
-        }, INTRO_DURATION);
-
-    })();
-// end home page
-
-//  star portfolio page
-  // Filter tabs
-  document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+  // Manual button clicks
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      isAuto = false;
+      clearTimeout(autoTimer);
+      activateSlide(parseInt(btn.getAttribute("data-index"), 10), true);
     });
   });
 
-  // Subtle scroll effect on nav
-  window.addEventListener('scroll', () => {
-    document.querySelector('nav').style.padding =
-      window.scrollY > 60 ? '14px 60px' : '22px 60px';
-  });
+  // Start sequence after intro
+  setTimeout(function () {
+    if (introEl) introEl.classList.add("fade-out");
+    contentBox.classList.add("visible");
+    activateSlide(0, false);
+    setTimeout(function () { if (introEl) introEl.classList.add("hidden"); }, 850);
+    scheduleNext();
+  }, INTRO_DURATION);
+})();
 
-  // start blog details page 
-  window.addEventListener('scroll', () => {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop;
-    const scrollHeight = doc.scrollHeight - doc.clientHeight;
-    const progress = (scrollTop / scrollHeight) * 100;
-    document.getElementById('reading-progress').style.width = progress + '%';
+// ============================================================
+// Portfolio Page — Filter Tabs
+// Safe: only runs if .tab elements exist
+// ============================================================
+document.addEventListener("DOMContentLoaded", function () {
+  var tabs = document.querySelectorAll(".tab");
+  if (!tabs.length) return;
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      tabs.forEach(function (t) { t.classList.remove("active"); });
+      tab.classList.add("active");
+    });
   });
-// end blog details page
+});
+
+// ============================================================
+// Blog Details Page — Reading Progress Bar
+// Safe: only runs if #reading-progress exists
+// ============================================================
+(function () {
+  var progressBar = document.getElementById("reading-progress");
+  if (!progressBar) return;
+
+  window.addEventListener("scroll", function () {
+    var doc          = document.documentElement;
+    var scrollTop    = doc.scrollTop || document.body.scrollTop;
+    var scrollHeight = doc.scrollHeight - doc.clientHeight;
+    if (scrollHeight <= 0) return;
+    progressBar.style.width = ((scrollTop / scrollHeight) * 100) + "%";
+  }, { passive: true });
+})();
+
+
+// ============================================================
+// Drag-to-scroll for tab nav and tab content grids
+// Works on both desktop (mouse) and mobile (touch)
+// ============================================================
+document.addEventListener("DOMContentLoaded", function () {
+
+  function addDragScroll(el) {
+    if (!el) return;
+
+    var isDown     = false;
+    var startX     = 0;
+    var startScroll = 0;
+    var moved      = false;
+
+    el.addEventListener("mousedown", function (e) {
+      // Only left mouse button
+      if (e.button !== 0) return;
+      isDown      = true;
+      moved       = false;
+      startX      = e.clientX;
+      startScroll = el.scrollLeft;
+      el.style.cursor     = "grabbing";
+      el.style.userSelect = "none";
+      e.preventDefault();
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!isDown) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) moved = true;
+      el.scrollLeft = startScroll - dx;
+    });
+
+    window.addEventListener("mouseup", function () {
+      if (!isDown) return;
+      isDown = false;
+      el.style.cursor     = "grab";
+      el.style.userSelect = "";
+    });
+
+    // Block click on buttons/links if we dragged
+    el.addEventListener("click", function (e) {
+      if (moved) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        moved = false;
+      }
+    }, true);
+  }
+
+  // Tab nav lists
+  document.querySelectorAll(".custom-tab > ul").forEach(addDragScroll);
+
+  // Tab content grids
+  document.querySelectorAll(".tab-content .grid").forEach(addDragScroll);
+});
