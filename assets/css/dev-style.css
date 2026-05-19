@@ -1046,7 +1046,7 @@
  .hero-bg-texture {
    position: absolute;
    inset: 0;
-   background: url('./assets/images/home/01-Home-Page-2560×1440-Background.png') center/cover;
+   background: url('/assets/images/home/01-Home-Page-2560×1440-Background.png') center/cover;
    z-index: 1;
  }
 
@@ -2811,7 +2811,7 @@
  .hero-bg-texture {
    position: absolute;
    inset: 0;
-   background: url('./assets/images/home/01-Home-Page-2560×1440-Background.png') center/cover;
+   background: url('/assets/images/home/01-Home-Page-2560×1440-Background.png') center/cover;
    z-index: 1;
  }
 
