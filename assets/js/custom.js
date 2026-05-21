@@ -934,6 +934,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var titlesEl = document.getElementById("hero-titles");
   var subEl    = document.getElementById("dynamic-sub");
   var mainEl   = document.getElementById("dynamic-main");
+  var emojiEl  = document.getElementById("dynamic-emoji");
   var videoEl  = document.getElementById("main-hero-video");
   var gifEl    = document.getElementById("main-hero-gif");
   var buttons  = Array.from(document.querySelectorAll(".nav-btn"));
@@ -954,6 +955,12 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(function () {
         if (subEl)  subEl.textContent  = btn.getAttribute("data-sub");
         if (mainEl) mainEl.textContent = btn.getAttribute("data-main");
+        if (emojiEl) {
+          emojiEl.textContent = btn.getAttribute("data-emoji") || "";
+          emojiEl.classList.remove("emoji-pop");
+          void emojiEl.offsetWidth;
+          emojiEl.classList.add("emoji-pop");
+        }
         titlesEl.classList.remove("slide-out");
         titlesEl.classList.add("slide-in");
         requestAnimationFrame(function () {
