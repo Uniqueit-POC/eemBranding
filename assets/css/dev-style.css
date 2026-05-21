@@ -2810,7 +2810,7 @@
  .hero-bg-texture {
    position: absolute;
    inset: 0;
-   background: url('/assets/images/home/01-Home-Page-2560×1440-Background.png') center/cover;
+   background: url('../images/home/01-Home-Page-2560×1440-Background.png') center/cover;
    z-index: 1;
  }
 
@@ -2847,7 +2847,7 @@
    position: absolute;
    inset: 0;
    z-index: 10;
-   background: url('/assets/images/banner/01-Home-Page-2560×1440.webp') center/cover no-repeat;
+   background: url('../images/banner/01-Home-Page-2560×1440.webp') center/cover no-repeat;
    /* Fallback solid color if image hasn't loaded yet */
    background-color: var(--clr-dark);
    opacity: 1;
