@@ -1106,58 +1106,11 @@
   <script src="assets/js/chart.js"></script>
   <script src="assets/js/dz.carousel.js"></script>
   <script src="assets/js/dz.ajax.js"></script>
+  <script src="assets/js/portfolio-related.js"></script>
   <script src="assets/js/custom.js"></script>
 
   <script>
-    /* ════════════════════════════════════════
-       SLIDER
-    ════════════════════════════════════════ */
-    (function () {
-      const track = document.getElementById('sliderTrack');
-      const btnPrev = document.getElementById('slPrev');
-      const btnNext = document.getElementById('slNext');
-      const cards = track.querySelectorAll('.sl-card');
-      let current = 0;
-
-      function visibleCount() {
-        const w = window.innerWidth;
-        if (w <= 767) return 1;
-        if (w <= 991) return 2;
-        return 3;
-      }
-
-      function cardWidth() {
-        return cards[0].getBoundingClientRect().width + 14; // gap=14
-      }
-
-      function maxIndex() {
-        return Math.max(0, cards.length - visibleCount());
-      }
-
-      function goTo(idx) {
-        current = Math.max(0, Math.min(idx, maxIndex()));
-        track.style.transform = 'translateX(-' + (current * cardWidth()) + 'px)';
-      }
-
-      btnPrev.addEventListener('click', () => goTo(current - 1));
-      btnNext.addEventListener('click', () => goTo(current + 1));
-
-      // Arrow button inside card → redirect
-      cards.forEach(card => {
-        const arrowBtn = card.querySelector('.sl-arrow-btn');
-        const href = card.dataset.href || '#';
-        if (arrowBtn) {
-          arrowBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            window.location.href = href;
-          });
-        }
-        // clicking card body also redirects
-        card.addEventListener('click', () => { window.location.href = href; });
-      });
-
-      window.addEventListener('resize', () => goTo(current));
-    })();
+    /* Our Work slider (see assets/js/portfolio-related.js) */
 
     /* ════════════════════════════════════════
        LIGHTBOX

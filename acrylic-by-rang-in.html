@@ -640,7 +640,7 @@
             <div class="container">
               <div class="intro-grid">
                 <div class="intro-img">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in-01.webp" alt="Acrylic by Rang-In Cover">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-01.webp" alt="Acrylic by Rang-In Cover">
                 </div>
                 <div>
                                     <span class="intro-tag">Catalogue Design</span>                  <h1 class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-white headline">                      Acrylic by <br> <em>Rang-In</em>                  </h1>                  <p class="intro-p">Acrylic by Rang-In is a nice surface collection that looks very sleek and sophisticated. It has a high-gloss finish that's very clear and deep like a mirror. This makes the laminates look very luxurious and modern, which is great for any room.</p>                  <p class="intro-p">The Acrylic by Rang- Surfaces are not just nice to look at; they are also very durable. It can resist scratches. They are easy to clean, which makes them perfect for kitchens, wardrobes, stores, and other commercial spaces that need to look nice. The acrylic by Rang-In surfaces make every room look elegant and stylish, like a work of art. The Acrylic by Rang-In collection is about making a bold statement with the surfaces in your home or office, and it does a great job of that.</p>
@@ -666,7 +666,7 @@
 
               <div class="pg-grid" id="pgGrid">
                 <div class="pg-item" data-index="1" style="grid-row: span 2;">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in-02.webp" alt="Acrylic by Rang-In 02"
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-02.webp" alt="Acrylic by Rang-In 02"
                     style="height:100%;object-fit:cover;">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
@@ -677,7 +677,7 @@
                 </div>
 
                 <div class="pg-item" data-index="2">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in03.webp" alt="Acrylic by Rang-In 03">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-03.webp" alt="Acrylic by Rang-In 03">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -687,7 +687,7 @@
                 </div>
 
                 <div class="pg-item" data-index="3">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in04.webp" alt="Acrylic by Rang-In 04">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-04.webp" alt="Acrylic by Rang-In 04">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -697,7 +697,7 @@
                 </div>
 
                 <div class="pg-item" data-index="4">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in05.webp" alt="Acrylic by Rang-In 05">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-05.webp" alt="Acrylic by Rang-In 05">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -707,7 +707,7 @@
                 </div>
 
                 <div class="pg-item" data-index="5">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in06.webp" alt="Acrylic by Rang-In 06">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-06.webp" alt="Acrylic by Rang-In 06">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -757,7 +757,7 @@
                   <!-- Card 1 -->
                   <div class="sl-card" data-href="Portfolio.html">
                     <div class="sl-card-img">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/acrylic-by-rang-in/acrylic-by-rang-in-01.webp" alt="Arica">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-01.webp" alt="Arica">
                     </div>
                     <div class="sl-card-info">
                       <div>
@@ -1079,58 +1079,11 @@
   <script src="assets/js/chart.js"></script>
   <script src="assets/js/dz.carousel.js"></script>
   <script src="assets/js/dz.ajax.js"></script>
+  <script src="assets/js/portfolio-related.js"></script>
   <script src="assets/js/custom.js"></script>
 
   <script>
-    /* ════════════════════════════════════════
-       SLIDER
-    ════════════════════════════════════════ */
-    (function () {
-      const track = document.getElementById('sliderTrack');
-      const btnPrev = document.getElementById('slPrev');
-      const btnNext = document.getElementById('slNext');
-      const cards = track.querySelectorAll('.sl-card');
-      let current = 0;
-
-      function visibleCount() {
-        const w = window.innerWidth;
-        if (w <= 767) return 1;
-        if (w <= 991) return 2;
-        return 3;
-      }
-
-      function cardWidth() {
-        return cards[0].getBoundingClientRect().width + 14; // gap=14
-      }
-
-      function maxIndex() {
-        return Math.max(0, cards.length - visibleCount());
-      }
-
-      function goTo(idx) {
-        current = Math.max(0, Math.min(idx, maxIndex()));
-        track.style.transform = 'translateX(-' + (current * cardWidth()) + 'px)';
-      }
-
-      btnPrev.addEventListener('click', () => goTo(current - 1));
-      btnNext.addEventListener('click', () => goTo(current + 1));
-
-      // Arrow button inside card → redirect
-      cards.forEach(card => {
-        const arrowBtn = card.querySelector('.sl-arrow-btn');
-        const href = card.dataset.href || '#';
-        if (arrowBtn) {
-          arrowBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            window.location.href = href;
-          });
-        }
-        // clicking card body also redirects
-        card.addEventListener('click', () => { window.location.href = href; });
-      });
-
-      window.addEventListener('resize', () => goTo(current));
-    })();
+    /* Our Work slider (see assets/js/portfolio-related.js) */
 
     /* ════════════════════════════════════════
        LIGHTBOX

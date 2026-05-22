@@ -7,7 +7,7 @@ const plexifyGsap = function () {
   );
   let smoother;
 
-  if (!smoother) {
+  if (!smoother && !document.querySelector(".portfolio-layout")) {
     smoother = ScrollSmoother.create({
       smooth: 2,
       effects: true,

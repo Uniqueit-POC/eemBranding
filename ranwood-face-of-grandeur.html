@@ -677,7 +677,7 @@
                 </div>
 
                 <div class="pg-item" data-index="2">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood03.webp" alt="Ranwood 03">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-03.webp" alt="Ranwood 03">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -687,7 +687,7 @@
                 </div>
 
                 <div class="pg-item" data-index="3">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood04.webp" alt="Ranwood 04">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-04.webp" alt="Ranwood 04">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -697,7 +697,7 @@
                 </div>
 
                 <div class="pg-item" data-index="4">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood05.webp" alt="Ranwood 05">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-05.webp" alt="Ranwood 05">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -707,7 +707,7 @@
                 </div>
 
                 <div class="pg-item" data-index="5">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood06.webp" alt="Ranwood 06">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-06+.webp" alt="Ranwood 06">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -1079,58 +1079,11 @@
   <script src="assets/js/chart.js"></script>
   <script src="assets/js/dz.carousel.js"></script>
   <script src="assets/js/dz.ajax.js"></script>
+  <script src="assets/js/portfolio-related.js"></script>
   <script src="assets/js/custom.js"></script>
 
   <script>
-    /* ════════════════════════════════════════
-       SLIDER
-    ════════════════════════════════════════ */
-    (function () {
-      const track = document.getElementById('sliderTrack');
-      const btnPrev = document.getElementById('slPrev');
-      const btnNext = document.getElementById('slNext');
-      const cards = track.querySelectorAll('.sl-card');
-      let current = 0;
-
-      function visibleCount() {
-        const w = window.innerWidth;
-        if (w <= 767) return 1;
-        if (w <= 991) return 2;
-        return 3;
-      }
-
-      function cardWidth() {
-        return cards[0].getBoundingClientRect().width + 14; // gap=14
-      }
-
-      function maxIndex() {
-        return Math.max(0, cards.length - visibleCount());
-      }
-
-      function goTo(idx) {
-        current = Math.max(0, Math.min(idx, maxIndex()));
-        track.style.transform = 'translateX(-' + (current * cardWidth()) + 'px)';
-      }
-
-      btnPrev.addEventListener('click', () => goTo(current - 1));
-      btnNext.addEventListener('click', () => goTo(current + 1));
-
-      // Arrow button inside card → redirect
-      cards.forEach(card => {
-        const arrowBtn = card.querySelector('.sl-arrow-btn');
-        const href = card.dataset.href || '#';
-        if (arrowBtn) {
-          arrowBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            window.location.href = href;
-          });
-        }
-        // clicking card body also redirects
-        card.addEventListener('click', () => { window.location.href = href; });
-      });
-
-      window.addEventListener('resize', () => goTo(current));
-    })();
+    /* Our Work slider (see assets/js/portfolio-related.js) */
 
     /* ════════════════════════════════════════
        LIGHTBOX

@@ -640,7 +640,7 @@
             <div class="container">
               <div class="intro-grid">
                 <div class="intro-img">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style-01.webp" alt="Luxe Style Cover">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-01.webp" alt="Luxe Style Cover">
                 </div>
                 <div>
                                     <span class="intro-tag">Catalogue Design</span>                  <h1 class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-white headline">                      A way of saying elegance <br> <em>Luxe style</em>                  </h1>                  <p class="intro-p">'Luxe style' is a way of saying 'elegance'. It is where high-end looks meet style. This laminate collection is designed to make interiors feel more luxurious. It has textures and subtle finishes. The colours are very classy. Luxe Style is made to be both beautiful and strong.</p>                  <p class="intro-p">The surfaces do not look great, but they also work well in everyday life. Luxe Style is perfect for homes. It is also great for offices and special spaces. It makes interiors feel comfortable, classy, and modern. The Luxe Style laminate collection helps create a blend of comfort and style. It brings a sense of luxury to any room. The style is timeless and very elegant. Luxe Style makes an addition to any interior.</p>
@@ -666,7 +666,7 @@
 
               <div class="pg-grid" id="pgGrid">
                 <div class="pg-item" data-index="1" style="grid-row: span 2;">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style-02.webp" alt="Luxe Style 02"
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-02.webp" alt="Luxe Style 02"
                     style="height:100%;object-fit:cover;">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
@@ -677,7 +677,7 @@
                 </div>
 
                 <div class="pg-item" data-index="2">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style03.webp" alt="Luxe Style 03">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-03.webp" alt="Luxe Style 03">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -687,7 +687,7 @@
                 </div>
 
                 <div class="pg-item" data-index="3">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style04.webp" alt="Luxe Style 04">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-04.webp" alt="Luxe Style 04">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -697,7 +697,7 @@
                 </div>
 
                 <div class="pg-item" data-index="4">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style05.webp" alt="Luxe Style 05">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-05.webp" alt="Luxe Style 05">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -707,7 +707,7 @@
                 </div>
 
                 <div class="pg-item" data-index="5">
-                  <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style06.webp" alt="Luxe Style 06">
+                  <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-06.webp" alt="Luxe Style 06">
                   <div class="pg-zoom"><svg viewBox="0 0 24 24">
                       <circle cx="11" cy="11" r="8" />
                       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -757,7 +757,7 @@
                   <!-- Card 1 -->
                   <div class="sl-card" data-href="Portfolio.html">
                     <div class="sl-card-img">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/luxe-style/luxe-style-01.webp" alt="Arica">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-01.webp" alt="Arica">
                     </div>
                     <div class="sl-card-info">
                       <div>
@@ -1079,58 +1079,11 @@
   <script src="assets/js/chart.js"></script>
   <script src="assets/js/dz.carousel.js"></script>
   <script src="assets/js/dz.ajax.js"></script>
+  <script src="assets/js/portfolio-related.js"></script>
   <script src="assets/js/custom.js"></script>
 
   <script>
-    /* ════════════════════════════════════════
-       SLIDER
-    ════════════════════════════════════════ */
-    (function () {
-      const track = document.getElementById('sliderTrack');
-      const btnPrev = document.getElementById('slPrev');
-      const btnNext = document.getElementById('slNext');
-      const cards = track.querySelectorAll('.sl-card');
-      let current = 0;
-
-      function visibleCount() {
-        const w = window.innerWidth;
-        if (w <= 767) return 1;
-        if (w <= 991) return 2;
-        return 3;
-      }
-
-      function cardWidth() {
-        return cards[0].getBoundingClientRect().width + 14; // gap=14
-      }
-
-      function maxIndex() {
-        return Math.max(0, cards.length - visibleCount());
-      }
-
-      function goTo(idx) {
-        current = Math.max(0, Math.min(idx, maxIndex()));
-        track.style.transform = 'translateX(-' + (current * cardWidth()) + 'px)';
-      }
-
-      btnPrev.addEventListener('click', () => goTo(current - 1));
-      btnNext.addEventListener('click', () => goTo(current + 1));
-
-      // Arrow button inside card → redirect
-      cards.forEach(card => {
-        const arrowBtn = card.querySelector('.sl-arrow-btn');
-        const href = card.dataset.href || '#';
-        if (arrowBtn) {
-          arrowBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            window.location.href = href;
-          });
-        }
-        // clicking card body also redirects
-        card.addEventListener('click', () => { window.location.href = href; });
-      });
-
-      window.addEventListener('resize', () => goTo(current));
-    })();
+    /* Our Work slider (see assets/js/portfolio-related.js) */
 
     /* ════════════════════════════════════════
        LIGHTBOX
