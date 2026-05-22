@@ -1115,3 +1115,52 @@ document.addEventListener("DOMContentLoaded", function () {
   // Tab content grids
   document.querySelectorAll(".tab-content .grid").forEach(addDragScroll);
 });
+
+(function () {
+  const sliderTrack = document.getElementById('sliderTrack');
+  if (!sliderTrack) return;
+
+  const pageTag = document.querySelector('.intro-tag');
+  if (!pageTag) return;
+
+  const pageCategory = pageTag.textContent.trim().toLowerCase();
+  let category = null;
+  if (pageCategory.includes('packaging')) category = 'packaging';
+  else if (pageCategory.includes('social media')) category = 'social media';
+  else if (pageCategory.includes('catalogue')) category = 'catalogue';
+  else if (pageCategory.includes('3d') || pageCategory.includes('rendering')) category = '3d';
+  if (!category) return;
+
+  sliderTrack.querySelectorAll('.sl-card').forEach(card => {
+    const sub = card.querySelector('.sl-card-sub');
+    if (!sub) return;
+    const cardText = sub.textContent.trim().toLowerCase();
+    const isPackaging = cardText.includes('packaging');
+    const isSocial = cardText.includes('social media');
+    const isCatalogue = cardText.includes('catalogue');
+    const is3D = cardText.includes('3d') || cardText.includes('rendering');
+
+    let show = false;
+    if (category === 'packaging' && isPackaging) show = true;
+    if (category === 'social media' && isSocial) show = true;
+    if (category === 'catalogue' && isCatalogue) show = true;
+    if (category === '3d' && is3D) show = true;
+
+    if (!show) card.remove();
+  });
+
+  const visibleCards = sliderTrack.querySelectorAll('.sl-card').length;
+  if (!visibleCards) {
+    const section = sliderTrack.closest('.slider-sec');
+    if (section) section.style.display = 'none';
+    return;
+  }
+
+  const header = document.querySelector('.slider-sec .sec-header h1');
+  if (header) {
+    if (category === 'packaging') header.textContent = 'More Packaging Work';
+    if (category === 'social media') header.textContent = 'More Social Media Work';
+    if (category === 'catalogue') header.textContent = 'More Catalogue Work';
+    if (category === '3d') header.textContent = 'More 3D Work';
+  }
+})();
