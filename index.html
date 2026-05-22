@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dev-style.css">
+  <link rel="stylesheet" href="./assets/css/typography-system.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -138,7 +139,7 @@
                                     </ul>
                                 </li>
 
-                                <li><a href="portfolio.html"><span>Portfolio</span></a></li>
+                                <li><a href="Portfolio.html"><span>Portfolio</span></a></li>
                                 <li><a href="blog.html"><span>Blog</span></a></li>
                             </ul>
                         </div>
@@ -168,7 +169,7 @@
                 <div class="page-content">
 
                     <!-- ===================== HERO BANNER ===================== -->
-                    <section class="iconic-hero-final md:flex hidden">
+                    <section class="iconic-hero-final flex">
 
                         <!-- Phase 0: Intro cover shown for 2 seconds (uses the same bg image, no content) -->
                         <!-- To use a DIFFERENT intro image, change the background-image in .hero-intro-image CSS above -->
@@ -191,14 +192,16 @@
                         <div class="hero-content-box" id="hero-content">
                             <div class="hero-titles" id="hero-titles">
                                 <h2 id="dynamic-sub">ECHOING BRAND</h2>
-                                <h1 id="dynamic-main">EXCELLENCE</h1>
+                                <div class="hero-title-row">
+                                    <h1 id="dynamic-main">EXCELLENCE</h1>
+                                </div>
                             </div>
 
                             <div class="hero-nav-wrapper">
 
                                 <!-- Slide 1: Aligned to Your Brand -->
                                 <button class="nav-btn" data-index="0" data-sub="ECHOING BRAND" data-main="EXCELLENCE"
-                                    data-video="./assets/images/banner/Ear.mp4">
+                                     data-video="./assets/images/banner/Ear.mp4">
                                     <div class="icon-circle">
                                         <svg width="22" height="37" viewBox="0 0 22 37" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +230,7 @@
 
                                 <!-- Slide 2: Aimed at Your Future -->
                                 <button class="nav-btn" data-index="1" data-sub="VISIONARY BRAND" data-main="STRATEGY"
-                                    data-video="./assets/images/banner/EYE.mp4">
+                                     data-video="./assets/images/banner/EYE.mp4">
                                     <div class="icon-circle">
                                         <svg width="52" height="30" viewBox="0 0 52 30" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +252,7 @@
 
                                 <!-- Slide 3: Articulate About Your Success -->
                                 <button class="nav-btn" data-index="2" data-sub="ARTICULATE GROWTH" data-main="SUCCESS"
-                                    data-video="./assets/images/banner/Mouth.mp4">
+                                     data-video="./assets/images/banner/Mouth.mp4">
                                     <div class="icon-circle">
                                         <svg width="51" height="37" viewBox="0 0 51 37" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -291,9 +294,7 @@
                                             <a href="https://eembranding.com/services/creative-design-agency-in-ahmedabad"
                                                 class="text-grey underline hover:text-primary duration-300">creative
                                                 design agency</a>
-                                            where substance over shortcuts and long-term brands over quick trends
-                                            matter. Whatever your brand�s image is to people, we�ll be like your
-                                            partner, whether it�s an idea or a brand.
+                                            where substance over shortcuts and long-term brands over quick trends matter. Whatever your brand’s image is to people, we’ll be like your partner, whether it’s an idea or a brand.
                                         </p>
                                         <h2 class="text-white sm:text-3xl text-xl font-bold py-10">
                                             360 Branding + Perfect Design = 100% Growth
@@ -375,9 +376,9 @@
                                                     </div>
                                                     <div>
                                                         <h3 class="sm:text-2xl/30 text-xl font-medium mb-5 text-dark">
-                                                            360� Branding</h3>
+                                                            360° Branding</h3>
                                                         <p class="text-[17px]/24 text-bodytext font-medium">
-                                                            Comprehensive 360� solutions that cover every touchpoint of
+                                                            Comprehensive 360° solutions that cover every touchpoint of
                                                             the customer journey.</p>
                                                     </div>
                                                 </div>
@@ -578,12 +579,7 @@
                                                         href="services/creative-design-agency-in-ahmedabad"
                                                         class="hover:text-primary link-hover">Creative designing
                                                         service</a></h3>
-                                                <p class="text-base text-bodytext">We want to help the brand expand and
-                                                    improve its online store. Our goal is to get the sales, find the
-                                                    right people to buy from the brand, and make a good profit. We do
-                                                    this by using marketing strategies that are based on facts and
-                                                    numbers. We can help the brand get more people to visit the website
-                                                    and turn them into customers.
+                                                <p class="text-base text-bodytext">We want to help the brand expand and improve its online store. Our goal is to get the sales, find the right people to buy from the brand, and make a good profit. We do this by using marketing strategies that are based on facts and numbers. We can help the brand drive more website visits and convert them into customers.
                                                 </p>
                                             </div>
                                         </div>
@@ -910,10 +906,7 @@
                                         <div>
                                             <h5 class="text-xl font-semibold mb-10">Expertise in Different Industries
                                             </h5>
-                                            <p class="text-bodytext text-base leading-relaxed">Our team has a lot of
-                                                experience in various sectors from architectural surfacing to
-                                                industrial manufacturing. This expertise helps us understand and
-                                                communicate in the industry's language.</p>
+                                            <p class="text-bodytext text-base leading-relaxed">Our team has a lot of experience in various sectors. From architectural surfacing to industrial manufacturing. This expertise helps us understand and communicate in the industry's language.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1046,7 +1039,7 @@
                                             <div class="lg:col-span-3 sm:col-span-6 col-span-12">
                                                 <div class="group">
                                                     <div class="overflow-hidden relative rounded-2xl h-60">
-                                                        <img src="assets/images/EEM-Portfolio/All-catalogue/Arica/Arica-01.webp"
+                                                        <img src="assets/images/EEM-Portfolio/All Catalogue/Century/Century 01.webp"
                                                             alt="Arica"
                                                             class="w-full h-full object-cover duration-500 group-hover:scale-110">
                                                         <div
@@ -1127,7 +1120,7 @@
                                             <div class="lg:col-span-3 sm:col-span-6 col-span-12">
                                                 <div class="group">
                                                     <div class="overflow-hidden relative rounded-2xl h-60">
-                                                        <img src="assets/images/EEM-Portfolio/All-catalogue/Arica/Arica-01.webp"
+                                                        <img src="assets/images/EEM-Portfolio/All Catalogue/Century/Century 01.webp"
                                                             alt="Arica"
                                                             class="w-full h-full object-cover duration-500 group-hover:scale-110">
                                                         <div
@@ -1592,7 +1585,7 @@
                                     <div class="text-center max-w-400 py-20 mx-auto">
                                         <h3 class="sm:text-[35px] text-2xxl font-medium mb-10 headline">Talk To Our
                                             Expert</h3>
-                                        <p class="text-bodytext sm:text-[17px]/24 text-base font-medium lg:mb-30 mb-15">
+                                        <p class="text-bodytext sm:text-[17px]/24 text-base font-medium lg:mb-30 mb-15 text-center">
                                             Partner with our brand specialists to build your market-leading identity.
                                         </p>
                                         <a href="contact-us.html" class="btn btn-outline-primary px-40.5">
@@ -1633,7 +1626,7 @@
                                             </button>
                                             <div class="accordion-content">
                                                 <div class="content-inner active">
-                                                    A branding agency helps define a brand�s identity through strategy,
+                                                    A branding agency helps define a brand's identity through strategy,
                                                     visual design, messaging, and marketing to create a clear and
                                                     consistent presence.
                                                 </div>
@@ -1928,7 +1921,7 @@
                                 <div class="lg:col-span-4 col-span-12 wow fadeInUp" data-wow-delay="0.8s">
                                     <div
                                         class="border border-gray bg-white rounded-[25px] xl:pt-76 xl:pb-70 py-40 px-22 text-center h-full">
-                                        <h3 class="text-[80px]/60 text-secondary mb-15 flex justify-center">4.9</h3>
+                                        <h3 class="text-[80px]/60 text-secondary mb-30 flex justify-center">4.9</h3>
                                         <div class="flex justify-center">
                                             <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -1970,6 +1963,8 @@
                                                     fill="#F9BC2F" />
                                             </svg>
                                         </div>
+                                        <br>
+                                        <br>
                                         <div class="flex items-center justify-center sm:mb-30 mb-20">
                                             <span class="text-lg/20 text-bodytext font-medium"> Star Rating on
                                                 Google</span>
@@ -2027,10 +2022,7 @@
                                                             <!-- (Repeat Star SVG 5 times) -->
                                                         </div>
                                                         <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">
-                                                            Professional, insightful, and results-driven. They helped us
-                                                            bridge the gap between <strong class="font-bold">industrial
-                                                                manufacturing and high-end lifestyle branding</strong>.
-                                                            Our brand identity has found newfound clarity and strength.
+                                                            Professional, insightful, and results-driven. They helped us bridge the gap between industrial manufacturing and high-end lifestyle branding. Our distributors and clients have both noted the newfound clarity and strength of our brand identity.
                                                         </p>
                                                     </div>
                                                 </div>
@@ -2069,12 +2061,7 @@
                                                                     fill="#F9BC2F"></path>
                                                             </svg>
                                                         </div>
-                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">They
-                                                            didn't just give us a new logo; they <strong
-                                                                class="font-bold">redefined our entire visual
-                                                                narrative</strong>. Their understanding of 'premium
-                                                            quality' for architects has directly impacted our sales
-                                                            growth.</p>
+                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">Our brand was struggling to stand out in a saturated laminate market until we partnered with this team. They didn't just give us a new logo; they redefined our entire visual narrative. Their deep understanding of how to communicate 'premium quality' to architects and interior designers has directly impacted our sales growth.</p>
                                                     </div>
                                                 </div>
                                                 <!-- Slide 3: SUNTOUCH -->
@@ -2112,11 +2099,7 @@
                                                                     fill="#F9BC2F"></path>
                                                             </svg>
                                                         </div>
-                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">The
-                                                            attention to detail was exceptional. They captured <strong
-                                                                class="font-bold">intricate textures and
-                                                                finishes</strong> in a way that feels tangible even on a
-                                                            screen. Truly a masterclass in aesthetic branding.</p>
+                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">The attention to detail provided for our latest catalogue and digital presence was exceptional. They managed to capture the intricate textures and unique finishes of our laminates in a way that feels tangible even on a screen. Truly a masterclass in aesthetic branding.</p>
                                                     </div>
                                                 </div>
                                                 <!-- Slide 4: PURITEO -->
@@ -2154,11 +2137,7 @@
                                                                     fill="#F9BC2F"></path>
                                                             </svg>
                                                         </div>
-                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">Their
-                                                            expertise in <strong class="font-bold">'humanising' our
-                                                                supplements</strong> transformed complex scientific
-                                                            formulations into an approachable and visually striking
-                                                            brand story.</p>
+                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">In the wellness industry, trust is everything. This agency helped us transform complex scientific formulations into a brand story that is approachable, transparent, and visually striking. Their expertise in 'humanising' our supplements made our launch much more impactful than we could have managed alone.</p>
                                                     </div>
                                                 </div>
                                                 <!-- Slide 5: ISCON GATHIYA -->
@@ -2196,11 +2175,7 @@
                                                                     fill="#F9BC2F"></path>
                                                             </svg>
                                                         </div>
-                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">They
-                                                            perfectly captured the <strong class="font-bold">'soul' of
-                                                                our recipes</strong>, respecting our traditional roots
-                                                            while making the brand feel modern and relevant for today�s
-                                                            landscape.</p>
+                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">They perfectly captured the 'soul' of our recipes. It’s rare to find a branding partner that respects traditional roots while making a brand feel modern and relevant for today’s social media landscape. The storytelling they crafted has turned our customers into true brand advocates.</p>
                                                     </div>
                                                 </div>
                                                 <!-- Slide 6: ELECTRATECH -->
@@ -2238,11 +2213,7 @@
                                                                     fill="#F9BC2F"></path>
                                                             </svg>
                                                         </div>
-                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">Beyond
-                                                            visual identity, they function as <strong
-                                                                class="font-bold">strategic consultants</strong> with a
-                                                            rare ability to provide branding solutions that drive
-                                                            measurable business outcomes.</p>
+                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">Beyond visual identity, this agency functions as a high-level strategic consultant. They possess a rare ability to dissect complex market dynamics and provide branding solutions that drive measurable business outcomes. Their work is characterised by a deep commitment to excellence, thorough research, and a clear understanding of long-term brand equity.</p>
                                                     </div>
                                                 </div>
                                                 <!-- Slide 7: VAURIC -->
@@ -2280,11 +2251,7 @@
                                                                     fill="#F9BC2F"></path>
                                                             </svg>
                                                         </div>
-                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">They
-                                                            successfully positioned our product line as a <strong
-                                                                class="font-bold">benchmark for precision and
-                                                                safety</strong>, translating technical specs into a
-                                                            powerful brand promise.</p>
+                                                        <p class="xl:text-2xxl/40 sm:text-2xl text-lg text-dark">In the high-stakes world of industrial manufacturing, the agency successfully positioned our abrasive product line as a benchmark for precision and safety. They translated technical specifications—like RPM stability and grit consistency—into a powerful brand promise that resonates with both procurement officers and shop-floor engineers.</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2428,7 +2395,7 @@
                                         </p>
                                     </div>
                                     <div class="flex gap-16 flex-wrap">
-                                        <a href="portfolio.html" class="btn btn-primary btn-lg">
+                                        <a href="Portfolio.html" class="btn btn-primary btn-lg">
                                             <span class="pxl-button-text">View Portfolio</span>
                                         </a>
                                         <a href="contact-us.html" class="btn btn-outline-primary btn-lg">
@@ -2457,7 +2424,7 @@
                                         </p>
                                     </div>
                                     <div class="flex gap-12 flex-col sm:flex-row justify-center">
-                                        <a href="portfolio.html" class="btn btn-primary btn-lg w-full sm:w-auto">
+                                        <a href="Portfolio.html" class="btn btn-primary btn-lg w-full sm:w-auto">
                                             <span class="pxl-button-text">View Portfolio</span>
                                         </a>
                                         <a href="contact-us.html" class="btn btn-outline-primary btn-lg w-full sm:w-auto">
@@ -2490,7 +2457,7 @@
                                                 alt="EEM Branding">
                                         </a>
                                         <p class="text-black/60 text-base leading-relaxed mb-25">We are the Branding
-                                            Agency in Ahmedabad that gives life to your brand � through strategy,
+                                            Agency in Ahmedabad that gives life to your brands through strategy,
                                             design, and digital presence.</p>
                                         <div class="flex gap-12">
                                             <a href="https://www.instagram.com/eembranding/#"
@@ -2534,23 +2501,23 @@
                                     <div class="lg:col-span-2 sm:col-span-2 col-span-6 mt-20 md:mt-0">
                                         <h4 class="text-[#171717] text-2xl/31 sm:mb-20 mb-5 font-normal">Services</h4>
                                         <ul class="space-y-12">
-                                            <li><a href="services/catalogue-design-company-in-ahmedabad"
+                                            <li><a href="catalog-design.html"
                                                     class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">Catalogue
                                                     Design</a></li>
 
-                                            <li><a href="services/creative-design-agency-in-ahmedabad"
+                                            <li><a href="creative-design.html"
                                                     class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">Creative
                                                     Designing</a></li>
 
-                                            <li><a href="services/digital-marketing-agency-ahmedabad"
+                                            <li><a href="digital-marketing.html"
                                                     class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">Digital
                                                     Marketing</a></li>
 
-                                            <li><a href="services/3d-rendering-company-in-ahmedabad"
+                                            <li><a href="3d-rendering.html"
                                                     class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">3D
                                                     Rendering</a></li>
 
-                                            <li><a href="services/ecommerce-marketing"
+                                            <li><a href="ecommerce-marketing.html"
                                                     class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">Ecommerce
                                                     Marketing</a></li>
                                         </ul>
@@ -2577,6 +2544,12 @@
                                                     class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">+91
                                                     90818 13238</a>
                                             </li>
+                      <li class="flex items-start gap-12">
+                        <i class="fa fa-phone text-primary mt-4"></i>
+                        <a href="tel:+919913535550"
+                          class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">+91
+                          99135 35550</a>
+                      </li>
                                             <li class="flex items-start gap-12">
                                                 <i class="fa fa-location-dot text-primary mt-4"></i>
                                                 <a href="https://maps.app.goo.gl/75bGRXfV7srnPYHp9"

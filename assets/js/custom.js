@@ -1,11 +1,124 @@
 var plexify = function () {
   "use strict";
 
+  const isMobileSidebar = () => window.matchMedia("(max-width: 1279px)").matches;
+
+  const refreshOpenSubmenuHeights = (root) => {
+    if (!root) return;
+    root.querySelectorAll(".sub-menu.sub-menu-open").forEach((menu) => {
+      menu.style.setProperty("--sub-h", menu.scrollHeight + "px");
+    });
+  };
+
+  const closeSubmenuBranch = (subMenu) => {
+    if (!subMenu) return;
+    subMenu.classList.remove("sub-menu-open");
+    subMenu.style.removeProperty("--sub-h");
+    subMenu.querySelectorAll("a.dz-open").forEach((openLink) => {
+      openLink.classList.remove("dz-open");
+    });
+    subMenu.querySelectorAll(".sub-menu.sub-menu-open").forEach((nested) => {
+      closeSubmenuBranch(nested);
+    });
+  };
+
+  const closeAllMobileSubmenus = (root) => {
+    if (!root) return;
+    root.querySelectorAll("a.dz-open").forEach((openLink) => {
+      openLink.classList.remove("dz-open");
+    });
+    root.querySelectorAll(".sub-menu.sub-menu-open").forEach((menu) => {
+      closeSubmenuBranch(menu);
+    });
+  };
+
+  const toggleMobileSubmenu = (link, subMenu) => {
+    const isOpen = subMenu.classList.contains("sub-menu-open");
+    const parentUl = link.parentElement?.parentElement;
+
+    if (parentUl) {
+      parentUl.querySelectorAll(":scope > li > a").forEach((siblingLink) => {
+        if (siblingLink === link) return;
+        siblingLink.classList.remove("dz-open");
+        const siblingMenu = siblingLink.nextElementSibling;
+        if (siblingMenu?.classList.contains("sub-menu")) {
+          closeSubmenuBranch(siblingMenu);
+        }
+      });
+    }
+
+    if (isOpen) {
+      link.classList.remove("dz-open");
+      closeSubmenuBranch(subMenu);
+    } else {
+      link.classList.add("dz-open");
+      subMenu.classList.add("sub-menu-open");
+      subMenu.style.setProperty("--sub-h", subMenu.scrollHeight + "px");
+    }
+
+    requestAnimationFrame(() => refreshOpenSubmenuHeights(link.closest(".full-sidenav")));
+  };
+
+  const removeMobileSidebarChrome = (fullSidenav) => {
+    if (!fullSidenav) return;
+    fullSidenav.querySelector(".sidenav-close")?.remove();
+    fullSidenav.querySelector(".sidenav-footer")?.remove();
+    delete fullSidenav.dataset.sidenavEnhanced;
+  };
+
+  const injectMobileSidebarChrome = () => {
+    const fullSidenav = document.querySelector(".full-sidenav");
+    if (!fullSidenav) return;
+
+    if (!isMobileSidebar()) {
+      removeMobileSidebarChrome(fullSidenav);
+      return;
+    }
+
+    if (fullSidenav.dataset.sidenavEnhanced === "1") return;
+    fullSidenav.dataset.sidenavEnhanced = "1";
+
+    if (!fullSidenav.querySelector(".sidenav-close")) {
+      const closeBtn = document.createElement("button");
+      closeBtn.type = "button";
+      closeBtn.className = "sidenav-close menu-close";
+      closeBtn.setAttribute("aria-label", "Close menu");
+      closeBtn.innerHTML = "&times;";
+      fullSidenav.insertBefore(closeBtn, fullSidenav.firstChild);
+    }
+
+    fullSidenav.querySelectorAll(":scope > .sidenav-contact").forEach((el) => {
+      if (!el.closest(".sidenav-footer")) el.remove();
+    });
+
+    if (!fullSidenav.querySelector(".sidenav-footer")) {
+      const footer = document.createElement("div");
+      footer.className = "sidenav-footer";
+      footer.innerHTML =
+        '<a href="contact-us.html" class="sidenav-contact-btn"><span>Contact Us</span></a>' +
+        '<div class="sidenav-contact" aria-label="Contact information">' +
+        '<p class="sidenav-contact__title">Get In Touch</p>' +
+        '<a href="tel:+919081813238" class="sidenav-contact__item"><i class="fa fa-phone" aria-hidden="true"></i><span>+91 90818 13238</span></a>' +
+        '<a href="tel:+919913535550" class="sidenav-contact__item"><i class="fa fa-phone" aria-hidden="true"></i><span>+91 99135 35550</span></a>' +
+        '<a href="mailto:info@eembranding.com" class="sidenav-contact__item"><i class="fa fa-envelope" aria-hidden="true"></i><span>info@eembranding.com</span></a>' +
+        '<a href="mailto:eembranding@gmail.com" class="sidenav-contact__item"><i class="fa fa-envelope" aria-hidden="true"></i><span>eembranding@gmail.com</span></a>' +
+        '<div class="sidenav-contact__social">' +
+        '<a href="https://www.instagram.com/eembranding/#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="lab la-instagram"></i></a>' +
+        '<a href="https://www.facebook.com/eembranding" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="lab la-facebook-f"></i></a>' +
+        '<a href="https://www.linkedin.com/company/eem-branding/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="lab la-linkedin-in"></i></a>' +
+        '<a href="http://in.pinterest.com/eembranding/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><i class="lab la-pinterest"></i></a>' +
+        "</div></div>";
+      fullSidenav.appendChild(footer);
+    }
+  };
+
   const handleSidebarMenu = () => {
     const menuBtn = document.querySelector(".menu-btn");
     const fullSidenav = document.querySelector(".full-sidenav");
     const mainBar = document.querySelector(".main-bar");
     const menuClose = document.querySelector(".menu-close");
+
+    injectMobileSidebarChrome();
 
     const onMenuBtnClick = function () {
       this.classList.toggle("open");
@@ -16,6 +129,10 @@ var plexify = function () {
         "menu-btn-open",
         this.classList.contains("open")
       );
+
+      if (!this.classList.contains("open")) {
+        closeAllMobileSubmenus(fullSidenav);
+      }
     };
 
     const onMenuCloseClick = function () {
@@ -23,48 +140,42 @@ var plexify = function () {
       if (fullSidenav) fullSidenav.classList.remove("show");
       if (mainBar) mainBar.classList.remove("show");
       document.body.classList.remove("menu-btn-open");
+      closeAllMobileSubmenus(fullSidenav);
     };
 
     const onFullSidenavClick = function (e) {
+      if (!isMobileSidebar()) return;
+
       const link = e.target.closest("a");
       if (!link || !fullSidenav.contains(link)) return;
+      if (link.classList.contains("sidenav-contact-btn")) return;
 
       const subMenu = link.nextElementSibling;
-
       if (
-        subMenu &&
-        (subMenu.classList.contains("sub-menu") ||
-          subMenu.classList.contains("mega-menu"))
+        !subMenu ||
+        (!subMenu.classList.contains("sub-menu") &&
+          !subMenu.classList.contains("mega-menu"))
       ) {
-        if (window.innerWidth >= 1200) {
-          return;
-        }
-
-        e.preventDefault();
-
-        const isOpen = link.classList.contains("dz-open");
-
-        fullSidenav.querySelectorAll("a.dz-open").forEach((openLink) => {
-          openLink.classList.remove("dz-open");
-          const openMenu = openLink.nextElementSibling;
-          if (openMenu) openMenu.style.maxHeight = null;
-        });
-
-        if (!isOpen) {
-          link.classList.add("dz-open");
-          subMenu.style.maxHeight = subMenu.scrollHeight + "px";
-        }
+        return;
       }
+
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMobileSubmenu(link, subMenu);
     };
 
     menuBtn?.addEventListener("click", onMenuBtnClick);
-    menuClose?.addEventListener("click", onMenuCloseClick);
-    fullSidenav?.addEventListener("click", onFullSidenavClick);
+    document.querySelectorAll(".menu-close, .sidenav-close").forEach((btn) => {
+      btn.addEventListener("click", onMenuCloseClick);
+    });
+    fullSidenav?.addEventListener("click", onFullSidenavClick, true);
 
     return function removeSidebarMenuListeners() {
       menuBtn?.removeEventListener("click", onMenuBtnClick);
-      menuClose?.removeEventListener("click", onMenuCloseClick);
-      fullSidenav?.removeEventListener("click", onFullSidenavClick);
+      document.querySelectorAll(".menu-close, .sidenav-close").forEach((btn) => {
+        btn.removeEventListener("click", onMenuCloseClick);
+      });
+      fullSidenav?.removeEventListener("click", onFullSidenavClick, true);
     };
   };
 
@@ -770,6 +881,7 @@ var plexify = function () {
     },
     resize: function () {
       handleHeaderOverlay();
+      injectMobileSidebarChrome();
     },
   };
 };
@@ -863,56 +975,109 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var spacer = document.getElementById("eem-spacer");
     var sticky = document.getElementById("eem-sticky");
-    var bar    = document.getElementById("eem-bar");
-    var c0     = document.getElementById("ec0");
-    var c1     = document.getElementById("ec1");
-    var c2     = document.getElementById("ec2");
-    if (!spacer || !c0) return; // Not on this page — exit silently
+    var bar = document.getElementById("eem-bar");
+    var c0 = document.getElementById("ec0");
+    var c1 = document.getElementById("ec1");
+    var c2 = document.getElementById("ec2");
+    if (!spacer || !c0) return;
 
+    var cards = [c0, c1, c2];
     var scroller = document.getElementById("smooth-wrapper") || window;
 
-    [c0, c1, c2].forEach(function (c) {
-      c.style.transition  = "none";
-      c.style.willChange  = "transform, opacity";
-    });
-
-    gsap.set(c0, { y: "0%",   scale: 1,    opacity: 1, zIndex: 3 });
-    gsap.set(c1, { y: "100%",              opacity: 0, zIndex: 4 });
-    gsap.set(c2, { y: "100%",              opacity: 0, zIndex: 5 });
-
-    var tl = gsap.timeline({ defaults: { ease: "none" } });
-
-    // Card 2 (EYES) slides up, Card 1 (EARS) pushes back
-    tl.to(c1, { y: "0%",  opacity: 1,    duration: 1 }, 0)
-      .to(c0, { y: "-4%", scale: 0.97, opacity: 0.15, duration: 1 }, 0);
-
-    // Card 3 (MOUTH) slides up, Card 2 (EYES) pushes back
-    tl.to(c2, { y: "0%",  opacity: 1,    duration: 1 }, 1)
-      .to(c1, { y: "-4%", scale: 0.97, opacity: 0.15, duration: 1 }, 1);
-
-    // Progress bar
-    tl.fromTo(bar, { width: "0%" }, { width: "100%", duration: 2, ease: "none" }, 0);
-
-    ScrollTrigger.create({
-      trigger:     spacer,
-      start:       "top top",
-      end:         "bottom bottom",
-      pin:         sticky,
-      pinSpacing:  false,
-      scrub:       1.2,
-      scroller:    scroller,
-      animation:   tl,
-      anticipatePin: 1,
-      onUpdate: function (self) {
-        if (bar) bar.style.width = (self.progress * 100) + "%";
+    function clearCardInlineStyles() {
+      cards.forEach(function (c) {
+        gsap.set(c, { clearProps: "transform,opacity,zIndex,scale,y" });
+        c.style.transition = "";
+        c.style.willChange = "";
+      });
+      if (bar) {
+        bar.style.width = "";
+        bar.style.display = "";
       }
-    });
+    }
 
-    setTimeout(function () { ScrollTrigger.refresh(); }, 300);
+    function setStackedMode() {
+      spacer.classList.add("eem--stacked");
+      spacer.classList.remove("eem--pinned");
+      clearCardInlineStyles();
+      if (bar) bar.style.display = "none";
+    }
+
+    function setPinnedMode() {
+      spacer.classList.remove("eem--stacked");
+      spacer.classList.add("eem--pinned");
+
+      cards.forEach(function (c) {
+        c.style.transition = "none";
+        c.style.willChange = "transform, opacity";
+      });
+
+      if (bar) bar.style.display = "";
+
+      gsap.set(c0, { y: "0%", scale: 1, opacity: 1, zIndex: 3 });
+      gsap.set(c1, { y: "100%", opacity: 0, zIndex: 4 });
+      gsap.set(c2, { y: "100%", opacity: 0, zIndex: 5 });
+
+      var tl = gsap.timeline({ defaults: { ease: "none" } });
+
+      tl.to(c1, { y: "0%", opacity: 1, duration: 1 }, 0).to(
+        c0,
+        { y: "-4%", scale: 0.97, opacity: 0.15, duration: 1 },
+        0
+      );
+
+      tl.to(c2, { y: "0%", opacity: 1, duration: 1 }, 1).to(
+        c1,
+        { y: "-4%", scale: 0.97, opacity: 0.15, duration: 1 },
+        1
+      );
+
+      tl.fromTo(bar, { width: "0%" }, { width: "100%", duration: 2, ease: "none" }, 0);
+
+      ScrollTrigger.create({
+        trigger: spacer,
+        start: "top top",
+        end: "bottom bottom",
+        pin: sticky,
+        pinSpacing: false,
+        scrub: 1.2,
+        scroller: scroller,
+        animation: tl,
+        anticipatePin: 1,
+        onUpdate: function (self) {
+          if (bar) bar.style.width = self.progress * 100 + "%";
+        },
+      });
+    }
+
+    ScrollTrigger.matchMedia({
+      "(max-width: 768px)": function () {
+        setStackedMode();
+        setTimeout(function () {
+          ScrollTrigger.refresh();
+        }, 100);
+        return function () {
+          spacer.classList.remove("eem--stacked", "eem--pinned");
+          clearCardInlineStyles();
+        };
+      },
+      "(min-width: 769px)": function () {
+        setPinnedMode();
+        setTimeout(function () {
+          ScrollTrigger.refresh();
+        }, 300);
+        return function () {
+          spacer.classList.remove("eem--stacked", "eem--pinned");
+          clearCardInlineStyles();
+        };
+      },
+    });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { setTimeout(initEEM, 200); });
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(initEEM, 200);
+    });
   } else {
     setTimeout(initEEM, 200);
   }
@@ -1015,14 +1180,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Start sequence after intro
-  setTimeout(function () {
-    if (introEl) introEl.classList.add("fade-out");
+  function shouldPlayIntroSplash() {
+    return window.matchMedia("(min-width: 1280px)").matches;
+  }
+
+  function startHeroSequence() {
     contentBox.classList.add("visible");
+    if (emojiEl && buttons[0]) {
+      emojiEl.textContent = buttons[0].getAttribute("data-emoji") || "";
+      emojiEl.classList.remove("emoji-pop");
+      void emojiEl.offsetWidth;
+      emojiEl.classList.add("emoji-pop");
+    }
     activateSlide(0, false);
-    setTimeout(function () { if (introEl) introEl.classList.add("hidden"); }, 850);
     scheduleNext();
-  }, INTRO_DURATION);
+  }
+
+  if (shouldPlayIntroSplash() && introEl) {
+    setTimeout(function () {
+      introEl.classList.add("fade-out");
+      startHeroSequence();
+      setTimeout(function () { introEl.classList.add("hidden"); }, 850);
+    }, INTRO_DURATION);
+  } else {
+    if (introEl) introEl.classList.add("hidden");
+    startHeroSequence();
+  }
 })();
 
 // ============================================================

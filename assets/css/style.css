@@ -134,8 +134,8 @@
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     /* ── FONT VARS — change only here ── */
-    --font-body:      'Nunito', sans-serif;
-    --font-heading:   "mona-", "Hanken Grotesk", sans-serif;
+    --font-body:      'Nunito', system-ui, sans-serif;
+    --font-heading:   'Hanken Grotesk', system-ui, sans-serif;
     --font-base:      var(--font-body);
     --font-highlight: var(--font-heading);
 
@@ -7119,7 +7119,7 @@ input[type=number] {
   color: var(--heading-color);
   display: -webkit-box;
   max-height: 3960px*px;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -7139,7 +7139,7 @@ input[type=number] {
 .pxl-testimonial-carousel.layout-1 .item-description>* {
   display: -webkit-box;
   max-height: 3960px*px;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -8544,7 +8544,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-inline: auto;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
+  /* -webkit-box-orient: vertical; */
   -webkit-line-clamp: 6;
   max-width: calc(var(--spacing) * 378);
   overflow: hidden;
@@ -9366,7 +9366,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .custom-create-card-heading {
         color: #1B2D00;
-        font-size: 22px;
+        font-size: 18px;
         margin: 0 0 12px 0;
         font-weight: 700;
     }
@@ -9656,16 +9656,56 @@ h1, h2, h3, h4, h5, h6 {
 .custom-tab > ul:active { cursor: grabbing; }
 .custom-tab > ul .tab-title { flex-shrink: 0; white-space: nowrap; }
 
-/* ── Tab content grid drag-scroll fix ── */
-.tab-content .grid.grid-cols-12 {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: grab;
+/* ── Tab content grid drag-scroll (desktop overflow fallback) ── */
+@media (min-width: 768px) {
+  .custom-tab .tab-content .grid.grid-cols-12 {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+  }
+  .custom-tab .tab-content .grid.grid-cols-12::-webkit-scrollbar { display: none; }
+  .custom-tab .tab-content .grid.grid-cols-12:active { cursor: grabbing; }
 }
-.tab-content .grid.grid-cols-12::-webkit-scrollbar { display: none; }
-.tab-content .grid.grid-cols-12:active { cursor: grabbing; }
+
+/* ── Our Creative Portfolio — mobile horizontal card slider ── */
+@media (max-width: 767px) {
+  .custom-tab .tab-content .grid.grid-cols-12 {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    gap: 20px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    padding-bottom: 8px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .custom-tab .tab-content .grid.grid-cols-12::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-tab .tab-content .grid.grid-cols-12:active {
+    cursor: grabbing;
+  }
+
+  .custom-tab .tab-content .grid.grid-cols-12 > [class*="col-span"] {
+    flex: 0 0 min(78vw, 300px) !important;
+    width: min(78vw, 300px) !important;
+    max-width: min(78vw, 300px) !important;
+    scroll-snap-align: start;
+    grid-column: auto !important;
+  }
+}
 
 
   /* ══════════════════════════════════════════
@@ -10503,7 +10543,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--sp-sm);
   }
 
-  .lp-affordable-desc {
+  .lp-affordable-desc  {
     font-size: var(--fs-md);
     color: rgba(255,255,255,0.6);
     max-width: 520px;
@@ -10585,4 +10625,7 @@ h1, h2, h3, h4, h5, h6 {
 
   @keyframes lp-fade-up {
     to { opacity: 1; transform: translateY(0); }
+  }
+  .text-center{
+    text-align: center !important;
   }

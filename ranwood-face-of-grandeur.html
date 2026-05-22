@@ -73,7 +73,7 @@
 
     .intro-tag {
       display: inline-block;
-      font-size: .7rem;
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: .2em;
       text-transform: uppercase;
@@ -83,10 +83,11 @@
       border-bottom: 2px solid var(--red)
     }
 
-    .text-whites{
+    .text-whites {
       color: white !important;
     }
-   .intro-h {
+
+    .intro-h {
       font-size: clamp(2rem, 4vw, 3.4rem);
       font-weight: 900;
       line-height: 1.05;
@@ -101,7 +102,7 @@
     }
 
     .intro-p {
-      font-size: 1rem;
+      font-size: 18px;
       line-height: 1.8;
       color: var(--body)
     }
@@ -127,7 +128,7 @@
     }
 
     .sec-label {
-      font-size: .7rem;
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: .2em;
       text-transform: uppercase;
@@ -229,7 +230,7 @@
     }
 
     .sl-card-title {
-      font-size: 1.1rem;
+      font-size: 18px;
       font-weight: 700;
       letter-spacing: .02em;
       text-transform: uppercase;
@@ -238,7 +239,7 @@
     }
 
     .sl-card-sub {
-      font-size: .72rem;
+      font-size: 16px;
       color: rgba(255, 255, 255, .55);
       margin-top: 3px;
       letter-spacing: .05em;
@@ -518,6 +519,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="./assets/css/typography-system.css">
 </head>
 
 <body>
@@ -606,7 +608,7 @@
                   </ul>
                 </li>
 
-                <li><a href="portfolio.html"><span>Portfolio</span></a></li>
+                <li><a href="Portfolio.html"><span>Portfolio</span></a></li>
                 <li><a href="blog.html"><span>Blog</span></a></li>
               </ul>
             </div>
@@ -643,7 +645,17 @@
                   <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-01.webp" alt="Ranwood Cover">
                 </div>
                 <div>
-                                    <span class="intro-tag">Catalogue Design</span>                  <h1 class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-white headline">                      Face of Grandeur <br> <em>Ranwood</em>                  </h1>                  <p class="intro-p">Ranwood – Face of Grandeur is a premium wood-inspired laminate collection that captures the timeless beauty and natural richness of real wood with exceptional precision. Designed to evoke warmth, depth, and sophistication, it features authentic wood grains, elegant textures, and refined finishes that elevate any interior space.</p>                  <p class="intro-p">Built for strength and lasting performance, Ranwood combines aesthetic grandeur with everyday durability, making it ideal for both residential and commercial applications. With its majestic presence and natural charm, Ranwood transforms surfaces into expressions of classic luxury and enduring style.</p>
+                  <span class="intro-tag">Catalogue Design</span>
+                  <h1 class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-white headline"> Face
+                    of Grandeur <br> <em>Ranwood</em> </h1>
+                  <p class="intro-p">is a premium wood-inspired laminate collection that
+                    captures the timeless beauty and natural richness of real wood with exceptional precision. Designed
+                    to evoke warmth, depth, and sophistication, it features authentic wood grains, elegant textures, and
+                    refined finishes that elevate any interior space.</p>
+                  <p class="intro-p">Built for strength and lasting performance, Ranwood combines aesthetic grandeur
+                    with everyday durability, making it ideal for both residential and commercial applications. With its
+                    majestic presence and natural charm, Ranwood transforms surfaces into expressions of classic luxury
+                    and enduring style.</p>
                 </div>
               </div>
             </div>
@@ -657,9 +669,8 @@
               <div class="sec-header" style="margin-bottom:32px">
                 <div>
                   <div class="sec-label">Ranwood Collection</div>
-                   <h1
-                      class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-white headline">
-                      Project <em> Gallery </em>
+                  <h1 class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-white headline">
+                    Project <em> Gallery </em>
                   </h1>
                 </div>
               </div>
@@ -732,9 +743,8 @@
               <div class="sec-header">
                 <div>
                   <div class="sec-label">Our Work</div>
-                   <h1
-                      class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-whites headline">
-                      Portfolio <em> Collections </em>
+                  <h1 class="intro-h lg:text-[80px]/90 sm:text-5xl text-4xxl lg:mb-30 mb-10 text-whites headline">
+                    Portfolio <em> Collections </em>
                   </h1>
                 </div>
                 <div class="slider-nav">
@@ -1019,6 +1029,12 @@
                           90818 13238</a>
                       </li>
                       <li class="flex items-start gap-12">
+                        <i class="fa fa-phone text-primary mt-4"></i>
+                        <a href="tel:+919913535550"
+                          class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">+91
+                          99135 35550</a>
+                      </li>
+                      <li class="flex items-start gap-12">
                         <i class="fa fa-location-dot text-primary mt-4"></i>
                         <a href="https://maps.app.goo.gl/75bGRXfV7srnPYHp9"
                           class="text-bodytext text-lg/23 font-light inline-block hover:text-primary link-hover sm:pb-12 pb-8">KP
@@ -1050,16 +1066,23 @@
   <!-- ── LIGHTBOX — outside all wrappers so fixed positioning works ── -->
   <div class="lb-backdrop" id="lbBackdrop" role="dialog" aria-modal="true">
     <button class="lb-close" id="lbClose" aria-label="Close">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
     </button>
     <button class="lb-prev" id="lbPrev" aria-label="Previous image">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
     </button>
     <div class="lb-inner">
       <img class="lb-img" id="lbImg" src="" alt="">
     </div>
     <button class="lb-next" id="lbNext" aria-label="Next image">
-      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      <svg viewBox="0 0 24 24">
+        <polyline points="9 6 15 12 9 18" />
+      </svg>
     </button>
     <div class="lb-counter" id="lbCounter"></div>
   </div>

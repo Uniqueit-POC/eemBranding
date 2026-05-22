@@ -1,0 +1,355 @@
+/**
+
+ * EEM Branding — global typography (3 families, contextual scale)
+
+ * Families: Hanken Grotesk (titles/nav), Nunito (body/descriptions), system-ui (fallback)
+
+ * Scale: 16px UI/meta · 18px body/nav · 22px section titles (headings use page clamp)
+
+ */
+
+
+
+:root {
+
+  --eem-font-heading: 'Hanken Grotesk', system-ui, sans-serif;
+
+  --eem-font-body: 'Nunito', system-ui, sans-serif;
+
+  --eem-font-fallback: system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+
+
+  --eem-fs-xs: 16px;
+
+  --eem-fs-sm: 16px;
+
+  --eem-fs-base: 18px;
+
+  --eem-fs-md: 18px;
+
+  --eem-fs-lg: 22px;
+
+
+
+  --eem-fs-desc: 18px;
+
+  --eem-fs-subtitle: 16px;
+
+  --eem-fs-menu-title: 22px;
+
+  --eem-fs-nav: 18px;
+
+  --eem-fs-label: 16px;
+
+  --eem-fs-input: 18px;
+
+
+
+  --font-body: var(--eem-font-body);
+
+  --font-heading: var(--eem-font-heading);
+
+  --font-base: var(--eem-font-body);
+
+  --font-highlight: var(--eem-font-heading);
+
+
+
+  --text-xs: 16px;
+
+  --text-sm: 18px;
+
+  --text-base: 18px;
+
+  --text-lg: 22px;
+
+  --text-xl: 22px;
+
+}
+
+
+
+html {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-base);
+
+}
+
+
+
+body {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-desc) !important;
+
+}
+
+
+
+/* ── Headings (display font) — size from page styles / clamp ── */
+
+h1, h2, h3, h4, h5, h6,
+
+.intro-h,
+
+.headline,
+
+.hero-title,
+
+.pf-title {
+
+  font-family: var(--eem-font-heading) !important;
+
+}
+
+
+
+/* ── Section / card titles ── */
+
+footer h4,
+
+.card-title,
+
+.contact-hero .card-title,
+
+.map-header h2,
+
+.map-overlay-card .oc-name {
+
+  font-family: var(--eem-font-heading) !important;
+
+  font-size: var(--eem-fs-menu-title) !important;
+
+  line-height: 1.35 !important;
+
+}
+
+
+
+/* ── Labels, eyebrows, small caps ── */
+
+.intro-tag,
+
+.sec-label,
+
+.hero-eyebrow,
+
+.eyebrow,
+
+.card-label,
+
+.oc-label,
+
+.meta-text,
+
+.pf-industry,
+
+.label-tag,
+
+.filter-tab,
+
+.filter-count,
+
+.tags-label,
+
+.dskd-bullet-label,
+
+.dskd-card-num,
+
+.map-header span,
+
+.map-overlay-card .oc-label,
+
+.social-sidebar-label,
+
+.pm-block,
+
+.pf-badge,
+
+.pf-tag {
+
+  font-family: var(--eem-font-heading) !important;
+
+  font-size: var(--eem-fs-subtitle) !important;
+
+  line-height: 1.45 !important;
+
+}
+
+
+
+/* ── Slider card text ── */
+
+.sl-card-title {
+
+  font-family: var(--eem-font-heading) !important;
+
+  font-size: var(--eem-fs-md) !important;
+
+  line-height: 1.35 !important;
+
+}
+
+
+
+.sl-card-sub {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-subtitle) !important;
+
+  line-height: 1.4 !important;
+
+}
+
+
+
+/* ── Body copy / descriptions ── */
+
+.intro-p,
+
+.intro-p + .intro-p,
+
+p,
+
+.text-black\/60,
+
+footer p,
+
+.pf-desc,
+
+.text-bodytext,
+
+.hero-subtitle,
+
+.card-value,
+
+.card-value a,
+
+.form-left p,
+
+.tagline,
+
+.subtitle,
+
+.dskd-bullet-val,
+
+.dskd-organ-stands-for,
+
+.map-overlay-card .oc-addr,
+
+.comment-form-wrap > p,
+
+.more-header p,
+
+.nav-btn p {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-desc) !important;
+
+  line-height: 1.65 !important;
+
+}
+
+
+
+/* ── Footer links (not column titles) ── */
+
+footer a,
+
+footer li a,
+
+footer .link-hover {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-nav) !important;
+
+  line-height: 1.5 !important;
+
+}
+
+
+
+/* ── Header navigation ── */
+
+.site-header .navbar > li > a,
+
+.site-header .navbar > .sub-menu-down > .sub-menu > li > a,
+
+.site-header .navbar .sub-menu li > a,
+
+.header-nav .nav a,
+
+.header-nav .nav .sub-menu a {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-nav) !important;
+
+  line-height: 1.5 !important;
+
+}
+
+
+
+footer h4.text-2xl\/31 {
+
+  font-size: var(--eem-fs-menu-title) !important;
+
+}
+
+
+
+/* ── Forms ── */
+
+input,
+
+textarea,
+
+select {
+
+  font-family: var(--eem-font-body) !important;
+
+  font-size: var(--eem-fs-input) !important;
+
+}
+
+
+
+button,
+
+label,
+
+.form-group label {
+
+  font-family: var(--eem-font-body) !important;
+
+}
+
+
+
+.form-group label {
+
+  font-size: var(--eem-fs-label) !important;
+
+}
+
+
+
+[style*='Barlow'],
+
+[style*='Roboto Condensed'],
+
+[style*='Futura'] {
+
+  font-family: var(--eem-font-heading) !important;
+
+}
+
+
