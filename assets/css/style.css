@@ -9622,7 +9622,7 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Tab nav: horizontal scroll, no wrap */
   .custom-tab > ul {
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     justify-content: flex-start !important;
