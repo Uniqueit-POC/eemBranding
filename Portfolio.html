@@ -20,745 +20,6 @@
     href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
 
-  <style>
-    /* ─── BRAND CSS VARIABLES ─────────────────────────────────── */
-    :root {
-      --clr-primary: #e31e24;
-      --clr-primary-dark: #b81519;
-      --clr-primary-light: rgba(227, 30, 36, 0.08);
-      --clr-primary-mid: rgba(227, 30, 36, 0.18);
-      --clr-dark: #111111;
-      --clr-body: #666666;
-      --clr-muted: #999999;
-      --clr-white: #ffffff;
-      --clr-bg: #f4f1ed;
-      --clr-bg-light: #faf8f5;
-      --clr-card: #ffffff;
-      --clr-border: #e8e2d9;
-
-      --fs-xs: 0.75rem;
-      --fs-sm: 0.875rem;
-      --fs-base: 1rem;
-      --fs-md: 1.05rem;
-      --fs-lg: 1.125rem;
-      --fs-xl: 1.25rem;
-      --fs-2xl: 1.5rem;
-      --fs-3xl: 1.875rem;
-      --fs-4xl: 2.25rem;
-      --fs-5xl: 3rem;
-
-      --fw-light: 300;
-      --fw-regular: 400;
-      --fw-medium: 500;
-      --fw-semibold: 600;
-      --fw-bold: 700;
-      --fw-black: 900;
-
-      --lh-tight: 1.1;
-      --lh-snug: 1.3;
-      --lh-normal: 1.5;
-      --lh-relaxed: 1.75;
-      --lh-loose: 1.9;
-
-      --ls-tight: -0.02em;
-      --ls-wide: 0.05em;
-      --ls-wider: 0.1em;
-      --ls-widest: 0.2em;
-
-      --sp-xs: 8px;
-      --sp-sm: 16px;
-      --sp-md: 24px;
-      --sp-lg: 40px;
-      --sp-xl: 60px;
-      --sp-2xl: 80px;
-      --sp-section: clamp(60px, 10vw, 100px);
-
-      --br-sm: 6px;
-      --br-md: 12px;
-      --br-lg: 18px;
-      --br-xl: 24px;
-      --br-2xl: 30px;
-      --br-full: 9999px;
-
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.10);
-      --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
-      --shadow-red: 0 8px 40px rgba(227, 30, 36, 0.18);
-
-      --tr-fast: all 0.2s ease;
-      --tr-base: all 0.3s ease;
-      --tr-slow: all 0.5s ease;
-      --tr-smooth: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-
-    /* ─── UTILITY ────────────────────────────────────────────── */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin-inline: auto;
-      padding-inline: clamp(16px, 4vw, 40px)
-    }
-
-    .label-tag {
-      display: inline-block;
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-widest);
-      text-transform: uppercase;
-      color: var(--clr-primary);
-      position: relative;
-      padding-bottom: 6px
-    }
-
-    .label-tag::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--clr-primary)
-    }
-
-    /* ─── FILTER BAR ─────────────────────────────────────────── */
-    .filter-section {
-      background: var(--clr-white);
-      border-bottom: 1px solid var(--clr-border);
-      position: sticky;
-      top: 64px;
-      z-index: 100
-    }
-
-    .filter-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--sp-md);
-      padding-block: var(--sp-md);
-      flex-wrap: wrap
-    }
-
-    .filter-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap
-    }
-
-    .filter-tab {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-sm);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wider);
-      text-transform: uppercase;
-      padding: 8px 20px;
-      border-radius: var(--br-full);
-      border: 1.5px solid var(--clr-border);
-      color: var(--clr-body);
-      background: transparent;
-      cursor: pointer;
-      transition: var(--tr-base);
-      white-space: nowrap
-    }
-
-    .filter-tab:hover {
-      border-color: var(--clr-primary);
-      color: var(--clr-primary)
-    }
-
-    .filter-tab.active {
-      background: var(--clr-primary);
-      border-color: var(--clr-primary);
-      color: var(--clr-white)
-    }
-
-    .filter-count {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wider);
-      text-transform: uppercase;
-      color: var(--clr-muted);
-      white-space: nowrap
-    }
-
-    .filter-count span {
-      color: var(--clr-primary)
-    }
-
-    /* ─── PORTFOLIO LAYOUT + SIDEBAR MENU ───────────────────── */
-    .portfolio-layout {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 0;
-      background: var(--clr-white);
-      border-bottom: 1px solid var(--clr-border);
-      align-items: start
-    }
-
-    .pf-sidebar {
-      position: sticky;
-      top: 80px;
-      z-index: 99;
-      align-self: start;
-      max-height: calc(100vh - 96px);
-      overflow-y: auto;
-      background: var(--clr-white);
-      border-right: 1px solid var(--clr-border);
-      padding: var(--sp-md) 0
-    }
-
-    /* Sticky sidebar: ScrollSmoother disabled on this page (see animation.js) */
-    .portfolio-layout {
-      align-items: start
-    }
-
-    .pf-menu-item {
-      display: block;
-      width: 100%;
-      text-align: left;
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-base);
-      font-weight: var(--fw-medium);
-      color: var(--clr-dark);
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--clr-border);
-      padding: 16px 24px;
-      cursor: pointer;
-      transition: var(--tr-base)
-    }
-
-    .pf-menu-item:hover {
-      color: var(--clr-primary);
-      background: var(--clr-primary-light)
-    }
-
-    .pf-menu-item.active {
-      color: var(--clr-primary);
-      background: var(--clr-primary-light);
-      font-weight: var(--fw-semibold)
-    }
-
-    .portfolio-main {
-      min-width: 0
-    }
-
-    .portfolio-main .filter-count {
-      padding: var(--sp-md) clamp(16px, 4vw, 40px);
-      border-bottom: 1px solid var(--clr-border);
-      background: var(--clr-bg-light)
-    }
-
-    @media(max-width:991px) {
-      .portfolio-layout {
-        grid-template-columns: 1fr
-      }
-
-      .pf-sidebar {
-        position: static;
-        display: flex;
-        flex-wrap: wrap;
-        border-right: none;
-        border-bottom: 1px solid var(--clr-border);
-        padding: 12px clamp(16px, 4vw, 24px);
-        gap: 8px
-      }
-
-      .pf-menu-item {
-        width: auto;
-        border: 1.5px solid var(--clr-border);
-        border-radius: var(--br-full);
-        padding: 8px 16px;
-        font-size: var(--fs-sm)
-      }
-
-      .pf-menu-item.active {
-        background: var(--clr-primary);
-        border-color: var(--clr-primary);
-        color: var(--clr-white)
-      }
-    }
-
-    /* ─── PORTFOLIO GRID ─────────────────────────────────────── */
-    .portfolio-section {
-      padding: var(--sp-section) 0;
-      background: var(--clr-bg-light)
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px
-    }
-
-    /* ─── PORTFOLIO CARD ─────────────────────────────────────── */
-    .pf-card {
-      background: var(--clr-white);
-      border-radius: var(--br-xl);
-      overflow: hidden;
-      border: 1px solid var(--clr-border);
-      transition: var(--tr-smooth);
-      cursor: pointer;
-      position: relative
-    }
-
-    .pf-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-xl);
-      border-color: transparent
-    }
-
-    .pf-card.featured {
-      grid-column: span 2
-    }
-
-    /* Card image area */
-    .pf-img {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 16/10
-    }
-
-    .pf-card.featured .pf-img {
-      aspect-ratio: 16/8
-    }
-
-    .pf-img-inner {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    }
-
-    .pf-card:hover .pf-img-inner {
-      transform: scale(1.06)
-    }
-
-    /* Mosaic inside card */
-    .pf-mosaic {
-      display: grid;
-      width: 100%;
-      height: 100%
-    }
-
-    .pf-mosaic-3 {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3px
-    }
-
-    .pf-mosaic-3 .pm-a {
-      grid-column: 1;
-      grid-row: 1/span 2
-    }
-
-    .pf-mosaic-3 .pm-b {
-      grid-column: 2;
-      grid-row: 1
-    }
-
-    .pf-mosaic-3 .pm-c {
-      grid-column: 2;
-      grid-row: 2
-    }
-
-    .pf-mosaic-2 {
-      grid-template-columns: 1fr 1fr;
-      gap: 3px
-    }
-
-    .pf-mosaic-4 {
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3px
-    }
-
-    .pf-mosaic-4 .pm-a {
-      grid-column: 1/span 2;
-      grid-row: 1
-    }
-
-    .pf-mosaic-4 .pm-b {
-      grid-column: 3;
-      grid-row: 1/span 2
-    }
-
-    .pf-mosaic-4 .pm-c {
-      grid-column: 1;
-      grid-row: 2
-    }
-
-    .pf-mosaic-4 .pm-d {
-      grid-column: 2;
-      grid-row: 2
-    }
-
-    .pm-block {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase
-    }
-
-    .pm-red {
-      background: linear-gradient(135deg, #900008 0%, #5d0004 100%);
-      color: rgba(255, 255, 255, 0.4)
-    }
-
-    .pm-red2 {
-      background: linear-gradient(135deg, #c0000a 0%, #800005 100%);
-      color: rgba(255, 255, 255, 0.4)
-    }
-
-    .pm-grey {
-      background: #ddd8d2;
-      color: rgba(0, 0, 0, 0.2)
-    }
-
-    .pm-grey2 {
-      background: #e8e4df;
-      color: rgba(0, 0, 0, 0.18)
-    }
-
-    .pm-dark {
-      background: #1a1a1a;
-      color: rgba(255, 255, 255, 0.2)
-    }
-
-    .pm-dark2 {
-      background: #222;
-      color: rgba(255, 255, 255, 0.2)
-    }
-
-    .pm-cream {
-      background: #f0ece6;
-      color: rgba(0, 0, 0, 0.2)
-    }
-
-    .pm-gold {
-      background: linear-gradient(135deg, #c9a84c 0%, #a07830 100%);
-      color: rgba(255, 255, 255, 0.4)
-    }
-
-    .pm-green {
-      background: linear-gradient(135deg, #1e4d2b 0%, #2d6e3e 100%);
-      color: rgba(255, 255, 255, 0.3)
-    }
-
-    .pm-blue {
-      background: linear-gradient(135deg, #0a2a5e 0%, #1a4a8e 100%);
-      color: rgba(255, 255, 255, 0.3)
-    }
-
-    /* Overlay on hover */
-    .pf-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(17, 17, 17, 0.85) 0%, transparent 55%);
-      opacity: 0;
-      transition: var(--tr-smooth);
-      display: flex;
-      align-items: flex-end;
-      padding: var(--sp-md)
-    }
-
-    .pf-card:hover .pf-overlay {
-      opacity: 1
-    }
-
-    .pf-overlay-cta {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-sm);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wider);
-      text-transform: uppercase;
-      color: var(--clr-white);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transform: translateY(10px);
-      transition: var(--tr-smooth)
-    }
-
-    .pf-card:hover .pf-overlay-cta {
-      transform: translateY(0)
-    }
-
-    .pf-overlay-cta svg {
-      width: 16px;
-      height: 16px;
-      stroke: currentColor;
-      stroke-width: 2.5;
-      fill: none
-    }
-
-    .pf-overlay-arrow {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--clr-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center
-    }
-
-    /* Category badge */
-    .pf-badge {
-      position: absolute;
-      top: var(--sp-sm);
-      left: var(--sp-sm);
-      background: rgba(17, 17, 17, 0.75);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: rgba(255, 255, 255, 0.85);
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: var(--br-full)
-    }
-
-    /* Card body */
-    .pf-body {
-      padding: var(--sp-md)
-    }
-
-    .pf-industry {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-xs);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-widest);
-      text-transform: uppercase;
-      color: var(--clr-primary);
-      margin-bottom: 6px
-    }
-
-    .pf-title {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-2xl);
-      font-weight: var(--fw-black);
-      line-height: var(--lh-snug);
-      letter-spacing: var(--ls-tight);
-      text-transform: uppercase;
-      color: var(--clr-dark);
-      margin-bottom: 8px;
-      transition: var(--tr-fast)
-    }
-
-    .pf-card:hover .pf-title {
-      color: var(--clr-primary)
-    }
-
-    .pf-desc {
-      font-size: var(--fs-sm);
-      color: var(--clr-body);
-      line-height: var(--lh-relaxed);
-      margin-bottom: var(--sp-md)
-    }
-
-    .pf-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: var(--sp-sm);
-      border-top: 1px solid var(--clr-border)
-    }
-
-    .pf-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap
-    }
-
-    .pf-tag {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--clr-muted);
-      background: var(--clr-bg);
-      padding: 4px 10px;
-      border-radius: var(--br-full)
-    }
-
-    .pf-arrow {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: var(--clr-primary-light);
-      border: 1.5px solid var(--clr-primary-mid);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--tr-base);
-      flex-shrink: 0
-    }
-
-    .pf-card:hover .pf-arrow {
-      background: var(--clr-primary);
-      border-color: var(--clr-primary)
-    }
-
-    .pf-arrow svg {
-      width: 13px;
-      height: 13px;
-      stroke: var(--clr-primary);
-      stroke-width: 2.5;
-      fill: none;
-      transition: var(--tr-base)
-    }
-
-    .pf-card:hover .pf-arrow svg {
-      stroke: var(--clr-white)
-    }
-
-    /* ─── FEATURED LARGE ROW ─────────────────────────────────── */
-    .pf-card.tall .pf-img {
-      aspect-ratio: 4/5
-    }
-
-    /* ─── MARQUEE STRIP ──────────────────────────────────────── */
-    .marquee-strip {
-      background: var(--clr-primary);
-      padding: 16px 0;
-      overflow: hidden
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: ticker 25s linear infinite
-    }
-
-    .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-lg);
-      padding-right: var(--sp-lg);
-      white-space: nowrap;
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: var(--fs-md);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wider);
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.9)
-    }
-
-    .marquee-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5)
-    }
-
-    @keyframes ticker {
-      0% {
-        transform: translateX(0)
-      }
-
-      100% {
-        transform: translateX(-50%)
-      }
-    }
-
-    /* ─── ANIMATIONS ──────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(32px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.65s ease, transform 0.65s ease
-    }
-
-    .reveal.in {
-      opacity: 1;
-      transform: translateY(0)
-    }
-
-    /* ─── RESPONSIVE ──────────────────────────────────────────── */
-    @media(max-width:1024px) {
-      .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .pf-card.featured {
-        grid-column: span 2
-      }
-
-      .test-grid {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .banner-stats {
-        display: none
-      }
-    }
-
-    @media(max-width:768px) {
-      .nav-links {
-        display: none
-      }
-
-      .nav-hamburger {
-        display: flex
-      }
-
-      .portfolio-grid {
-        grid-template-columns: 1fr
-      }
-
-      .pf-card.featured {
-        grid-column: span 1
-      }
-
-      .test-grid {
-        grid-template-columns: 1fr
-      }
-
-      .cta-inner {
-        grid-template-columns: 1fr
-      }
-
-      .filter-section {
-        position: static
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: center
-      }
-
-      .footer-links {
-        justify-content: center
-      }
-
-      .banner-inner {
-        flex-direction: column;
-        align-items: flex-start
-      }
-    }
-  </style>
   <link rel="stylesheet" href="assets/css/typography-system.css">
 </head>
 
@@ -905,7 +166,7 @@
             <div class="container">
               <div class="portfolio-grid" id="portfolioGrid">
 
-              <div class="pf-card featured reveal" data-cat="catalogue" data-href="arica.html" role="link" tabindex="0">
+<div class="pf-card featured reveal" data-cat="catalogue" data-href="arica.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
                       <img src="./assets/images/EEM-Portfolio/All-catalogue/Arica/Arica-01.webp" alt="Arica" loading="lazy"
@@ -926,28 +187,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- Social Media -->
-                <div class="pf-card reveal" data-cat="social" data-href="greta-soical.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Greta-Soical/greta - 01.webp" alt="Puriteo" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Social Media</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Social Creative</div>
-                    <h2 class="pf-title">Greta</h2>
-                    <p class="pf-desc">Digital Curation for Premium Surfacing: </p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Lifestyle</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
+
                 <div class="pf-card reveal" data-cat="catalogue" data-href="atina.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
@@ -969,91 +209,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="pf-card reveal" data-cat="branding" data-href="aaryan-tradelink.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/aaryan/aaryan-01.webp" alt="Aaryan Tradelink" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">Aaryan Tradelink</h2>
-                    <p class="pf-desc">Trust and strength — clean, professional logo for reliable trade networks.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Branding</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="century-prowud-stylogue.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/century-prowud/century-01.webp" alt="Century Prowud Stylogue" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Laminate Design</div>
-                    <h2 class="pf-title">Century Prowud's Stylogue Neo</h2>
-                    <p class="pf-desc">Premium catalogue design — minimalist wooden egg metaphor and sophisticated neutral palette.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Premium</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="packaging" data-href="iscon.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Iscon/back-design-01.webp" alt="Iscon" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Packaging</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Packaging Design</div>
-                    <h2 class="pf-title">Iscon</h2>
-                    <p class="pf-desc">Iscon packaging — structured back designs and retail-ready product presentation.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Packaging</span><span class="pf-tag">Print</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Social Media -->
-                 <div class="pf-card reveal" data-cat="social" data-href="puriteo.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Puriteo/puriteo-01.webp" alt="Puriteo" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Social Media</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Social Creative</div>
-                    <h2 class="pf-title">Puriteo</h2>
-                    <p class="pf-desc">Puriteo social media — fresh visuals that communicate purity and quality.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Lifestyle</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
+
                 <div class="pf-card reveal" data-cat="catalogue" data-href="asa-decosheets.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
@@ -1075,28 +231,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- Packaging -->
-                <div class="pf-card reveal" data-cat="packaging" data-href="voxo.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/VOXO/voxo-01.webp" alt="VOXO" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Packaging</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Packaging Design</div>
-                    <h2 class="pf-title">VOXO</h2>
-                    <p class="pf-desc">VOXO packaging — bold graphics and clear hierarchy for standout shelf presence.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Packaging</span><span class="pf-tag">Retail</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
+
                 <div class="pf-card reveal" data-cat="catalogue" data-href="dazzle-berry-colours-trend.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
@@ -1118,32 +253,11 @@
                     </div>
                   </div>
                 </div>
-                <!-- 3d -->
-                <div class="pf-card reveal" data-cat="rendering" data-href="3d-rendering-Portfolio.html" role="link" tabindex="0">
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="century-prowud-stylogue.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/3D-New-Size/3D-01.webp" alt="3D Rendering" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">3D Rendering</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">3D Visualization</div>
-                    <h2 class="pf-title">3D Rendering Projects</h2>
-                    <p class="pf-desc">Photoreal 3D renders — realistic materials and lighting for products and spaces.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">3D</span><span class="pf-tag">Render</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="greta-lam-stylish-collection.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/greta/greeta-0.8-01.webp" alt="Greta Lam Stylish" loading="lazy"
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/century-prowud/century-01.webp" alt="Century Prowud Stylogue" loading="lazy"
                         style="width:100%;height:100%;object-fit:cover;display:block;">
                     </div>
                     <div class="pf-overlay">
@@ -1153,422 +267,16 @@
                   </div>
                   <div class="pf-body">
                     <div class="pf-industry">Laminate Design</div>
-                    <h2 class="pf-title">Greta Lam Stylish</h2>
-                    <p class="pf-desc">Greta Lam Stylish Collection — Art Deco-inspired geometry with a premium, high-end persona.</p>
+                    <h2 class="pf-title">Century Prowud's Stylogue Neo</h2>
+                    <p class="pf-desc">Premium catalogue design — minimalist wooden egg metaphor and sophisticated neutral palette.</p>
                     <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Laminate</span></div>
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Premium</span></div>
                       <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
                     </div>
                   </div>
                 </div>
-                <!-- Social Media -->
-                <div class="pf-card reveal" data-cat="social" data-href="rosewood.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Rosewood/01.webp" alt="Rosewood" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Social Media</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Social Creative</div>
-                    <h2 class="pf-title">Rosewood</h2>
-                    <p class="pf-desc">Rosewood social creatives — warm, elegant posts for premium interior brands.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Interiors</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="pf-card reveal" data-cat="catalogue" data-href="greta.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/greta-1/greta-01.webp" alt="Greta Lam" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Laminate Design</div>
-                    <h2 class="pf-title">Greta Lam</h2>
-                    <p class="pf-desc">Greta Lam — warm cream and terracotta palette with timeless cultural sophistication.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Texture</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="pf-card reveal" data-cat="branding" data-href="alak-smart-security.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/alak-smart-security/alak-01.jpg" alt="ALAK Smart Security" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">ALAK Smart Security</h2>
-                    <p class="pf-desc">Tech-noir security branding — magenta typography with fingerprint, shield, and smart-lock motifs.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Security</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="live-in-colour.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kaptone/kaptone-01.webp" alt="Live in Colour" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Laminate Design</div>
-                    <h2 class="pf-title">Live in Colour</h2>
-                    <p class="pf-desc">Live in Colour by Kaptone — bold colours and modern finishes that make spaces pop.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Colour</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Social Media -->
-                <div class="pf-card reveal" data-cat="social" data-href="suntouch.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Suntouch/sun-touch-01.webp" alt="Suntouch" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Social Media</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Social Creative</div>
-                    <h2 class="pf-title">Suntouch</h2>
-                    <p class="pf-desc">Suntouch social media — bright, energetic campaign-ready designs.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Campaign</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="luxe-style.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-01.webp" alt="Luxe Style" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Laminate Design</div>
-                    <h2 class="pf-title">Luxe Style</h2>
-                    <p class="pf-desc">Luxe Style — high-end looks with classy textures and timeless elegance.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Luxury</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="branding" data-href="sarvghn-engineering.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/sarvghn-engineering/sarvghn-01.webp" alt="Sarvghn Engineering" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">Sarvghn Engineering</h2>
-                    <p class="pf-desc">Industrial monogram fusing S and E — precision, permanence, and authoritative engineering presence.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Engineering</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="ranberry-south.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranberry new south/01-ran-berry.webp" alt="Ranberry South" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Laminate Design</div>
-                    <h2 class="pf-title">Ranberry New South</h2>
-                    <p class="pf-desc">Ranberry New South — deeper tones for premium commercial and residential interiors.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Commercial</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Social Media -->
-                <div class="pf-card reveal" data-cat="social" data-href="iscon-gathiya.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Iscon Gathiya/iscon-01.webp" alt="Iscon Gathiya" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Social Media</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Social Creative</div>
-                    <h2 class="pf-title">Iscon Gathiya</h2>
-                    <p class="pf-desc">Social creatives for Iscon Gathiya — vibrant posts with a modern digital touch.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Food</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="ranwood-face-of-grandeur.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-01.webp" alt="Ranwood" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Wood Laminate</div>
-                    <h2 class="pf-title">Ranwood – Face of Grandeur</h2>
-                    <p class="pf-desc">Ranwood Face of Grandeur — premium wood-inspired laminates with authentic grain detail.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Wood</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="branding" data-href="vividus.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/vividums 01/vividums-01.webp" alt="Vividus" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">Vividus</h2>
-                    <p class="pf-desc">Bold impactful branding — sophisticated laminate identity built to last.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Branding</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="pf-card reveal" data-cat="catalogue" data-href="ranwood-masterpiece-of-prestige.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood rega/ranwood-01.webp" alt="Ranwood Masterpiece" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Wood Laminate</div>
-                    <h2 class="pf-title">Ranwood – Masterpiece</h2>
-                    <p class="pf-desc">Ranwood Masterpiece of Prestige — fancy wood-look laminates with meticulous detail.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Wood</span><span class="pf-tag">Luxury</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Logo Design -->
-                 
-                
-                <div class="pf-card reveal" data-cat="branding" data-href="arrow-paper-products.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/arrow/arrow-01.webp" alt="Arrow Paper Products" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">Arrow Paper Products</h2>
-                    <p class="pf-desc">Precision and reliability — sharp logo design always moving forward.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Branding</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="pf-card reveal" data-cat="branding" data-href="smart-home.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/smart home/smart-home-01.webp" alt="SmartHomes" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">SmartHomes</h2>
-                    <p class="pf-desc">Futuristic smart-home branding — connected, comfortable living.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Tech</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="branding" data-href="moxello-realty.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Moxello realty/moxello-realty.webp" alt="Moxello Realty" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">Moxello Realty</h2>
-                    <p class="pf-desc">Innovation and structure — modern realty branding with clean balanced shapes.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Realty</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Packaging -->
-                <div class="pf-card reveal" data-cat="packaging" data-href="vauric.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Vauric/vauric-0.webp" alt="Vauric" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Packaging</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Packaging Design</div>
-                    <h2 class="pf-title">Vauric</h2>
-                    <p class="pf-desc">Vauric packaging design — modern, refined product boxes and label systems.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Packaging</span><span class="pf-tag">Brand</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="branding" data-href="mybankloan-ai.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/mybankloan.ai/01.webp" alt="MYBANKLOAN.AI" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">MYBANKLOAN.AI</h2>
-                    <p class="pf-desc">Speed and trust — clean fintech branding that feels fast and secure.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Fintech</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="catalogue" data-href="kianna.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-01.webp" alt="Kiana Acrylic Master Collection" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Catalogue</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Acrylic Design</div>
-                    <h2 class="pf-title">Kiana Acrylic Master Collection</h2>
-                    <p class="pf-desc">Sage green palette, gold-veined marble, and a vibrant bird in flight — contemporary geometry meets expressive artistry. "Add Colour to Your Life."</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Acrylic</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="pf-card reveal" data-cat="branding" data-href="prospact-design-studio.html" role="link" tabindex="0">
-                  <div class="pf-img">
-                    <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/prospact design studio/prospact-design-studio-01.webp" alt="Prospact Design Studio" loading="lazy"
-                        style="width:100%;height:100%;object-fit:cover;display:block;">
-                    </div>
-                    <div class="pf-overlay">
-                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
-                    </div>
-                    <div class="pf-badge">Logo Design</div>
-                  </div>
-                  <div class="pf-body">
-                    <div class="pf-industry">Logo Design</div>
-                    <h2 class="pf-title">Prospact Design Studio</h2>
-                    <p class="pf-desc">Creative and functional — studio identity for beautiful, useful spaces.</p>
-                    <div class="pf-footer">
-                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Studio</span></div>
-                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- <div class="pf-card reveal" data-cat="catalogue" data-href="acrylic-by-ranberry.html" role="link" tabindex="0">
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="acrylic-by-ranberry.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
                       <img src="./assets/images/EEM-Portfolio/All-catalogue/ranberry-acrylic/ranberry-acrylic-01.webp" alt="Acrylic by Ranberry" loading="lazy"
@@ -1612,10 +320,120 @@
                   </div>
                 </div>
 
+                <div class="pf-card reveal" data-cat="catalogue" data-href="greta.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/greta/greeta-0.8-01.webp" alt="Greta Lam Stylish" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Laminate Design</div>
+                    <h2 class="pf-title">Greta Lam Stylish</h2>
+                    <p class="pf-desc">Greta Lam Stylish Collection — Art Deco-inspired geometry with a premium, high-end persona.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Laminate</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="greta.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/greta-1/greta-01.webp" alt="Greta Lam" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Laminate Design</div>
+                    <h2 class="pf-title">Greta Lam</h2>
+                    <p class="pf-desc">Greta Lam — warm cream and terracotta palette with timeless cultural sophistication.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Texture</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="live-in-colour.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kaptone/kaptone-01.webp" alt="Live in Colour" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Laminate Design</div>
+                    <h2 class="pf-title">Live in Colour</h2>
+                    <p class="pf-desc">Live in Colour by Kaptone — bold colours and modern finishes that make spaces pop.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Colour</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="kianna.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana%20acrylic/kiana-acrylic-01.webp" alt="Kiana Acrylic Master Collection" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Acrylic Design</div>
+                    <h2 class="pf-title">Kiana Acrylic Master Collection</h2>
+                    <p class="pf-desc">Sage green palette, gold-veined marble, and a bird in flight — geometry meets expressive colour for Kiana Acrylic.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Acrylic</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="luxe-style.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kooyoo/kooyoo-01.webp" alt="Luxe Style" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Laminate Design</div>
+                    <h2 class="pf-title">Luxe Style</h2>
+                    <p class="pf-desc">Luxe Style — high-end looks with classy textures and timeless elegance.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Luxury</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="pf-card reveal" data-cat="catalogue" data-href="trends-by-ranberry.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranberry new/ranberry-new-01.webp" alt="Trends by Ranberry" loading="lazy"
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranberry%20new/ranberry-new-01.webp" alt="Trends by Ranberry" loading="lazy"
                         style="width:100%;height:100%;object-fit:cover;display:block;">
                     </div>
                     <div class="pf-overlay">
@@ -1632,12 +450,34 @@
                       <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
                     </div>
                   </div>
-                </div>             
+                </div>
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="ranberry-south.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranberry%20new%20south/01-ran-berry.webp" alt="Ranberry South" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Laminate Design</div>
+                    <h2 class="pf-title">Ranberry New South</h2>
+                    <p class="pf-desc">Ranberry New South — deeper tones for premium commercial and residential interiors.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Commercial</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="pf-card reveal" data-cat="catalogue" data-href="acrylic-by-rang-in.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
-                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana acrylic/kiana-acrylic-01.webp" alt="Acrylic by Rang-In" loading="lazy"
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/kiana%20acrylic/kiana-acrylic-01.webp" alt="Acrylic by Rang-In" loading="lazy"
                         style="width:100%;height:100%;object-fit:cover;display:block;">
                     </div>
                     <div class="pf-overlay">
@@ -1678,6 +518,336 @@
                   </div>
                 </div>
 
+                <div class="pf-card reveal" data-cat="catalogue" data-href="ranwood-face-of-grandeur.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood/ranwood-01.webp" alt="Ranwood" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Wood Laminate</div>
+                    <h2 class="pf-title">Ranwood – Face of Grandeur</h2>
+                    <p class="pf-desc">Ranwood Face of Grandeur — premium wood-inspired laminates with authentic grain detail.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Wood</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="catalogue" data-href="ranwood-masterpiece-of-prestige.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/ranwood%20rega/ranwood-01.webp" alt="Ranwood Masterpiece" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Catalogue</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Wood Laminate</div>
+                    <h2 class="pf-title">Ranwood – Masterpiece</h2>
+                    <p class="pf-desc">Ranwood Masterpiece of Prestige — fancy wood-look laminates with meticulous detail.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Catalogue</span><span class="pf-tag">Wood</span><span class="pf-tag">Luxury</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="packaging" data-href="iscon.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Iscon/back-design-01.webp" alt="Iscon" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Packaging</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Packaging Design</div>
+                    <h2 class="pf-title">Iscon</h2>
+                    <p class="pf-desc">Iscon packaging — structured back designs and retail-ready product presentation.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Packaging</span><span class="pf-tag">Print</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="packaging" data-href="vauric.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Vauric/vauric-0.webp" alt="Vauric" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Packaging</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Packaging Design</div>
+                    <h2 class="pf-title">Vauric</h2>
+                    <p class="pf-desc">Vauric packaging design — modern, refined product boxes and label systems.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Packaging</span><span class="pf-tag">Brand</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="packaging" data-href="voxo.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/VOXO/voxo-01.webp" alt="VOXO" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Packaging</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Packaging Design</div>
+                    <h2 class="pf-title">VOXO</h2>
+                    <p class="pf-desc">VOXO packaging — bold graphics and clear hierarchy for standout shelf presence.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Packaging</span><span class="pf-tag">Retail</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="social" data-href="iscon-gathiya.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Iscon%20Gathiya/iscon-01.webp" alt="Iscon Gathiya" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Social Media</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Social Creative</div>
+                    <h2 class="pf-title">Iscon Gathiya</h2>
+                    <p class="pf-desc">Social creatives for Iscon Gathiya — vibrant posts with a modern digital touch.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Food</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="social" data-href="puriteo.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Puriteo/puriteo-01.webp" alt="Puriteo" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Social Media</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Social Creative</div>
+                    <h2 class="pf-title">Puriteo</h2>
+                    <p class="pf-desc">Puriteo social media — fresh visuals that communicate purity and quality.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Lifestyle</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="social" data-href="rosewood.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Rosewood/01.webp" alt="Rosewood" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Social Media</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Social Creative</div>
+                    <h2 class="pf-title">Rosewood</h2>
+                    <p class="pf-desc">Rosewood social creatives — warm, elegant posts for premium interior brands.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Interiors</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="social" data-href="suntouch.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Suntouch/sun-touch-01.webp" alt="Suntouch" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Social Media</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Social Creative</div>
+                    <h2 class="pf-title">Suntouch</h2>
+                    <p class="pf-desc">Suntouch social media — bright, energetic campaign-ready designs.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Social</span><span class="pf-tag">Campaign</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="rendering" data-href="3d-rendering-Portfolio.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/3D-New-Size/3D-01.webp" alt="3D Rendering" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">3D Rendering</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">3D Visualization</div>
+                    <h2 class="pf-title">3D Rendering Projects</h2>
+                    <p class="pf-desc">Photoreal 3D renders — realistic materials and lighting for products and spaces.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">3D</span><span class="pf-tag">Render</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="aaryan-tradelink.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/aaryan/aaryan-01.webp" alt="Aaryan Tradelink" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">Aaryan Tradelink</h2>
+                    <p class="pf-desc">Trust and strength — clean, professional logo for reliable trade networks.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Branding</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="arrow-paper-products.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/arrow/arrow-01.webp" alt="Arrow Paper Products" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">Arrow Paper Products</h2>
+                    <p class="pf-desc">Precision and reliability — sharp logo design always moving forward.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Branding</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="moxello-realty.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/Moxello%20realty/moxello-realty.webp" alt="Moxello Realty" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">Moxello Realty</h2>
+                    <p class="pf-desc">Innovation and structure — modern realty branding with clean balanced shapes.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Realty</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="mybankloan-ai.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/mybankloan.ai/01.webp" alt="MYBANKLOAN.AI" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">MYBANKLOAN.AI</h2>
+                    <p class="pf-desc">Speed and trust — clean fintech branding that feels fast and secure.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Fintech</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="prospact-design-studio.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/prospact%20design%20studio/prospact-design-studio-01.webp" alt="Prospact Design Studio" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">Prospact Design Studio</h2>
+                    <p class="pf-desc">Creative and functional — studio identity for beautiful, useful spaces.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Studio</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="pf-card reveal" data-cat="branding" data-href="rang-in-logo.html" role="link" tabindex="0">
                   <div class="pf-img">
                     <div class="pf-img-inner">
@@ -1698,7 +868,96 @@
                       <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
                     </div>
                   </div>
-                </div> -->
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="smart-home.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/smart%20home/smart-home-01.webp" alt="SmartHomes" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">SmartHomes</h2>
+                    <p class="pf-desc">Futuristic smart-home branding — connected, comfortable living.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Tech</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="vividus.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/vividums%2001/vividums-01.webp" alt="Vividus" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">Vividus</h2>
+                    <p class="pf-desc">Bold impactful branding — sophisticated laminate identity built to last.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Branding</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="alak-smart-security.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/alak-smart-security/alak-01.jpg" alt="ALAK Smart Security" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">ALAK Smart Security</h2>
+                    <p class="pf-desc">Tech-noir security branding — magenta typography with fingerprint, shield, and smart-lock motifs.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Security</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pf-card reveal" data-cat="branding" data-href="sarvghn-engineering.html" role="link" tabindex="0">
+                  <div class="pf-img">
+                    <div class="pf-img-inner">
+                      <img src="./assets/images/EEM-Portfolio/All-catalogue/sarvghn-engineering/sarvghn-01.webp" alt="Sarvghn Engineering" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
+                    <div class="pf-overlay">
+                      <div class="pf-overlay-cta">View Project <span class="pf-overlay-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></div>
+                    </div>
+                    <div class="pf-badge">Logo Design</div>
+                  </div>
+                  <div class="pf-body">
+                    <div class="pf-industry">Logo Design</div>
+                    <h2 class="pf-title">Sarvghn Engineering</h2>
+                    <p class="pf-desc">Industrial monogram fusing S and E — precision, permanence, and authoritative engineering presence.</p>
+                    <div class="pf-footer">
+                      <div class="pf-tags"><span class="pf-tag">Logo</span><span class="pf-tag">Engineering</span></div>
+                      <div class="pf-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
       </section>

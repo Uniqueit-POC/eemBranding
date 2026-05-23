@@ -146,6 +146,29 @@ ${gridInner}
             </div>
           </section>`;
   html = html.replace(/<section class="grid-sec">[\s\S]*?<\/section>\s*(?=<!-- ── LIGHTBOX|<!-- ════════════════════════════════════════\s+SECTION 1)/, gridSection + '\n\n          ');
+
+  html = html.replace(/<body(\s*)>/i, '<body$1 class="portfolio-detail-page">');
+  html = html.replace(
+    /<div class="slider-track" id="sliderTrack">[\s\S]*?<\/div><!-- \/slider-track -->/,
+    '<div class="slider-track" id="sliderTrack">\n\n                </div><!-- /slider-track -->'
+  );
+  html = html.replace(
+    /<script src="assets\/vendor\/gsap[\s\S]*?<script src="assets\/js\/custom\.js"><\/script>\s*(?:<script>[\s\S]*?<\/script>\s*)?(?=<\/body>)/i,
+    `<script src="assets/vendor/wow/wow.js"></script>
+  <script src="assets/js/animation.js"></script>
+  <script src="assets/js/portfolio-pages.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+`
+  );
+  html = html.replace(/<link rel="stylesheet" href="\.\/assets\/css\/dev-style\.css"\s*\/?>\s*/gi, '');
+  if (!html.includes('href="assets/css/dev-style.css"')) {
+    html = html.replace(
+      /(<link rel="stylesheet" href="assets\/css\/style\.css">)/,
+      '$1\n  <link rel="stylesheet" href="assets/css/dev-style.css">'
+    );
+  }
+
   fs.writeFileSync(filePath, html, 'utf8');
   console.log('created', cfg.file);
 }
@@ -206,6 +229,11 @@ const DETAIL_PAGES = [
     p1: 'Ranberry New South — deeper tones and richer textures tailored for premium commercial and residential interiors.',
     p2: 'A southern edition catalogue with updated finishes designed for bold, contemporary spaces.',
     basePath: `${IMG}/All-catalogue/ranberry new south`, images: ['01-ran-berry.webp', '02-ran-berry.webp', '03-ran-berry.webp', '04-ran-berry.webp', '05-ran-berry.webp', '06-ran-berry.webp'] },
+  { file: 'kianna.html', title: 'Kiana Acrylic Master Collection', tag: 'Catalogue Design', collection: 'Kiana Acrylic Master Collection', alt: 'Kiana Acrylic',
+    headline: 'Kiana Acrylic <br> <em>Master Collection</em>',
+    p1: "The design strategy blends contemporary geometry with expressive, main-character artistry to highlight the brand's vibrant identity. Moving away from standard monochromatic industrial covers, this layout uses a refreshing, sophisticated sage green palette that bridges natural serenity with modern design.",
+    p2: 'The visual narrative is split dynamically by a fluid, curved horizon line: the upper section reveals a serene, gold-veined marble landscape, while a vibrant, multi-colored bird in full flight serves as a striking metaphor for creative freedom and the brand\'s tagline, "Add Colour to Your Life."',
+    basePath: `${IMG}/All-catalogue/kiana acrylic`, images: ['kiana-acrylic-01.webp', 'kiana-acrylic-02.webp', 'kiana-acrylic-03.webp', 'kiana-acrylic-04.webp', 'kiana-acrylic-05.webp', 'kiana-acrylic-06.webp'], force: true },
   { file: 'century-prowud-stylogue.html', title: 'Century Prowud Stylogue Neo', tag: 'Catalogue Design', collection: 'Century Prowud Collection', alt: 'Century Prowud Stylogue',
     headline: "Century Prowud's <br> <em>Stylogue Neo Vol. 2.0</em>",
     p1: 'The design objective was to elevate a traditional product catalogue into a premium visual narrative for contemporary living. The cover bypasses standard product grids for a striking minimalist metaphor: an abstract, multi-textured wooden egg cradled by raw, organic driftwood.',

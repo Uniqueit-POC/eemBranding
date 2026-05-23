@@ -17,6 +17,12 @@ var plexify = function () {
     subMenu.querySelectorAll("a.dz-open").forEach((openLink) => {
       openLink.classList.remove("dz-open");
     });
+    // Also reset any chevron toggle buttons
+    const parentLi = subMenu.parentElement;
+    if (parentLi) {
+      const toggleBtn = parentLi.querySelector(":scope > .sub-menu-toggle");
+      if (toggleBtn) toggleBtn.classList.remove("dz-open");
+    }
     subMenu.querySelectorAll(".sub-menu.sub-menu-open").forEach((nested) => {
       closeSubmenuBranch(nested);
     });
@@ -78,6 +84,27 @@ var plexify = function () {
     if (fullSidenav.dataset.sidenavEnhanced === "1") return;
     fullSidenav.dataset.sidenavEnhanced = "1";
 
+    // ── Inject chevron toggle buttons for real-href links that have sub-menus ──
+    // These are links like <a href="services.html"> that sit next to a <ul class="sub-menu">
+    fullSidenav.querySelectorAll("a").forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      // Skip void links — they already toggle via click
+      if (href === "" || href === "#" || href.startsWith("javascript")) return;
+      // Skip if already has a toggle button injected
+      if (link.nextElementSibling && link.nextElementSibling.classList.contains("sub-menu-toggle")) return;
+
+      const subMenu = link.nextElementSibling;
+      if (!subMenu || (!subMenu.classList.contains("sub-menu") && !subMenu.classList.contains("mega-menu"))) return;
+
+      // Inject a chevron button between the link and the sub-menu
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "sub-menu-toggle";
+      btn.setAttribute("aria-label", "Toggle submenu");
+      btn.innerHTML = '<i class="fa fa-angle-down" aria-hidden="true"></i>';
+      link.parentElement.insertBefore(btn, subMenu);
+    });
+
     if (!fullSidenav.querySelector(".sidenav-close")) {
       const closeBtn = document.createElement("button");
       closeBtn.type = "button";
@@ -112,6 +139,20 @@ var plexify = function () {
     }
   };
 
+  let menuScrollY = 0;
+
+  const lockBodyForMenu = () => {
+    menuScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.top = `-${menuScrollY}px`;
+    document.body.classList.add("menu-btn-open");
+  };
+
+  const unlockBodyForMenu = () => {
+    document.body.classList.remove("menu-btn-open");
+    document.body.style.top = "";
+    window.scrollTo(0, menuScrollY);
+  };
+
   const handleSidebarMenu = () => {
     const menuBtn = document.querySelector(".menu-btn");
     const fullSidenav = document.querySelector(".full-sidenav");
@@ -120,31 +161,49 @@ var plexify = function () {
 
     injectMobileSidebarChrome();
 
-    const onMenuBtnClick = function () {
-      this.classList.toggle("open");
-      if (fullSidenav) fullSidenav.classList.toggle("show");
-      if (mainBar) mainBar.classList.toggle("show");
+    const setMenuOpen = (open) => {
+      if (menuBtn) menuBtn.classList.toggle("open", open);
+      if (fullSidenav) fullSidenav.classList.toggle("show", open);
+      if (mainBar) mainBar.classList.toggle("show", open);
 
-      document.body.classList.toggle(
-        "menu-btn-open",
-        this.classList.contains("open")
-      );
-
-      if (!this.classList.contains("open")) {
+      if (open && isMobileSidebar()) {
+        lockBodyForMenu();
+        requestAnimationFrame(() => {
+          if (fullSidenav) fullSidenav.scrollTop = 0;
+        });
+      } else {
+        unlockBodyForMenu();
         closeAllMobileSubmenus(fullSidenav);
       }
     };
 
+    const onMenuBtnClick = function () {
+      setMenuOpen(!this.classList.contains("open"));
+    };
+
     const onMenuCloseClick = function () {
-      if (menuBtn) menuBtn.classList.remove("open");
-      if (fullSidenav) fullSidenav.classList.remove("show");
-      if (mainBar) mainBar.classList.remove("show");
-      document.body.classList.remove("menu-btn-open");
-      closeAllMobileSubmenus(fullSidenav);
+      setMenuOpen(false);
     };
 
     const onFullSidenavClick = function (e) {
       if (!isMobileSidebar()) return;
+
+      // ── Case 1: click on an injected chevron toggle button ──
+      const chevronBtn = e.target.closest(".sub-menu-toggle");
+      if (chevronBtn && fullSidenav.contains(chevronBtn)) {
+        e.preventDefault();
+        e.stopPropagation();
+        // The toggle button sits right before the sub-menu ul
+        const subMenu = chevronBtn.nextElementSibling;
+        const parentLink = chevronBtn.previousElementSibling;
+        if (subMenu && (subMenu.classList.contains("sub-menu") || subMenu.classList.contains("mega-menu"))) {
+          const isOpen = subMenu.classList.contains("sub-menu-open");
+          toggleMobileSubmenu(parentLink || chevronBtn, subMenu);
+          // Sync dz-open on the button itself for CSS chevron rotation
+          chevronBtn.classList.toggle("dz-open", !isOpen);
+        }
+        return;
+      }
 
       const link = e.target.closest("a");
       if (!link || !fullSidenav.contains(link)) return;
@@ -159,9 +218,18 @@ var plexify = function () {
         return;
       }
 
-      e.preventDefault();
-      e.stopPropagation();
-      toggleMobileSubmenu(link, subMenu);
+      // ── Case 2: link is javascript:void(0) — toggle only, no navigation ──
+      const href = link.getAttribute("href") || "";
+      if (href === "" || href === "#" || href.startsWith("javascript")) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMobileSubmenu(link, subMenu);
+        return;
+      }
+
+      // ── Case 3: link has a real href (e.g. services.html) ──
+      // Let the click navigate normally — do NOT intercept.
+      // The chevron button (injected below) handles dropdown toggling.
     };
 
     menuBtn?.addEventListener("click", onMenuBtnClick);

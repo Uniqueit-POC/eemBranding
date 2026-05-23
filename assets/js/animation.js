@@ -7,7 +7,11 @@ const plexifyGsap = function () {
   );
   let smoother;
 
-  if (!smoother && !document.querySelector(".portfolio-layout")) {
+  if (
+    !smoother &&
+    !document.querySelector(".portfolio-layout") &&
+    !document.querySelector(".portfolio-detail-page")
+  ) {
     smoother = ScrollSmoother.create({
       smooth: 2,
       effects: true,

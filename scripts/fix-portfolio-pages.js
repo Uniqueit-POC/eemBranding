@@ -123,15 +123,15 @@ for (const file of pages) {
   if (SLIDER_SCRIPT_RE.test(html)) {
     html = html.replace(
       SLIDER_SCRIPT_RE,
-      '/* Our Work slider (see assets/js/portfolio-related.js) */'
+      '/* Our Work slider (see assets/js/portfolio-pages.js) */'
     );
     changed = true;
   }
 
-  if (!html.includes('src="assets/js/portfolio-related.js"')) {
+  if (!html.includes('src="assets/js/portfolio-pages.js"')) {
     html = html.replace(
       '<script src="assets/js/custom.js"></script>',
-      '<script src="assets/js/portfolio-related.js"></script>\n  <script src="assets/js/custom.js"></script>'
+      '<script src="assets/js/portfolio-pages.js"></script>\n  <script src="assets/js/custom.js"></script>'
     );
     changed = true;
   }
