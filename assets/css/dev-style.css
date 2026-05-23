@@ -3284,6 +3284,14 @@ footer div:has(> a img[alt="EEM Branding"]) .flex.gap-12 > a[href*="pinterest"] 
 
 @media (max-width: 1279px) {
   .site-header .full-sidenav {
+    /* Make the mobile side nav a fixed overlay that scrolls internally
+       This prevents the page behind from scrolling when the menu is open */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: min(92%, 420px);
+    max-width: 420px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -3291,10 +3299,22 @@ footer div:has(> a img[alt="EEM Branding"]) .flex.gap-12 > a[href*="pinterest"] 
     padding: 20px 22px 24px !important;
     z-index: 10001;
     box-shadow: 4px 0 32px rgba(0, 0, 0, 0.12);
+    background: #fff;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
   }
 
   .site-header .full-sidenav.show {
     display: flex !important;
+  }
+
+  /* Lock body scroll when menu is open - script toggles `menu-btn-open` on body */
+  body.menu-btn-open {
+    position: fixed;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
   }
 
   .site-header .full-sidenav .logo {
