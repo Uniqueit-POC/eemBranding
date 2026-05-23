@@ -3435,6 +3435,18 @@ footer div:has(> a img[alt="EEM Branding"]) .flex.gap-12 > a[href*="pinterest"] 
     max-height: var(--sub-h, 1200px) !important;
   }
 
+  /* Prevent duplicate chevrons on mobile when a submenu toggle button is injected */
+  .site-header .full-sidenav a:has(+ .sub-menu-toggle):after {
+    content: none !important;
+    display: none !important;
+  }
+  .site-header .full-sidenav a:has(+ .sub-menu-toggle) {
+    padding-right: 8px !important;
+  }
+  .site-header .full-sidenav a:has(+ .sub-menu-toggle) .fa-angle-right {
+    display: none !important;
+  }
+
   .sidenav-footer {
     flex-shrink: 0;
     margin-top: 20px;
