@@ -15,7 +15,7 @@ const plexifyGsap = function () {
     smoother = ScrollSmoother.create({
       smooth: 2,
       effects: true,
-      normalizeScroll: true,
+      normalizeScroll: { allowNestedScroll: true },
       smoothTouch: 0.1,
     });
   }
@@ -567,15 +567,10 @@ window.addEventListener("resize", () => {
         { passive: false }
       );
 
-      let startY = 0;
-      let startX = 0;
-
       item.addEventListener(
         "touchstart",
         (e) => {
-          const touch = e.touches[0];
-          startY = touch.clientY;
-          startX = touch.clientX;
+          e.stopPropagation();
         },
         { passive: true }
       );
@@ -583,20 +578,9 @@ window.addEventListener("resize", () => {
       item.addEventListener(
         "touchmove",
         (e) => {
-          const touch = e.touches[0];
-          const deltaY = startY - touch.clientY;
-          const deltaX = startX - touch.clientX;
-
-          item.scrollTop += deltaY;
-          item.scrollLeft += deltaX;
-
-          startY = touch.clientY;
-          startX = touch.clientX;
-
           e.stopPropagation();
-          e.preventDefault();
         },
-        { passive: false }
+        { passive: true }
       );
     });
   };

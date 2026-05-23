@@ -1,4 +1,4 @@
-﻿ p {
+ p {
    text-align: justify;
  }
 
@@ -3354,10 +3354,9 @@ footer div:has(> a img[alt="EEM Branding"]) .flex.gap-12 > a[href*="pinterest"] 
   }
 
   .site-header .full-sidenav .navbar {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    flex: none !important;
+    min-height: auto !important;
+    overflow-y: visible !important;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
     border-bottom: none !important;
