@@ -8458,7 +8458,7 @@ body.menu-btn-open {
   text-rendering: optimizeSpeed;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  opacity: 0;
+  /* opacity: 0; */
   font-family: var(--font-heading);
 }
 /* All headings use Space Grotesk */
@@ -8559,7 +8559,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 575px) {
   .pxl-history-carousel.layout-1 .item-des {
     max-width: calc(var(--spacing) * 330);
-    font-size: var(--text-base);
+    font-size: 14px !important;
     line-height: var(--tw-leading, var(--text-base--line-height));
     --tw-leading: calc(var(--spacing) * 22);
     line-height: calc(var(--spacing) * 22);

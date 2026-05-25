@@ -4237,7 +4237,7 @@ footer div:has(> a img[alt="EEM Branding"]) .flex.gap-12 > a[href*="pinterest"] 
     /* ─── UTILITY ────────────────────────────────────────────── */
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1350px;
       margin-inline: auto;
       padding-inline: clamp(16px, 4vw, 40px)
     }
