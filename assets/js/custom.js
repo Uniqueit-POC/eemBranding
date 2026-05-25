@@ -1367,55 +1367,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".tab-content .grid").forEach(addDragScroll);
 });
 
-(function () {
-  const sliderTrack = document.getElementById('sliderTrack');
-  if (!sliderTrack) return;
-
-  const pageTag = document.querySelector('.intro-tag');
-  if (!pageTag) return;
-
-  const pageCategory = pageTag.textContent.trim().toLowerCase();
-  let category = null;
-  if (pageCategory.includes('packaging')) category = 'packaging';
-  else if (pageCategory.includes('social media')) category = 'social media';
-  else if (pageCategory.includes('catalogue')) category = 'catalogue';
-  else if (pageCategory.includes('3d') || pageCategory.includes('rendering')) category = '3d';
-  if (!category) return;
-
-  sliderTrack.querySelectorAll('.sl-card').forEach(card => {
-    const sub = card.querySelector('.sl-card-sub');
-    if (!sub) return;
-    const cardText = sub.textContent.trim().toLowerCase();
-    const isPackaging = cardText.includes('packaging');
-    const isSocial = cardText.includes('social media');
-    const isCatalogue = cardText.includes('catalogue');
-    const is3D = cardText.includes('3d') || cardText.includes('rendering');
-
-    let show = false;
-    if (category === 'packaging' && isPackaging) show = true;
-    if (category === 'social media' && isSocial) show = true;
-    if (category === 'catalogue' && isCatalogue) show = true;
-    if (category === '3d' && is3D) show = true;
-
-    if (!show) card.remove();
-  });
-
-  const visibleCards = sliderTrack.querySelectorAll('.sl-card').length;
-  if (!visibleCards) {
-    const section = sliderTrack.closest('.slider-sec');
-    if (section) section.style.display = 'none';
-    return;
-  }
-
-  const header = document.querySelector('.slider-sec .sec-header h1');
-  if (header) {
-    if (category === 'packaging') header.textContent = 'More Packaging Work';
-    if (category === 'social media') header.textContent = 'More Social Media Work';
-    if (category === 'catalogue') header.textContent = 'More Catalogue Work';
-    if (category === '3d') header.textContent = 'More 3D Work';
-  }
-})();
-
 
 /* ── Floating WhatsApp button — injected on every page ── */
 (function () {
@@ -1442,3 +1393,79 @@ document.addEventListener("DOMContentLoaded", function () {
     injectWhatsApp();
   }
 })();
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    /* ════════════════════════════════════════
+        PORTFOLIO SLIDER CONTROLLER
+       ════════════════════════════════════════ */
+    const track = document.getElementById('sliderTrack');
+    const prevBtn = document.getElementById('slPrev');
+    const nextBtn = document.getElementById('slNext');
+    const cards = Array.from(document.querySelectorAll('.sl-card'));
+    
+    if (!track || !prevBtn || !nextBtn || cards.length === 0) return;
+
+    let currentIndex = 0;
+
+    function getVisibleCardsCount() {
+      // Dynamically calculates how many cards fit in the wrapper viewport
+      const trackWidth = track.parentElement.getBoundingClientRect().width;
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      return Math.round(trackWidth / cardWidth) || 1;
+    }
+
+    function moveSlider() {
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      // Get styles to factor in grid/flex gaps if there are any
+      const trackStyle = window.getComputedStyle(track);
+      const gap = parseFloat(trackStyle.gap) || 0;
+      
+      const maxIndex = cards.length - getVisibleCardsCount();
+      
+      // Prevent scrolling past the last visible set of elements
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      if (currentIndex < 0) currentIndex = 0;
+
+      const amountToMove = currentIndex * (cardWidth + gap);
+      track.style.transform = `translateX(-${amountToMove}px)`;
+    }
+
+    // Next Button Click
+    nextBtn.addEventListener('click', () => {
+      const maxIndex = cards.length - getVisibleCardsCount();
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+      } else {
+        currentIndex = 0; // Loop back to start (Optional)
+      }
+      moveSlider();
+    });
+
+    // Prev Button Click
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = cards.length - getVisibleCardsCount(); // Loop to end (Optional)
+      }
+      moveSlider();
+    });
+
+    // Window resize handler to keep track positioning accurate
+    window.addEventListener('resize', moveSlider);
+
+    /* ════════════════════════════════════════
+        CARD CLICK NAVIGATION (data-href)
+       ════════════════════════════════════════ */
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        const destination = card.getAttribute('data-href');
+        if (destination) {
+          window.location.href = destination;
+        }
+      });
+      // Style cursor to point so user knows it's a link
+      card.style.cursor = 'pointer';
+    });
+  });
