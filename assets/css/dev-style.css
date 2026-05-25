@@ -1162,7 +1162,7 @@
    position: absolute;
    inset: 0;
    z-index: 10;
-   background: url('../images/banner/01-Home-Page-2560×1440.webp') center/cover no-repeat;
+   background: url('../images/banner/01-Home-Page-2560×144-2.webp') center/cover no-repeat;
    background-color: var(--clr-dark);
    opacity: 1;
    transition: opacity 0.8s ease;
@@ -3034,7 +3034,7 @@
    position: absolute;
    inset: 0;
    z-index: 10;
-   background: url('../images/banner/01-Home-Page-2560×1440.webp') center/cover no-repeat;
+   background: url('../images/banner/01-Home-Page-2560×144-2.webp') center/cover no-repeat;
    /* Fallback solid color if image hasn't loaded yet */
    background-color: var(--clr-dark);
    opacity: 1;
