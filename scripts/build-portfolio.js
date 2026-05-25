@@ -4,7 +4,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const IMG = './assets/images/EEM-Portfolio';
 const IMG_ROOT = path.join(ROOT, 'assets/images/EEM-Portfolio');
-const catalogueTemplate = fs.readFileSync(path.join(ROOT, 'arica.html'), 'utf8');
+const catalogueTemplate = fs.readFileSync(path.join(ROOT, 'century-prowud-stylogue.html'), 'utf8');
 const brandingTemplate = fs.readFileSync(path.join(ROOT, 'aaryan-tradelink.html'), 'utf8');
 
 function ensureDir(dir) {
@@ -209,7 +209,7 @@ const DETAIL_PAGES = [
     p1: 'Suntouch social media creatives — bright, energetic visuals designed to boost engagement and brand recall online.',
     p2: 'Flexible templates for product features, offers, and seasonal campaigns across social channels.',
     basePath: `${IMG}/All-catalogue/Suntouch`, images: ['sun-touch-01.webp', 'sun-touch-02.webp', 'sun-touch-03.webp', 'sun-touch-04.webp', 'sun-touch-05.webp', 'sun-touch-06.webp'] },
-  { file: '3d-rendering-Portfolio.html', title: '3D Rendering', tag: '3D Rendering', collection: '3D Rendering Projects', alt: '3D Rendering',
+  { file: '3d-rendering-portfolio.html', title: '3D Rendering', tag: '3D Rendering', collection: '3D Rendering Projects', alt: '3D Rendering',
     headline: 'Photoreal <br> <em>3D Rendering</em>',
     p1: 'High-quality 3D renders that bring products and spaces to life — realistic materials, lighting, and composition for marketing and sales.',
     p2: 'From laminates to interiors, every render is built to showcase detail, depth, and the true character of the design.',

@@ -16,7 +16,7 @@
   };
 
   var CATALOGUE = [
-    { href: "arica.html", img: IMG + "/All-catalogue/Arica/Arica-01.webp", title: "Arica", sub: "Catalogue Design" },
+    { href: "century-prowud-stylogue.html", img: IMG + "/All-catalogue/Arica/Arica-01.webp", title: "Arica", sub: "Catalogue Design" },
     { href: "atina.html", img: IMG + "/All-catalogue/atina/atina01.webp", title: "Atina", sub: "Catalogue Design" },
     { href: "asa-decosheets.html", img: IMG + "/All-catalogue/dazzle-berry-asa/dazzle-berry-asa-01.webp", title: "ASA Decosheets", sub: "Catalogue Design" },
     { href: "dazzle-berry-colours-trend.html", img: IMG + "/All-catalogue/dazzle-berry-pastel-crystal/01.webp", title: "Dazzle Berry's Colours Trend", sub: "Catalogue Design" },
