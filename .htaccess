@@ -8,9 +8,7 @@ Header always set Content-Security-Policy "upgrade-insecure-requests"
 ErrorDocument 404 /error-404.html	
 
 # Rewrite rules for clean URLs
-RewriteRule ^home$ index.html [L,NC]
 RewriteRule ^about-us$ about-us.html [L,NC]
-RewriteRule ^portfolio/bliss$ bliss.html [L,NC]
 RewriteRule ^services/creative-design-agency-in-ahmedabad$ creative-design.html [L,NC]
 RewriteRule ^services/digital-marketing-agency-ahmedabad$ digital-marketing.html [L,NC]
 RewriteRule ^portfolio/evershine-color-trendenchanting$ evershine-color-trendenchanting.html [L,NC]
